@@ -1,0 +1,14 @@
+{
+  "name": "h5p-caretaker-server",
+  "version": "1.0.0",
+  "description": "PHP based server component for using the H5P Caretaker library",
+  "keywords": [
+    "H5P",
+    "maintenance"
+  ],
+  "author": "NDLA",
+  "license": "MIT",
+  "dependencies": {
+    "h5p-caretaker-client": "git@github.com:ndlano/h5p-caretaker-client"
+  }
+}

@@ -1,0 +1,21 @@
+{
+    "name": "ndlano/h5p-caretaker-server",
+    "description": "PHP based reference implementation for the H5P Caretaker library",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "NDLA"
+        }
+    ],
+    "repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/ndlano/h5p-caretaker"
+		}
+  ],
+    "require": {
+        "php": ">=8",
+        "ndlano/h5p-caretaker": "dev-master"
+    }
+}
