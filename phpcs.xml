@@ -1,0 +1,5 @@
+<ruleset name="WP NDLA H5P Caretaker">
+    <rule ref="WordPress" />
+    <file>./includes</file>
+    <file>ndla-h5p-caretaker.php</file>
+</ruleset>
