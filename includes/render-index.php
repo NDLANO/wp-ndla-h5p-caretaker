@@ -122,13 +122,13 @@ function render_html( $file_js, $file_css, $locale ) {
 	</script>
 	</head>
 
-	<body class="h5p-caretaker">
+	<body class="h5p-caretaker" data-upload-endpoint="<?php echo esc_url( home_url( '/' . Options::get_url() . '-upload' ) ); ?>">
 	<header class="header">
 		<h1 class="title main-color"><?php echo esc_html( __( 'H5P Caretaker', 'NDLAH5PCARETAKER' ) ); ?></h1>
 		<?php render_select_language( $locale ); ?>
 	</header>
 
-	<main class="page" data-upload-endpoint="<?php echo esc_url( home_url( '/' . Options::get_url() . '-upload' ) ); ?>">
+	<main class="page">
 		<div class="block background-dark">
 		<div class="centered-row block-visible">
 			<p class="main-color"><?php echo esc_html( __( 'Take care of your H5P', 'NDLAH5PCARETAKER' ) ); ?></p>
