@@ -46,10 +46,7 @@ class Main {
 		 * Method to add a submenu item to the Tools menu
 		 */
 	public function add_tools_menu_entry() {
-		$user          = wp_get_current_user();
-		$user_locale   = get_user_meta( $user->ID, 'locale', true );
-		$locale        = $user_locale ? $user_locale : get_locale();
-		$caretaker_url = site_url( Options::get_url() ) . '?locale=' . $locale;
+		$caretaker_url = $this->build_url();
 
 		add_submenu_page(
 			'tools.php',      // Parent menu slug.
@@ -90,15 +87,85 @@ class Main {
 
 		add_rewrite_rule( '^' . $url . '/?$', 'index.php?custom_page=' . $url, 'top' );
 		add_rewrite_rule( '^' . $url . '-upload/?$', 'index.php?custom_page=' . $url . '-upload', 'top' );
+		add_rewrite_rule( '^' . $url . '-clean-up/?$', 'index.php?custom_page=' . $url . '-clean-up', 'top' );
 		flush_rewrite_rules();
+
+		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING ) ?? '';
+		$task = filter_input( INPUT_GET, 'task', FILTER_SANITIZE_STRING ) ?? '';
+		$id   = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_STRING ) ?? '';
+		if ( 'h5p' === $page && 'show' === $task ) {
+			add_action(
+				'admin_enqueue_scripts',
+				function () use ( $id ) {
+					$this->inject_caretaker_button( $id );
+				}
+			);
+		}
 	}
 
-		/**
-		 * Register the custom query variable.
-		 *
-		 * @param array $vars Existing query variables.
-		 * @return array Updated query variables.
-		 */
+	/**
+	 * Build the URL for the caretaker page.
+	 *
+	 * @param array $gets Array of GET parameters to set.
+	 * @return string The URL.
+	 */
+	private function build_url( $gets = array() ) {
+		if ( ! isset( $gets['locale'] ) ) {
+			$user           = wp_get_current_user();
+			$user_locale    = get_user_meta( $user->ID, 'locale', true );
+			$gets['locale'] = $user_locale ? $user_locale : get_locale();
+		}
+
+		$query_string = array_map(
+			function ( $key, $value ) {
+				return $key . '=' . $value;
+			},
+			array_keys( $gets ),
+			$gets
+		);
+
+		return site_url( Options::get_url() ) . '?' . implode( '&', $query_string );
+	}
+
+	/**
+	 * Inject the caretaker button into the H5P content editor.
+	 *
+	 * @param int $h5p_id The ID of the H5P content.
+	 */
+	public function inject_caretaker_button( $h5p_id ) {
+		if ( ! isset( $h5p_id ) ) {
+			return;
+		}
+
+		$caretaker_url = $this->build_url( array( 'id' => $h5p_id ) );
+
+		?>
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function() {
+				const lastButton = document.querySelector('.wrap > h2 > a:last-of-type');
+				if (!lastButton) {
+					return;
+				}
+
+				const caretakerButton = document.createElement('a');
+				caretakerButton.href = '<?php echo esc_url( $caretaker_url, null, 'not_display' ); ?>';
+				// The margin is not consistent for some reason, temporary workaround.
+				caretakerButton.style.marginLeft = '10px';
+				caretakerButton.target = '_blank';
+				caretakerButton.classList.add('add-new-h2');
+				caretakerButton.textContent = '<?php echo esc_html( __( 'H5P Caretaker', 'NDLAH5PCARETAKER' ) ); ?>';
+				lastButton.parentNode.insertBefore(caretakerButton, lastButton.nextSibling);
+			});
+		</script>
+		<?php
+	}
+
+	/**
+	 * Register the custom query variable.
+	 *
+	 * @param array $vars Existing query variables.
+	 * @return array Updated query variables.
+	 */
 	public function register_query_vars( $vars ) {
 		$vars[] = 'custom_page';
 		return $vars;
@@ -113,6 +180,8 @@ class Main {
 			render_page_index();
 		} elseif ( Options::get_url() . '-upload' === $custom_page ) {
 			fetch_analysis();
+		} elseif ( Options::get_url() . '-clean-up' === $custom_page ) {
+			clean_up_export_file();
 		}
 	}
 

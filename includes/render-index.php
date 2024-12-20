@@ -24,6 +24,33 @@ function render_page_index() {
 	$http_accept_language = get_http_accept_language();
 	$get_locale           = get_locale_from_query();
 
+	// Prevent snooping on H5P content.
+  // phpcs:ignore WordPress.WP.Capabilities.Unknown
+	if ( current_user_can( 'use-h5p-caretaker' ) ) {
+		$h5p_id = get_id_from_query();
+	}
+
+	if ( ! empty( $h5p_id ) ) {
+		try {
+			$export_needs_to_be_removed = ensure_h5p_export( $h5p_id );
+
+			$content = \H5P_Plugin::get_instance()->get_content( $h5p_id );
+
+			// Try to get H5P export file for H5P ID.
+			if ( is_array( $content ) ) {
+				$path = wp_upload_dir()['baseurl'] . DIRECTORY_SEPARATOR .
+					'h5p' . DIRECTORY_SEPARATOR .
+					'exports' . DIRECTORY_SEPARATOR .
+					( $content['slug'] ? $content['slug'] . '-' : '' ) .
+					$content['id'] .
+					'.h5p';
+			}
+		} catch ( \Exception $e ) {
+			unset( $e );
+			$path = null;
+		}
+	}
+
 	// Set the language based on the browser's language.
 	$locale = LocaleUtils::request_translation(
 		$get_locale ?? locale_accept_from_http( $http_accept_language )
@@ -36,9 +63,131 @@ function render_page_index() {
 		render_html(
 			$dist_url . '/' . get_file_by_pattern( $dist_dir, 'h5p-caretaker-client-*.js' ),
 			$dist_url . '/' . get_file_by_pattern( $dist_dir, 'h5p-caretaker-client-*.css' ),
-			$locale
+			$locale,
+			$path,
+			$export_needs_to_be_removed ? $h5p_id : false,
 		);
 	}
+}
+
+/**
+ * Ensure the H5P export file exists.
+ *
+ * @param int $h5p_id ID of H5P content to ensure export for.
+ *
+ * @return boolean True, if the export file needs to be removed later.
+ */
+function ensure_h5p_export( $h5p_id ) {
+	$core    = \H5P_Plugin::get_instance()->get_h5p_instance( 'core' );
+	$content = $core->loadContent( $h5p_id );
+
+	$export_file_name = $content['slug'] . '-' . $content['id'] . '.h5p';
+
+	if ( $core->fs->hasExport( $export_file_name ) ) {
+		return false;
+	}
+
+	if ( ! create_h5p_export( $content ) ) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * Create H5P export.
+ * Part of filterParameters function taken from H5P core. We cannot use that
+ * function, because the `h5p_export` option could be set to false in order to
+ * prevent downloading the H5P files - we need it temporarily though.
+ *
+ * @param array $content Object with content data.
+ *
+ * @return bool Whether the export was created successfully.
+ */
+function create_h5p_export( $content ) {
+	if ( ! ( isset( $content['library'] ) && isset( $content['params'] ) ) ) {
+		return false;
+	}
+
+	$params = (object) array(
+		'library' => \H5PCore::libraryToString( $content['library'] ),
+		'params'  => json_decode( $content['params'] ),
+	);
+
+	if ( ! $params->params ) {
+		return false;
+	}
+
+	$core = \H5P_Plugin::get_instance()->get_h5p_instance( 'core' );
+
+	// Validate and filter against main library semantics.
+	// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	$validator = new \H5PContentValidator( $core->h5pF, $core );
+	$validator->validateLibrary(
+		$params,
+		(object) array( 'options' => array( $params->library ) )
+	);
+
+	// Handle addons.
+	// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	$addons = $core->h5pF->loadAddons();
+	foreach ( $addons as $addon ) {
+		$add_to = json_decode( $addon['addTo'] );
+
+		if ( isset( $add_to->content->types ) ) {
+			foreach ( $add_to->content->types as $type ) {
+
+				if ( isset( $type->text->regex ) &&
+						$this->textAddonMatches( $params->params, $type->text->regex )
+				) {
+					$validator->addon( $addon );
+
+					// An addon shall only be added once.
+					break;
+				}
+			}
+		}
+	}
+
+	$params = wp_json_encode( $params->params );
+
+	// Update content dependencies.
+	$content['dependencies'] = $validator->getDependencies();
+
+	// Sometimes the parameters are filtered before content has been created.
+	if ( ! isset( $content['id'] ) ) {
+		return false;
+	}
+
+  // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	$core->h5pF->deleteLibraryUsage( $content['id'] );
+  // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	$core->h5pF->saveLibraryUsage( $content['id'], $content['dependencies'] );
+
+	if ( ! $content['slug'] ) {
+		$content['slug'] = $this->generateContentSlug( $content );
+
+		// Remove old export file.
+		$core->fs->deleteExport( $content['id'] . '.h5p' );
+	}
+
+	// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	$exporter            = new \H5PExport( $core->h5pF, $core );
+	$content['filtered'] = $params;
+
+	$exporter->createExportFile( $content );
+
+	// Cache.
+  // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	$core->h5pF->updateContentFields(
+		$content['id'],
+		array(
+			'filtered' => $params,
+			'slug'     => $content['slug'],
+		)
+	);
+
+	return true;
 }
 
 /**
@@ -61,6 +210,16 @@ function get_locale_from_query() {
 }
 
 /**
+ * Get the ID from the query.
+ *
+ * @return string The ID from the query.
+ */
+function get_id_from_query() {
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	return isset( $_GET['id'] ) ? sanitize_text_field( wp_unslash( $_GET['id'] ) ) : '';
+}
+
+/**
  * Get file by pattern.
  *
  * @param string $dir The directory to search in.
@@ -79,8 +238,10 @@ function get_file_by_pattern( $dir, $pattern ) {
  * @param string $file_js The filename of the JavaScript file.
  * @param string $file_css The filename of the CSS file.
  * @param string $locale The locale to use.
+ * @param string $path The path to the H5P file if preset.
+ * @param string $export_remove_id The ID of the H5P content to remove the export for.
  */
-function render_html( $file_js, $file_css, $locale ) {
+function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = false ) {
 	header( 'Content-Type: text/html; charset=utf-8' );
 	?>
 	<!DOCTYPE html>
@@ -94,6 +255,8 @@ function render_html( $file_js, $file_css, $locale ) {
     <?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript ?>
 	<script type="module" src="<?php echo esc_url( $file_js ); ?>"></script>
 	<script>
+		window.H5P_CARETAKER_PATH = <?php echo wp_json_encode( $path ); ?>;
+
 		window.H5P_CARETAKER_L10N = {
 		orDragTheFileHere: "<?php echo esc_js( __( 'or drag the file here', 'NDLAH5PCARETAKER' ) ); ?>",
 		removeFile: "<?php echo esc_js( __( 'Remove file', 'NDLAH5PCARETAKER' ) ); ?>",
@@ -177,11 +340,58 @@ function render_html( $file_js, $file_css, $locale ) {
 		<?php
 	}
 	?>
+	<script>
+		window.addEventListener('message', (event) => {
+			if (event.data.source !== 'h5p-caretaker-client') {
+				return; // Not for us.
+			}
+
+			if (event.data.action === 'initialized') {
+				const fileInput = document.querySelector('.h5p-caretaker .dropzone #file-input');
+				if (!fileInput) {
+					return;
+				}
+
+				// Simulate upload of the file from the server given in window.H5P_CARETAKER_PATH.
+				(async () => {
+					try {
+							const response = await fetch(window.H5P_CARETAKER_PATH);
+							const arrayBuffer = await response.arrayBuffer();
+
+							const binary = new Uint8Array(arrayBuffer);
+							const name = window.H5P_CARETAKER_PATH.split('/').pop();
+							const file = new File([binary], name, { type: 'application/zip' });
+
+							const dataTransfer = new DataTransfer();
+							dataTransfer.items.add(file);
+							fileInput.files = dataTransfer.files;
+
+							const event = new Event('change', { bubbles: true });
+							fileInput.dispatchEvent(event);
+					} catch (error) {
+							// Intentially left empty.
+					}
+				})();
+			}
+			else if (event.data.action === 'upload_succeeded' || event.data.action === 'upload_failed') {
+				if ( '<?php echo esc_js( $export_remove_id ); ?>' === '') {
+					return;
+				}
+
+				const formData = new FormData();
+				formData.set('id', '<?php echo esc_js( $export_remove_id ); ?>');
+
+				const xhr = new XMLHttpRequest();
+				xhr.open('POST', '<?php echo esc_url( home_url( '/' . Options::get_url() . '-clean-up' ) ); ?>', true);
+				xhr.send(formData);
+			}
+		});
+	</script>
 	</body>
 	</html>
 	<?php
 
-	exit; // Ensure no other content is loaded.
+	exit(); // Ensure no other content is loaded.
 }
 
 /**

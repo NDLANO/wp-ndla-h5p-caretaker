@@ -17,6 +17,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Fetch analysis for given file from H5P caretaker.
  */
 function fetch_analysis() {
+  // phpcs:ignore WordPress.WP.Capabilities.Unknown
+	if ( Options::get_visibility() !== 'public' && ! current_user_can( 'use-h5p-caretaker' ) ) {
+		// Redirect to the dashboard or display an error message.
+		wp_die( esc_html( __( 'You do not have sufficient permissions to access this page.', 'NDLAH5PCARETAKER' ) ) );
+	}
+
 	header( 'Content-Type: application/json; charset=utf-8' );
 
 	$max_file_size = convert_to_bytes( min( ini_get( 'post_max_size' ), ini_get( 'upload_max_filesize' ) ) );
