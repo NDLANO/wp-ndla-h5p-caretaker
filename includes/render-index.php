@@ -256,36 +256,10 @@ function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = f
 	<script type="module" src="<?php echo esc_url( $file_js ); ?>"></script>
 	<script>
 		window.H5P_CARETAKER_PATH = <?php echo wp_json_encode( $path ); ?>;
-
-		window.H5P_CARETAKER_L10N = {
-		orDragTheFileHere: "<?php echo esc_js( __( 'or drag the file here', 'NDLAH5PCARETAKER' ) ); ?>",
-		removeFile: "<?php echo esc_js( __( 'Remove file', 'NDLAH5PCARETAKER' ) ); ?>",
-		selectYourLanguage: "<?php echo esc_js( __( 'Select your language', 'NDLAH5PCARETAKER' ) ); ?>",
-		uploadProgress: "<?php echo esc_js( __( 'Upload progress', 'NDLAH5PCARETAKER' ) ); ?>",
-		uploadYourH5Pfile: "<?php echo esc_js( __( 'Upload your H5P file', 'NDLAH5PCARETAKER' ) ); ?>",
-		yourFileIsBeingChecked: "<?php echo esc_js( __( 'Your file is being checked', 'NDLAH5PCARETAKER' ) ); ?>",
-		yourFileWasCheckedSuccessfully: "<?php echo esc_js( __( 'Your file was checked successfully', 'NDLAH5PCARETAKER' ) ); ?>",
-		totalMessages: "<?php echo esc_js( __( 'Total messages', 'NDLAH5PCARETAKER' ) ); ?>",
-		issues: "<?php echo esc_js( __( 'issues', 'NDLAH5PCARETAKER' ) ); ?>",
-		results: "<?php echo esc_js( __( 'results', 'NDLAH5PCARETAKER' ) ); ?>",
-		filterBy: "<?php echo esc_js( __( 'Filter by', 'NDLAH5PCARETAKER' ) ); ?>",
-		groupBy: "<?php echo esc_js( __( 'Group by', 'NDLAH5PCARETAKER' ) ); ?>",
-		download: "<?php echo esc_js( __( 'Download', 'NDLAH5PCARETAKER' ) ); ?>",
-		expandAllMessages: "<?php echo esc_js( __( 'Expand all messages', 'NDLAH5PCARETAKER' ) ); ?>",
-		collapseAllMessages: "<?php echo esc_js( __( 'Collapse all messages', 'NDLAH5PCARETAKER' ) ); ?>",
-		allFilteredOut: "<?php echo esc_js( __( 'All messages have been filtered out by content.', 'NDLAH5PCARETAKER' ) ); ?>",
-		reportTitleTemplate: "<?php echo esc_js( __( 'H5P Caretaker report for @title', 'NDLAH5PCARETAKER' ) ); ?>",
-		contentFilter: "<?php echo esc_js( __( 'Content type filter', 'NDLAH5PCARETAKER' ) ); ?>",
-		showAll: "<?php echo esc_js( __( 'Show all', 'NDLAH5PCARETAKER' ) ); ?>",
-		showSelected: "<?php echo esc_js( __( 'Various selected contents', 'NDLAH5PCARETAKER' ) ); ?>",
-		showNone: "<?php echo esc_js( __( 'Show none', 'NDLAH5PCARETAKER' ) ); ?>",
-		filterByContent: "<?php echo esc_js( __( 'Filter by content:', 'NDLAH5PCARETAKER' ) ); ?>",
-		reset: "<?php echo esc_js( __( 'Reset', 'NDLAH5PCARETAKER' ) ); ?>",
-		}
 	</script>
 	</head>
 
-	<body class="h5p-caretaker" data-upload-endpoint="<?php echo esc_url( home_url( '/' . Options::get_url() . '-upload' ) ); ?>">
+	<body class="h5p-caretaker">
 	<header class="header">
 		<h1 class="title main-color"><?php echo esc_html( __( 'H5P Caretaker', 'NDLAH5PCARETAKER' ) ); ?></h1>
 		<?php render_select_language( $locale ); ?>
@@ -329,6 +303,75 @@ function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = f
 			<!-- </div> -->
 		</div>
 		</div>
+
+		<script>
+			// If there's a file to upload, do so after initialization.
+			const handleInitialized = () => {
+				const url = '<?php echo esc_url( $path ); ?>';
+				if (!url) {
+					return;
+				}
+				window.h5pcaretaker.uploadByURL(url);
+			};
+
+			// If export file needs to be removed, do so after upload has ended.
+			const handleUploadEnded = () => {
+				const exportRemoveId = '<?php echo esc_js( $export_remove_id ); ?>';
+				console.log(exportRemoveId);
+
+				if (!exportRemoveId) {
+					return;
+				}
+
+				const formData = new FormData();
+				formData.set('id', exportRemoveId);
+
+				const xhr = new XMLHttpRequest();
+				xhr.open('POST', '<?php echo esc_url( home_url( '/' . Options::get_url() . '-clean-up' ) ); ?>', true);
+				xhr.send(formData);
+			};
+
+			document.addEventListener('DOMContentLoaded', () => {
+				window.h5pcaretaker = new window.H5PCaretaker(
+					{
+						endpoint: '<?php echo esc_url( home_url( '/' . Options::get_url() . '-upload' ) ); ?>',
+						l10n: {
+							orDragTheFileHere: '<?php echo esc_html( __( 'or drag the file here' ) ); ?>',
+							removeFile: '<?php echo esc_html( __( 'Remove file' ) ); ?>',
+							selectYourLanguage: '<?php echo esc_html( __( 'Select your language' ) ); ?>',
+							uploadProgress: '<?php echo esc_html( __( 'Upload progress' ) ); ?>',
+							uploadYourH5Pfile: '<?php echo esc_html( __( 'Upload your H5P file' ) ); ?>',
+							yourFileIsBeingChecked: '<?php echo esc_html( __( 'Your file is being checked' ) ); ?>',
+							yourFileWasCheckedSuccessfully: '<?php echo esc_html( __( 'Your file was checked successfully' ) ); ?>',
+							totalMessages: '<?php echo esc_html( __( 'Total messages' ) ); ?>',
+							issues: '<?php echo esc_html( __( 'issues' ) ); ?>',
+							results: '<?php echo esc_html( __( 'results' ) ); ?>',
+							filterBy: '<?php echo esc_html( __( 'Filter by' ) ); ?>',
+							groupBy: '<?php echo esc_html( __( 'Group by' ) ); ?>',
+							download: '<?php echo esc_html( __( 'Download' ) ); ?>',
+							expandAllMessages: '<?php echo esc_html( __( 'Expand all messages' ) ); ?>',
+							collapseAllMessages: '<?php echo esc_html( __( 'Collapse all messages' ) ); ?>',
+							allFilteredOut: '<?php echo esc_html( __( 'All messages have been filtered out by content.' ) ); ?>',
+							reportTitleTemplate: '<?php echo esc_html( __( 'H5P Caretaker report for @title' ) ); ?>',
+							contentFilter: '<?php echo esc_html( __( 'Content type filter' ) ); ?>',
+							showAll: '<?php echo esc_html( __( 'Show all' ) ); ?>',
+							showSelected: '<?php echo esc_html( __( 'Various selected contents' ) ); ?>',
+							showNone: '<?php echo esc_html( __( 'Show none' ) ); ?>',
+							filterByContent: '<?php echo esc_html( __( 'Filter by content:' ) ); ?>',
+							reset: '<?php echo esc_html( __( 'Reset' ) ); ?>',
+						},
+					},
+					{
+						onInitialized: () => {
+							handleInitialized();
+						},
+						onUploadEnded: () => {
+							handleUploadEnded();
+						}
+					}
+				);
+			});
+		</script>
 	</main>
 
 	<?php
@@ -340,53 +383,6 @@ function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = f
 		<?php
 	}
 	?>
-	<script>
-		window.addEventListener('message', (event) => {
-			if (event.data.source !== 'h5p-caretaker-client') {
-				return; // Not for us.
-			}
-
-			if (event.data.action === 'initialized') {
-				const fileInput = document.querySelector('.h5p-caretaker .dropzone #file-input');
-				if (!fileInput) {
-					return;
-				}
-
-				// Simulate upload of the file from the server given in window.H5P_CARETAKER_PATH.
-				(async () => {
-					try {
-							const response = await fetch(window.H5P_CARETAKER_PATH);
-							const arrayBuffer = await response.arrayBuffer();
-
-							const binary = new Uint8Array(arrayBuffer);
-							const name = window.H5P_CARETAKER_PATH.split('/').pop();
-							const file = new File([binary], name, { type: 'application/zip' });
-
-							const dataTransfer = new DataTransfer();
-							dataTransfer.items.add(file);
-							fileInput.files = dataTransfer.files;
-
-							const event = new Event('change', { bubbles: true });
-							fileInput.dispatchEvent(event);
-					} catch (error) {
-							// Intentially left empty.
-					}
-				})();
-			}
-			else if (event.data.action === 'upload_succeeded' || event.data.action === 'upload_failed') {
-				if ( '<?php echo esc_js( $export_remove_id ); ?>' === '') {
-					return;
-				}
-
-				const formData = new FormData();
-				formData.set('id', '<?php echo esc_js( $export_remove_id ); ?>');
-
-				const xhr = new XMLHttpRequest();
-				xhr.open('POST', '<?php echo esc_url( home_url( '/' . Options::get_url() . '-clean-up' ) ); ?>', true);
-				xhr.send(formData);
-			}
-		});
-	</script>
 	</body>
 	</html>
 	<?php
