@@ -60,8 +60,8 @@ class Options {
 		update_option(
 			self::$option_slug,
 			array(
-				'url'        => $self::DEFAULT_URL,
-				'visibility' => $self::DEFAULT_VISIBILITY,
+				'url'        => self::DEFAULT_URL,
+				'visibility' => self::DEFAULT_VISIBILITY,
 				'intro'      => '',
 				'outro'      => '',
 			)
@@ -174,9 +174,9 @@ class Options {
 			self::DEFAULT_URL :
 			sanitize_text_field( $input['url'] );
 
-		$new_input['visibility'] = ( ! in_array( $visibility ?? '', array( 'public', 'capability' ), true ) ) ?
+		$new_input['visibility'] = ( ! in_array( $input['visibility'] ?? '', array( 'public', 'capability' ), true ) ) ?
 			'capability' :
-			$visibility;
+			$input['visibility'];
 
 		$new_input['intro'] = ! empty( $input['intro'] ) ?
 			wp_kses_post( $input['intro'] ) :
@@ -323,7 +323,7 @@ class Options {
 	public static function get_visibility() {
 		return ( isset( self::$options['visibility'] ) ) ?
 			self::$options['visibility'] :
-			$self::DEFAULT_VISIBILITY;
+			self::DEFAULT_VISIBILITY;
 	}
 
 	/**
