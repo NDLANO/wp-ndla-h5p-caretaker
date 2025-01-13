@@ -317,7 +317,6 @@ function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = f
 			// If export file needs to be removed, do so after upload has ended.
 			const handleUploadEnded = () => {
 				const exportRemoveId = '<?php echo esc_js( $export_remove_id ); ?>';
-				console.log(exportRemoveId);
 
 				if (!exportRemoveId) {
 					return;
