@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: NDLAH5PCARETAKER\n"
-"POT-Creation-Date: 2024-12-13 15:23+0100\n"
-"PO-Revision-Date: 2024-12-13 15:24+0100\n"
+"POT-Creation-Date: 2025-01-13 19:41+0100\n"
+"PO-Revision-Date: 2025-01-13 19:41+0100\n"
 "Last-Translator: H5P-Careraker\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,31 +18,32 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: vendor\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 
-#: includes/class-options.php:99 includes/render-index.php:130
+#: includes/class-main.php:156 includes/class-options.php:101
+#: includes/render-index.php:264
 msgid "H5P Caretaker"
 msgstr "H5P Caretaker"
 
-#: includes/class-options.php:123
+#: includes/class-options.php:125
 msgid "General"
 msgstr "Allgemein"
 
-#: includes/class-options.php:130
+#: includes/class-options.php:132
 msgid "URL"
 msgstr "URL"
 
-#: includes/class-options.php:138
+#: includes/class-options.php:140
 msgid "Visibility"
 msgstr "Sichtbarkeit"
 
-#: includes/class-options.php:146
+#: includes/class-options.php:148
 msgid "Additional intro"
 msgstr "Zusätzliche Einleitung"
 
-#: includes/class-options.php:154
+#: includes/class-options.php:156
 msgid "Additional footer"
 msgstr "Zusätzliche Fußzeile"
 
-#: includes/class-options.php:215
+#: includes/class-options.php:217
 #, php-format
 msgid ""
 "Set the desired URL for the H5P Caretaker page. With the current value it "
@@ -51,15 +52,15 @@ msgstr ""
 "Lege den gewünschten URL für die H5P-Caretaker-Seite ein. Mit dem aktuellen "
 "Wert wird er unter %s erreichbar sein."
 
-#: includes/class-options.php:262
+#: includes/class-options.php:264
 msgid "Public"
 msgstr "Öffentlich"
 
-#: includes/class-options.php:263
+#: includes/class-options.php:265
 msgid "Needs capability"
 msgstr "Benötigt Rechte"
 
-#: includes/class-options.php:267
+#: includes/class-options.php:269
 msgid ""
 "Select whether the H5P Caretaker page should be publicly available or only "
 "to those logged in users that have the capability based on their user role."
@@ -68,11 +69,16 @@ msgstr ""
 "für angemeldete Nutzerinnen und Nutzer, die dieses Recht in ihrer Rolle "
 "haben."
 
-#: includes/fetch-analysis.php:25
+#: includes/clean-up.php:28 includes/fetch-analysis.php:23
+#: includes/render-index.php:21
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Du bist nicht berechtigt, diese Seite zu sehen."
+
+#: includes/fetch-analysis.php:31
 msgid "Method Not Allowed"
 msgstr "Methode nicht erlaubt"
 
-#: includes/fetch-analysis.php:35
+#: includes/fetch-analysis.php:41
 #, php-format
 msgid ""
 "It seems that no file was provided or it exceeds the file upload size limit "
@@ -81,128 +87,123 @@ msgstr ""
 "Es sieht so aus, als sei keine Datei angegeben worden oder die Dateigröße "
 "überschreitet die Grenze von %s KB."
 
-#: includes/fetch-analysis.php:46
+#: includes/fetch-analysis.php:52
 msgid "Something went wrong with the file upload, but I dunno what."
 msgstr "Etwas ist schief gelaufen, aber ich weiß nicht was."
 
-#: includes/fetch-analysis.php:54
+#: includes/fetch-analysis.php:60
 #, php-format
 msgid "The file is larger than the allowed maximum file size of %s KB."
 msgstr "Die Datei ist größer als die maximal erlaubte Dateigröße von %s KB."
 
-#: includes/render-index.php:21
-msgid "You do not have sufficient permissions to access this page."
-msgstr "Du bist nicht berechtigt, diese Seite zu sehen."
-
-#: includes/render-index.php:94
+#: includes/render-index.php:252
 msgid "H5P Caretaker Reference Implementation"
 msgstr "H5P-Caretaker-Referenzimplementierung"
 
-#: includes/render-index.php:101
-msgid "or drag the file here"
-msgstr "oder ziehe die Datei hierher"
-
-#: includes/render-index.php:102
-msgid "Remove file"
-msgstr "Entferne Datei"
-
-#: includes/render-index.php:103
-msgid "Select your language"
-msgstr "Wähle deine Sprache"
-
-#: includes/render-index.php:104
-msgid "Upload progress"
-msgstr "Upload-Fortschritt"
-
-#: includes/render-index.php:105
-msgid "Upload your H5P file"
-msgstr "Lade deine H5P-Datei hoch"
-
-#: includes/render-index.php:106
-msgid "Your file is being checked"
-msgstr "Deine Datei wird geprüft"
-
-#: includes/render-index.php:107
-msgid "Your file was checked successfully"
-msgstr "Deine Datei wurde erfolgreich geprüft"
-
-#: includes/render-index.php:108
-msgid "Total messages"
-msgstr "Meldungen insgesamt"
-
-#: includes/render-index.php:109
-msgid "issues"
-msgstr "Auffälligkeiten"
-
-#: includes/render-index.php:110
-msgid "results"
-msgstr "Ergebnisse"
-
-#: includes/render-index.php:111
-msgid "Filter by"
-msgstr "Filtern nach"
-
-#: includes/render-index.php:112
-msgid "Group by"
-msgstr "Gruppieren nach"
-
-#: includes/render-index.php:113
-msgid "Download"
-msgstr "Herunterladen"
-
-#: includes/render-index.php:114
-msgid "Expand all messages"
-msgstr "Alle Meldungen ausklappen"
-
-#: includes/render-index.php:115
-msgid "Collapse all messages"
-msgstr "Alle Meldungen einklappen"
-
-#: includes/render-index.php:116
-msgid "All messages have been filtered out by content."
-msgstr "Alle Meldungen wurden nach Inhalt herausgefiltert."
-
-#: includes/render-index.php:117
-msgid "H5P Caretaker report for @title"
-msgstr "H5P-Caretaker-Report für @title"
-
-#: includes/render-index.php:118
-msgid "Content type filter"
-msgstr "Inhaltstypfilter"
-
-#: includes/render-index.php:119
-msgid "Show all"
-msgstr "Zeige alle"
-
-#: includes/render-index.php:120
-msgid "Various selected contents"
-msgstr "Verschiedene ausgewählte Inhalte"
-
-#: includes/render-index.php:121
-msgid "Show none"
-msgstr "Zeige keine"
-
-#: includes/render-index.php:122
-msgid "Filter by content:"
-msgstr "Filtere nach Inhalt:"
-
-#: includes/render-index.php:123
-msgid "Reset"
-msgstr "Zurücksetzen"
-
-#: includes/render-index.php:137
+#: includes/render-index.php:271
 msgid "Take care of your H5P"
 msgstr "Kümmere dich um H5P"
 
-#: includes/render-index.php:138
+#: includes/render-index.php:272
 msgid "Check your H5P file for improvements"
 msgstr "Prüfe deine H5P-Datei auf Verbesserungspotential"
 
-#: includes/render-index.php:140
+#: includes/render-index.php:274
 msgid ""
-"Upload your H5P file and uncover accessibility issues, missing information "
-"and best practices that can help you improve your H5P content."
+"Uncover accessibility issues, missing information and best practices that "
+"can help you improve your H5P content."
 msgstr ""
-"Lade deine H5P-Datei hoch und entdecke Probleme mit der Barrierefreiheit, "
-"fehlende Informationen und bewährte Praktiken, die dir helfen können, deine "
-"H5P-Inhalte zu verbessern."
+"Entdecke Probleme mit der Barrierefreiheit, fehlende Informationen und "
+"bewährte Praktiken, die dir helfen können, deine H5P-Inhalte zu verbessern."
+
+#: includes/render-index.php:339
+msgid "or drag the file here"
+msgstr "oder ziehe die Datei hierher"
+
+#: includes/render-index.php:340
+msgid "Remove file"
+msgstr "Entferne Datei"
+
+#: includes/render-index.php:341
+msgid "Select your language"
+msgstr "Wähle deine Sprache"
+
+#: includes/render-index.php:342
+msgid "Upload progress"
+msgstr "Upload-Fortschritt"
+
+#: includes/render-index.php:343
+msgid "Upload your H5P file"
+msgstr "Lade deine H5P-Datei hoch"
+
+#: includes/render-index.php:344
+msgid "Your file is being checked"
+msgstr "Deine Datei wird geprüft"
+
+#: includes/render-index.php:345
+msgid "Your file was checked successfully"
+msgstr "Deine Datei wurde erfolgreich geprüft"
+
+#: includes/render-index.php:346
+msgid "Total messages"
+msgstr "Meldungen insgesamt"
+
+#: includes/render-index.php:347
+msgid "issues"
+msgstr "Auffälligkeiten"
+
+#: includes/render-index.php:348
+msgid "results"
+msgstr "Ergebnisse"
+
+#: includes/render-index.php:349
+msgid "Filter by"
+msgstr "Filtern nach"
+
+#: includes/render-index.php:350
+msgid "Group by"
+msgstr "Gruppieren nach"
+
+#: includes/render-index.php:351
+msgid "Download"
+msgstr "Herunterladen"
+
+#: includes/render-index.php:352
+msgid "Expand all messages"
+msgstr "Alle Meldungen ausklappen"
+
+#: includes/render-index.php:353
+msgid "Collapse all messages"
+msgstr "Alle Meldungen einklappen"
+
+#: includes/render-index.php:354
+msgid "All messages have been filtered out by content."
+msgstr "Alle Meldungen wurden nach Inhalt herausgefiltert."
+
+#: includes/render-index.php:355
+msgid "H5P Caretaker report for @title"
+msgstr "H5P-Caretaker-Report für @title"
+
+#: includes/render-index.php:356
+msgid "Content type filter"
+msgstr "Inhaltstypfilter"
+
+#: includes/render-index.php:357
+msgid "Show all"
+msgstr "Zeige alle"
+
+#: includes/render-index.php:358
+msgid "Various selected contents"
+msgstr "Verschiedene ausgewählte Inhalte"
+
+#: includes/render-index.php:359
+msgid "Show none"
+msgstr "Zeige keine"
+
+#: includes/render-index.php:360
+msgid "Filter by content:"
+msgstr "Filtere nach Inhalt:"
+
+#: includes/render-index.php:361
+msgid "Reset"
+msgstr "Zurücksetzen"

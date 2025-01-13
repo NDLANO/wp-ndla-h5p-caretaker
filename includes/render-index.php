@@ -234,6 +234,7 @@ function get_file_by_pattern( $dir, $pattern ) {
 
 /**
  * Render the HTML for the page.
+ * TODO: Think about a templating engine. Mustache? Simple, but we do not need much here - and moodle uses it, too.
  *
  * @param string $file_js The filename of the JavaScript file.
  * @param string $file_css The filename of the CSS file.
@@ -271,7 +272,7 @@ function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = f
 			<p class="main-color"><?php echo esc_html( __( 'Take care of your H5P', 'NDLAH5PCARETAKER' ) ); ?></p>
 			<h2 class="title"><?php echo esc_html( __( 'Check your H5P file for improvements', 'NDLAH5PCARETAKER' ) ); ?></h2>
 			<p>
-			<?php echo esc_html( __( 'Upload your H5P file and uncover accessibility issues, missing information and best practices that can help you improve your H5P content.', 'NDLAH5PCARETAKER' ) ); ?>
+			<?php echo esc_html( __( 'Uncover accessibility issues, missing information and best practices that can help you improve your H5P content.', 'NDLAH5PCARETAKER' ) ); ?>
 			</p>
 			<?php
 			if ( ! empty( Options::get_intro() ) ) {
