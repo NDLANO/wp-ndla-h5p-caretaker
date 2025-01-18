@@ -132,13 +132,13 @@ function convert_to_bytes( $size ) {
  * @return void
  */
 function done( $code, $message ) {
+	if ( isset( $code ) ) {
+		http_response_code( $code );
+	}
+	
 	if ( isset( $message ) ) {
 		// WordPress does not trust $message which is already a json encoded string.
 		echo wp_json_encode( json_decode( $message ) );
-	}
-
-	if ( isset( $code ) ) {
-		http_response_code( $code );
 	}
 
 	exit();
