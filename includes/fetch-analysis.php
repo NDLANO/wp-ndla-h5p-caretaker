@@ -17,6 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Fetch analysis for given file from H5P caretaker.
  */
 function fetch_analysis() {
+	global $wp_filesystem;
+
   // phpcs:ignore WordPress.WP.Capabilities.Unknown
 	if ( Options::get_visibility() !== 'public' && ! current_user_can( 'use-h5p-caretaker' ) ) {
 		// Redirect to the dashboard or display an error message.
@@ -64,7 +66,6 @@ function fetch_analysis() {
 	}
 
 	$upload_dir = wp_upload_dir( null, true )['basedir'] . DIRECTORY_SEPARATOR . 'h5p-caretaker';
-	global $wp_filesystem;
 	if ( ! file_exists( $upload_dir ) ) {
 		$wp_filesystem->mkdir( $upload_dir );
 	}
@@ -135,7 +136,7 @@ function done( $code, $message ) {
 	if ( isset( $code ) ) {
 		http_response_code( $code );
 	}
-	
+
 	if ( isset( $message ) ) {
 		// WordPress does not trust $message which is already a json encoded string.
 		echo wp_json_encode( json_decode( $message ) );

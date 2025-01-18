@@ -30,6 +30,8 @@ function render_page_index() {
 		$h5p_id = get_id_from_query();
 	}
 
+	$export_needs_to_be_removed = false;
+	$path                       = null;
 	if ( ! empty( $h5p_id ) ) {
 		try {
 			$export_needs_to_be_removed = ensure_h5p_export( $h5p_id );

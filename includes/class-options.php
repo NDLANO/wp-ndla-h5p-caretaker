@@ -49,7 +49,7 @@ class Options {
 	 * @since 0.1.0
 	 */
 	public static function set_defaults() {
-		update_option( 'ndlah5pcaretaker_version', NDLAH5PRESIZE_VERSION );
+		update_option( 'ndlah5pcaretaker_version', NDLAH5PCARETAKER_VERSION );
 
 		if ( get_option( 'ndlah5pcaretaker_defaults_set' ) ) {
 			return; // No need to set defaults.

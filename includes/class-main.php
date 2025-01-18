@@ -19,11 +19,6 @@ class Main {
 		 * Constructor.
 		 */
 	public function __construct() {
-
-		register_activation_hook( __FILE__, array( $this, 'on_activation' ) );
-		register_deactivation_hook( __FILE__, array( $this, 'on_deactivation' ) );
-		register_uninstall_hook( __FILE__, array( $this, 'on_uninstall' ) );
-
 		add_filter( 'query_vars', array( $this, 'register_query_vars' ) );
 		add_action( 'template_redirect', array( $this, 'handle_requests' ) );
 		add_action( 'admin_menu', array( $this, 'add_tools_menu_entry' ) );
@@ -183,28 +178,5 @@ class Main {
 		} elseif ( Options::get_url() . '-clean-up' === $custom_page ) {
 			clean_up_export_file();
 		}
-	}
-
-		/**
-		 * Handle plugin activation.
-		 */
-	public function on_activation() {
-		Options::set_defaults();
-		$this->initialize();
-	}
-
-		/**
-		 * Handle plugin deactivation.
-		 */
-	public function on_deactivation() {
-		flush_rewrite_rules();
-	}
-
-		/**
-		 * Handle plugin uninstallation.
-		 */
-	public function on_uninstall() {
-		Options::delete_options();
-		flush_rewrite_rules();
 	}
 }
