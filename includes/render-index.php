@@ -66,7 +66,7 @@ function render_page_index() {
 			$dist_url . '/' . get_file_by_pattern( $dist_dir, 'h5p-caretaker-client-*.js' ),
 			$dist_url . '/' . get_file_by_pattern( $dist_dir, 'h5p-caretaker-client-*.css' ),
 			$locale,
-			$path,
+			$path ?? '',
 			$export_needs_to_be_removed ? $h5p_id : false,
 		);
 	}
