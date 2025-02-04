@@ -19,6 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 function fetch_analysis() {
 	global $wp_filesystem;
 
+	ob_start();
+
   // phpcs:ignore WordPress.WP.Capabilities.Unknown
 	if ( Options::get_visibility() !== 'public' && ! current_user_can( 'use-h5p-caretaker' ) ) {
 		// Redirect to the dashboard or display an error message.
@@ -133,6 +135,8 @@ function convert_to_bytes( $size ) {
  * @return void
  */
 function done( $code, $message ) {
+	ob_end_clean();
+
 	if ( isset( $code ) ) {
 		http_response_code( $code );
 	}
