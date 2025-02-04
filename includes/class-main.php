@@ -85,9 +85,9 @@ class Main {
 		add_rewrite_rule( '^' . $url . '-clean-up/?$', 'index.php?custom_page=' . $url . '-clean-up', 'top' );
 		flush_rewrite_rules();
 
-		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING ) ?? '';
-		$task = filter_input( INPUT_GET, 'task', FILTER_SANITIZE_STRING ) ?? '';
-		$id   = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_STRING ) ?? '';
+		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ?? '';
+		$task = filter_input( INPUT_GET, 'task', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ?? '';
+		$id   = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ?? '';
 		if ( 'h5p' === $page && 'show' === $task ) {
 			add_action(
 				'admin_enqueue_scripts',

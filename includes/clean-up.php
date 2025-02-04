@@ -32,7 +32,7 @@ function clean_up_export_file() {
 		wp_die();
 	}
 
-	$h5p_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_STRING ) ?? '';
+	$h5p_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS ) ?? '';
 	if ( empty( $h5p_id ) ) {
 		wp_die();
 	}
