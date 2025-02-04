@@ -25,7 +25,7 @@ jobs:
 
       - name: Create versioned ZIP file
         run: |
-          ZIP_NAME="ndla-h5p-caretaker-${{ env.PLUGIN_VERSION }}.zip"
+          ZIP_NAME="wp-ndla-h5p-caretaker-${{ env.PLUGIN_VERSION }}.zip"
           echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
           zip -r "$ZIP_NAME" . \
             -x ".github/*" ".gitignore" ".git/*" \
