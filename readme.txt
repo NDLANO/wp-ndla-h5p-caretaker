@@ -45,6 +45,7 @@ Go to the settings _Settings > H5P Caretaker_ and
 The plugin will set up the URL _<your-wordpress-site>/h5p-caretaker_ or the URL that you configured in
 the settings. Go there, upload an H5P file and check the report for potential improvements of the
 content.
+The plugin will also add an "H5P Caretaker" menu item to the tools menu.
 You will also find an "H5P Caretaker" button above the H5P content view inside the editor. Click on that to open the
 H5P Caretaker page and the respective file will be checked directly.
 
