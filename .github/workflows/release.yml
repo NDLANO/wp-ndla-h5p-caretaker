@@ -1,0 +1,41 @@
+name: Release ZIP Build
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Extract version from readme.txt
+        run: |
+          VERSION=$(grep -oP '(?<=Stable tag:\s)\d+\.\d+\.\d+' readme.txt)
+          echo "PLUGIN_VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Install Node.js dependencies
+        run: npm install --production
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Create versioned ZIP file
+        run: |
+          ZIP_NAME="ndla-h5p-caretaker-${{ env.PLUGIN_VERSION }}.zip"
+          echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
+          zip -r "$ZIP_NAME" . \
+            -x ".github/*" ".gitignore" ".git/*" \
+            "docs/*" \
+            "composer.json" "composer.lock" \
+            "package.json" "package-lock.json"
+
+      - name: Upload ZIP to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ZIP_NAME }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
