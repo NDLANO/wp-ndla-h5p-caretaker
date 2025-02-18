@@ -59,8 +59,8 @@ function render_page_index() {
 	);
 	if ( get_query_var( 'custom_page' ) ) {
 		$base_dir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
-		$dist_dir = $base_dir . 'node_modules' . DIRECTORY_SEPARATOR . 'h5p-caretaker-client' . DIRECTORY_SEPARATOR . 'dist';
-		$dist_url = plugin_dir_url( __FILE__ ) . '../node_modules/h5p-caretaker-client/dist';
+		$dist_dir = $base_dir . 'node_modules' . DIRECTORY_SEPARATOR . '@explorendla' . DIRECTORY_SEPARATOR . 'h5p-caretaker-client' . DIRECTORY_SEPARATOR . 'dist' . DIRECTORY_SEPARATOR . '@explorendla';
+		$dist_url = plugin_dir_url( __FILE__ ) . '../node_modules/@explorendla/h5p-caretaker-client/dist/@explorendla';
 
 		render_html(
 			$dist_url . '/' . get_file_by_pattern( $dist_dir, 'h5p-caretaker-client-*.js' ),
