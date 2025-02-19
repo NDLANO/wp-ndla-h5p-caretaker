@@ -141,7 +141,7 @@ msgid "Your file is being checked"
 msgstr "Deine Datei wird geprüft"
 
 #: includes/render-index.php:345
-msgid "Your file was checked successfully"
+msgid "Your file check was completed"
 msgstr "Deine Datei wurde erfolgreich geprüft"
 
 #: includes/render-index.php:346

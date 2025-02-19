@@ -344,7 +344,7 @@ function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = f
 							uploadProgress: '<?php echo esc_html( __( 'Upload progress' ) ); ?>',
 							uploadYourH5Pfile: '<?php echo esc_html( __( 'Upload your H5P file' ) ); ?>',
 							yourFileIsBeingChecked: '<?php echo esc_html( __( 'Your file is being checked' ) ); ?>',
-							yourFileWasCheckedSuccessfully: '<?php echo esc_html( __( 'Your file was checked successfully' ) ); ?>',
+							yourFileWasCheckedSuccessfully: '<?php echo esc_html( __( 'Your file check was completed' ) ); ?>',
 							totalMessages: '<?php echo esc_html( __( 'Total messages' ) ); ?>',
 							issues: '<?php echo esc_html( __( 'issues' ) ); ?>',
 							results: '<?php echo esc_html( __( 'results' ) ); ?>',
