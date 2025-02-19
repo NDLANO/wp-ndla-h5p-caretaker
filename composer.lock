@@ -4,38 +4,39 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9baa7a75f836a50aa7d7a84bc7a24a5c",
+    "content-hash": "42af7405f60d1aee9f442073f8729c0f",
     "packages": [
         {
             "name": "ndlano/h5p-caretaker",
-            "version": "dev-master",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/NDLANO/h5p-caretaker.git",
-                "reference": "8ccf1add87ffde071fd1a3d8a79e203a3b2cf4d8"
+                "reference": "1d7342e9231924eaee1a864d9e9e5465864cc874"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NDLANO/h5p-caretaker/zipball/8ccf1add87ffde071fd1a3d8a79e203a3b2cf4d8",
-                "reference": "8ccf1add87ffde071fd1a3d8a79e203a3b2cf4d8",
+                "url": "https://api.github.com/repos/NDLANO/h5p-caretaker/zipball/1d7342e9231924eaee1a864d9e9e5465864cc874",
+                "reference": "1d7342e9231924eaee1a864d9e9e5465864cc874",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Ndlano\\H5PCaretaker\\": "app/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
                     "name": "NDLA",
+                    "email": "explore@ndla.no",
                     "homepage": "https://ndla.no",
                     "role": "Producer"
                 },
@@ -48,18 +49,16 @@
             ],
             "description": "Library that is supposed to help people take care of H5P content types",
             "support": {
-                "source": "https://github.com/NDLANO/h5p-caretaker/tree/master",
-                "issues": "https://github.com/NDLANO/h5p-caretaker/issues"
+                "issues": "https://github.com/NDLANO/h5p-caretaker/issues",
+                "source": "https://github.com/NDLANO/h5p-caretaker/tree/1.0.4"
             },
-            "time": "2025-02-04T15:28:01+00:00"
+            "time": "2025-02-19T09:39:48+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "ndlano/h5p-caretaker": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
