@@ -1,5 +1,5 @@
 {
-    "name": "ndlano/h5p-caretaker-server",
+    "name": "ndlano/wp-ndla-h5p-caretaker",
     "description": "PHP based reference implementation for the H5P Caretaker library",
     "type": "project",
     "license": "MIT",
