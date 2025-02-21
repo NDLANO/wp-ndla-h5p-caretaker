@@ -351,6 +351,8 @@ function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = f
 							filterBy: '<?php echo esc_html( __( 'Filter by' ) ); ?>',
 							groupBy: '<?php echo esc_html( __( 'Group by' ) ); ?>',
 							download: '<?php echo esc_html( __( 'Download' ) ); ?>',
+							showDetails: '<?php echo esc_html( __( 'Show details' ) ); ?>',
+							hideDetails: '<?php echo esc_html( __( 'Hide details' ) ); ?>',
 							expandAllMessages: '<?php echo esc_html( __( 'Expand all messages' ) ); ?>',
 							collapseAllMessages: '<?php echo esc_html( __( 'Collapse all messages' ) ); ?>',
 							allFilteredOut: '<?php echo esc_html( __( 'All messages have been filtered out by content.' ) ); ?>',
