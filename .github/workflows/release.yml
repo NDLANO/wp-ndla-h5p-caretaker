@@ -34,7 +34,8 @@ jobs:
             -x ".github/*" ".gitignore" ".git/*" \
             "docs/*" \
             "composer.json" "composer.lock" \
-            "package.json" "package-lock.json"
+            "package.json" "package-lock.json" \
+            "phpcs.xml"
 
       - name: Upload ZIP to Release
         uses: softprops/action-gh-release@v2
