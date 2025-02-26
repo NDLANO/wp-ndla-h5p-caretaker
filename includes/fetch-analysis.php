@@ -2,7 +2,7 @@
 /**
  * Fetch analysis for given file from H5P caretaker.
  *
- * @package NDLAH5PCARETAKER
+ * @package wp-ndla-h5p-caretaker
  */
 
 namespace NDLAH5PCARETAKER;
@@ -24,7 +24,7 @@ function fetch_analysis() {
   // phpcs:ignore WordPress.WP.Capabilities.Unknown
 	if ( Options::get_visibility() !== 'public' && ! current_user_can( 'use-h5p-caretaker' ) ) {
 		// Redirect to the dashboard or display an error message.
-		wp_die( esc_html( __( 'You do not have sufficient permissions to access this page.', 'NDLAH5PCARETAKER' ) ) );
+		wp_die( esc_html( __( 'You do not have sufficient permissions to access this page.', 'wp-ndla-h5p-caretaker' ) ) );
 	}
 
 	header( 'Content-Type: application/json; charset=utf-8' );
@@ -32,7 +32,7 @@ function fetch_analysis() {
 	$max_file_size = convert_to_bytes( min( ini_get( 'post_max_size' ), ini_get( 'upload_max_filesize' ) ) );
 
 	if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
-		done( 405, __( 'Method Not Allowed', 'NDLAH5PCARETAKER' ) );
+		done( 405, __( 'Method Not Allowed', 'wp-ndla-h5p-caretaker' ) );
 	}
 
 	// We're not in a WordPress context, so we can't use the nonce verification.
@@ -42,7 +42,7 @@ function fetch_analysis() {
 			422,
 			sprintf(
 				// translators: %s: The maximum file size in kilobytes.
-				__( 'It seems that no file was provided or it exceeds the file upload size limit of %s KB.', 'NDLAH5PCARETAKER' ),
+				__( 'It seems that no file was provided or it exceeds the file upload size limit of %s KB.', 'wp-ndla-h5p-caretaker' ),
 				$max_file_size / 1024
 			)
 		);
@@ -53,7 +53,7 @@ function fetch_analysis() {
 	$file = array_map( 'sanitize_text_field', $_FILES['file'] );
 
 	if ( strval( UPLOAD_ERR_OK ) !== $file['error'] ) {
-		done( 500, __( 'Something went wrong with the file upload, but I dunno what.', 'NDLAH5PCARETAKER' ) );
+		done( 500, __( 'Something went wrong with the file upload, but I dunno what.', 'wp-ndla-h5p-caretaker' ) );
 	}
 
 	if ( intval( $file['size'] ) > $max_file_size ) {
@@ -61,7 +61,7 @@ function fetch_analysis() {
 			413,
 			sprintf(
 			// translators: %s: The maximum file size in kilobytes.
-				__( 'The file is larger than the allowed maximum file size of %s KB.', 'NDLAH5PCARETAKER' ),
+				__( 'The file is larger than the allowed maximum file size of %s KB.', 'wp-ndla-h5p-caretaker' ),
 				$max_file_size / 1024
 			)
 		);
