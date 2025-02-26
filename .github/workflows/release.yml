@@ -33,8 +33,8 @@ jobs:
           zip -r "$ZIP_NAME" . \
             -x ".github/*" ".gitignore" ".git/*" \
             "docs/*" \
-            "composer.json" \
-            "package.json" \
+            "composer.lock" \
+            "package-lock.json" \
             "phpcs.xml"
 
       - name: Upload ZIP to Release
