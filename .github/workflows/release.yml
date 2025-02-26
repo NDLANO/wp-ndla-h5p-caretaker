@@ -12,9 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Extract version from readme.txt
+      - name: Extract version from ndla-h5p-caretaker.php
         run: |
-          VERSION=$(grep -oP '(?<=Stable tag:\s)\d+\.\d+\.\d+' readme.txt)
+          VERSION=$(grep -oP "define\s*\(\s*'NDLAH5PCARETAKER_VERSION'\s*,\s*'[^']+'" ndla-h5p-caretaker.php | sed -E "s/.*'([0-9]+\.[0-9]+\.[0-9]+)'.*/\1/")
           echo "PLUGIN_VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Install Node.js dependencies
