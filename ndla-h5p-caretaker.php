@@ -33,7 +33,7 @@ if ( ! function_exists( 'WP_Filesystem' ) ) {
 WP_Filesystem();
 
 if ( ! defined( 'NDLAH5PCARETAKER_VERSION' ) ) {
-	define( 'NDLAH5PCARETAKER_VERSION', '1.0.1' );
+	define( 'NDLAH5PCARETAKER_VERSION', '1.0.2' );
 }
 
 /**
