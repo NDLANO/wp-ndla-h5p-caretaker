@@ -1,6 +1,6 @@
 {
   "name": "wp-ndla-h5p-caretaker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "PHP based server component for using the H5P Caretaker library",
   "keywords": [
     "H5P",
@@ -9,6 +9,6 @@
   "author": "NDLA",
   "license": "MIT",
   "dependencies": {
-    "@explorendla/h5p-caretaker-client": "^1.0.17"
+    "@explorendla/h5p-caretaker-client": "^1.0.18"
   }
 }
