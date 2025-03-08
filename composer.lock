@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "ndlano/h5p-caretaker",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/NDLANO/h5p-caretaker.git",
-                "reference": "5642e7d87f183776b9998f555a794b8a917f9f52"
+                "reference": "639690f02336ff621984c4bac0dd8e2e264c6fb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NDLANO/h5p-caretaker/zipball/5642e7d87f183776b9998f555a794b8a917f9f52",
-                "reference": "5642e7d87f183776b9998f555a794b8a917f9f52",
+                "url": "https://api.github.com/repos/NDLANO/h5p-caretaker/zipball/639690f02336ff621984c4bac0dd8e2e264c6fb3",
+                "reference": "639690f02336ff621984c4bac0dd8e2e264c6fb3",
                 "shasum": ""
             },
             "require": {
@@ -50,9 +50,9 @@
             "description": "Library that is supposed to help people take care of H5P content types",
             "support": {
                 "issues": "https://github.com/NDLANO/h5p-caretaker/issues",
-                "source": "https://github.com/NDLANO/h5p-caretaker/tree/1.0.5"
+                "source": "https://github.com/NDLANO/h5p-caretaker/tree/1.0.6"
             },
-            "time": "2025-02-19T21:01:05+00:00"
+            "time": "2025-03-08T22:12:14+00:00"
         }
     ],
     "packages-dev": [],
