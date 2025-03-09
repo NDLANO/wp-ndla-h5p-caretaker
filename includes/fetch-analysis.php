@@ -143,7 +143,12 @@ function done( $code, $message ) {
 
 	if ( isset( $message ) ) {
 		// WordPress does not trust $message which is already a json encoded string.
-		echo wp_json_encode( json_decode( $message ) );
+		$decoded = json_decode( $message );
+		if ( null !== $decoded ) {
+			echo ( wp_json_encode( $decoded ) );
+		} else {
+			echo ( esc_html( $message ) );
+		}
 	}
 
 	exit();
