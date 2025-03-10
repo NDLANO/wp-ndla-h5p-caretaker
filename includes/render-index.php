@@ -363,6 +363,8 @@ function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = f
 							showNone: '<?php echo esc_html( __( 'Show none', 'wp-ndla-h5p-caretaker' ) ); ?>',
 							filterByContent: '<?php echo esc_html( __( 'Filter by content:', 'wp-ndla-h5p-caretaker' ) ); ?>',
 							reset: '<?php echo esc_html( __( 'Reset', 'wp-ndla-h5p-caretaker' ) ); ?>',
+							unknownError: '<?php echo esc_html( __( 'Something went wrong, but I dunno what, sorry!', 'wp-ndla-h5p-caretaker' ) ); ?>',
+							checkServerLog: '<?php echo esc_html( __( 'Please check the server log.', 'wp-ndla-h5p-caretaker' ) ); ?>',
 						},
 					},
 					{

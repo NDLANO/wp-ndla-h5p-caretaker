@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wp-ndla-h5p-caretaker\n"
-"POT-Creation-Date: 2025-02-21 13:37+0100\n"
-"PO-Revision-Date: 2025-02-21 13:37+0100\n"
+"POT-Creation-Date: 2025-03-10 15:12+0100\n"
+"PO-Revision-Date: 2025-03-10 15:13+0100\n"
 "Last-Translator: H5P-Careraker\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -43,7 +43,7 @@ msgstr "Zusätzliche Einleitung"
 msgid "Additional footer"
 msgstr "Zusätzliche Fußzeile"
 
-#: includes/class-options.php:217
+#: includes/class-options.php:219
 #, php-format
 msgid ""
 "Set the desired URL for the H5P Caretaker page. With the current value it "
@@ -52,15 +52,15 @@ msgstr ""
 "Lege den gewünschten URL für die H5P-Caretaker-Seite ein. Mit dem aktuellen "
 "Wert wird er unter %s erreichbar sein."
 
-#: includes/class-options.php:264
+#: includes/class-options.php:266
 msgid "Public"
 msgstr "Öffentlich"
 
-#: includes/class-options.php:265
+#: includes/class-options.php:267
 msgid "Needs capability"
 msgstr "Benötigt Rechte"
 
-#: includes/class-options.php:269
+#: includes/class-options.php:271
 msgid ""
 "Select whether the H5P Caretaker page should be publicly available or only "
 "to those logged in users that have the capability based on their user role."
@@ -215,3 +215,12 @@ msgstr "Filtere nach Inhalt:"
 #: includes/render-index.php:365
 msgid "Reset"
 msgstr "Zurücksetzen"
+
+#: includes/render-index.php:366
+msgid "Something went wrong, but I dunno what, sorry!"
+msgstr ""
+"Etwas ist schief gelaufen, aber ich weiß nicht was, bitte entschuldige!"
+
+#: includes/render-index.php:367
+msgid "Please check the server log."
+msgstr "Bitte prüfe die Server-Logs."
