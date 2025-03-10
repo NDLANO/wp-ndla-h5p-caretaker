@@ -145,9 +145,9 @@ function done( $code, $message ) {
 		// WordPress does not trust $message which is already a json encoded string.
 		$decoded = json_decode( $message );
 		if ( null !== $decoded ) {
-			echo ( wp_json_encode( $decoded ) );
+			echo wp_json_encode( $decoded );
 		} else {
-			echo ( esc_html( $message ) );
+			echo wp_json_encode( array( 'error' => esc_html( $message ) ) );
 		}
 	}
 
