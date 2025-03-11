@@ -2,7 +2,7 @@
 /**
  * Options page for the plugin.
  *
- * @package wp-ndla-h5p-caretaker
+ * @package ndla-h5p-caretaker
  */
 
 namespace NDLAH5PCARETAKER;
@@ -10,7 +10,7 @@ namespace NDLAH5PCARETAKER;
 /**
  * Options page for the plugin.
  *
- * @package wp-ndla-h5p-caretaker
+ * @package ndla-h5p-caretaker
  */
 class Options {
 
@@ -98,7 +98,7 @@ class Options {
 	public function create_admin_page() {
 		?>
 		<div class="wrap">
-			<h2><?php echo esc_html( __( 'H5P Caretaker', 'wp-ndla-h5p-caretaker' ) ); ?></h2>
+			<h2><?php echo esc_html( __( 'H5P Caretaker', 'ndla-h5p-caretaker' ) ); ?></h2>
 			<form method="post" action="options.php">
 				<?php
 				settings_fields( 'ndlah5pcaretaker_option_group' );
@@ -124,14 +124,14 @@ class Options {
 
 		add_settings_section(
 			'general_settings',
-			__( 'General', 'wp-ndla-h5p-caretaker' ),
+			__( 'General', 'ndla-h5p-caretaker' ),
 			array( $this, 'print_general_section_info' ),
 			'ndlah5pcaretaker-admin'
 		);
 
 		add_settings_field(
 			'url',
-			__( 'URL', 'wp-ndla-h5p-caretaker' ),
+			__( 'URL', 'ndla-h5p-caretaker' ),
 			array( $this, 'url_callback' ),
 			'ndlah5pcaretaker-admin',
 			'general_settings'
@@ -139,7 +139,7 @@ class Options {
 
 		add_settings_field(
 			'visibility',
-			__( 'Visibility', 'wp-ndla-h5p-caretaker' ),
+			__( 'Visibility', 'ndla-h5p-caretaker' ),
 			array( $this, 'visibility_callback' ),
 			'ndlah5pcaretaker-admin',
 			'general_settings'
@@ -147,7 +147,7 @@ class Options {
 
 		add_settings_field(
 			'intro',
-			__( 'Additional intro', 'wp-ndla-h5p-caretaker' ),
+			__( 'Additional intro', 'ndla-h5p-caretaker' ),
 			array( $this, 'intro_callback' ),
 			'ndlah5pcaretaker-admin',
 			'general_settings'
@@ -155,7 +155,7 @@ class Options {
 
 		add_settings_field(
 			'outro',
-			__( 'Additional footer', 'wp-ndla-h5p-caretaker' ),
+			__( 'Additional footer', 'ndla-h5p-caretaker' ),
 			array( $this, 'outro_callback' ),
 			'ndlah5pcaretaker-admin',
 			'general_settings'
@@ -218,7 +218,7 @@ class Options {
 				echo esc_html(
 					sprintf(
 						// translators: %s: Will contain the URL that the H5P Caretaker page will be available at.
-						__( 'Set the desired URL for the H5P Caretaker page. With the current value it will be available at %s.', 'wp-ndla-h5p-caretaker' ),
+						__( 'Set the desired URL for the H5P Caretaker page. With the current value it will be available at %s.', 'ndla-h5p-caretaker' ),
 						esc_url( home_url( '/' . self::get_url() ) )
 					)
 				);
@@ -265,12 +265,12 @@ class Options {
 				name="ndlah5pcaretaker_option[visibility]"
 				id="visibility"
 			>
-				<option value="public"<?php echo( 'public' === self::get_visibility() ? ' selected' : '' ); ?>><?php echo esc_html( __( 'Public', 'wp-ndla-h5p-caretaker' ) ); ?></option>
-				<option value="capability"<?php echo( 'capability' === self::get_visibility() ? ' selected' : '' ); ?>><?php echo esc_html( __( 'Needs capability', 'wp-ndla-h5p-caretaker' ) ); ?></option>
+				<option value="public"<?php echo( 'public' === self::get_visibility() ? ' selected' : '' ); ?>><?php echo esc_html( __( 'Public', 'ndla-h5p-caretaker' ) ); ?></option>
+				<option value="capability"<?php echo( 'capability' === self::get_visibility() ? ' selected' : '' ); ?>><?php echo esc_html( __( 'Needs capability', 'ndla-h5p-caretaker' ) ); ?></option>
 			</select>
 			<p class="description">
 			<?php
-				echo esc_html( __( 'Select whether the H5P Caretaker page should be publicly available or only to those logged in users that have the capability based on their user role.', 'wp-ndla-h5p-caretaker' ) );
+				echo esc_html( __( 'Select whether the H5P Caretaker page should be publicly available or only to those logged in users that have the capability based on their user role.', 'ndla-h5p-caretaker' ) );
 			?>
 			</p>
 		<?php

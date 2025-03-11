@@ -2,13 +2,13 @@
 /**
  * Plugin Name: NDLA's H5P Caretaker
  * Description: A plugin to allow checking H5P content for issues.
- * Text Domain: wp-ndla-h5p-caretaker
+ * Text Domain: ndla-h5p-caretaker
  * Domain Path: /languages
  * Version: 1.0.6
  * Author: NDLA, Oliver Tacke
  * License: MIT
  *
- * @package wp-ndla-h5p-caretaker
+ * @package ndla-h5p-caretaker
  */
 
 namespace NDLAH5PCARETAKER;

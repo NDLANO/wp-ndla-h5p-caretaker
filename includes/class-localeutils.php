@@ -2,7 +2,7 @@
 /**
  * LocaleUtils
  *
- * @package wp-ndla-h5p-caretaker
+ * @package ndla-h5p-caretaker
  */
 
 namespace NDLAH5PCARETAKER;
@@ -192,7 +192,7 @@ class LocaleUtils {
 
 		$translation_file = self::find_translation_file( $locale );
 		if ( ! empty( $translation_file ) ) {
-			load_textdomain( 'wp-ndla-h5p-caretaker', $translation_file );
+			load_textdomain( 'ndla-h5p-caretaker', $translation_file );
 		} else {
 			add_filter(
 				'locale',

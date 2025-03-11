@@ -2,7 +2,7 @@
 /**
  * Main plugin class file.
  *
- * @package wp-ndla-h5p-caretaker
+ * @package ndla-h5p-caretaker
  */
 
 namespace NDLAH5PCARETAKER;
@@ -31,7 +31,7 @@ class Main {
 		 */
 	public function load_plugin_textdomain() {
 		load_plugin_textdomain(
-			'wp-ndla-h5p-caretaker',
+			'ndla-h5p-caretaker',
 			false,
 			basename( dirname( __DIR__ ) ) . DIRECTORY_SEPARATOR . 'languages'
 		);
@@ -148,7 +148,7 @@ class Main {
 				caretakerButton.style.marginLeft = '10px';
 				caretakerButton.target = '_blank';
 				caretakerButton.classList.add('add-new-h2');
-				caretakerButton.textContent = '<?php echo esc_html( __( 'H5P Caretaker', 'wp-ndla-h5p-caretaker' ) ); ?>';
+				caretakerButton.textContent = '<?php echo esc_html( __( 'H5P Caretaker', 'ndla-h5p-caretaker' ) ); ?>';
 				lastButton.parentNode.insertBefore(caretakerButton, lastButton.nextSibling);
 			});
 		</script>

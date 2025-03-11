@@ -2,7 +2,7 @@
 /**
  * Handle the custom page display logic.
  *
- * @package wp-ndla-h5p-caretaker
+ * @package ndla-h5p-caretaker
  */
 
 namespace NDLAH5PCARETAKER;
@@ -18,7 +18,7 @@ function render_page_index() {
   // phpcs:ignore WordPress.WP.Capabilities.Unknown
 	if ( Options::get_visibility() !== 'public' && ! current_user_can( 'use-h5p-caretaker' ) ) {
 		// Redirect to the dashboard or display an error message.
-		wp_die( esc_html( __( 'You do not have sufficient permissions to access this page.', 'wp-ndla-h5p-caretaker' ) ) );
+		wp_die( esc_html( __( 'You do not have sufficient permissions to access this page.', 'ndla-h5p-caretaker' ) ) );
 	}
 
 	$http_accept_language = get_http_accept_language();
@@ -252,7 +252,7 @@ function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = f
 	<head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><?php esc_html_e( 'H5P Caretaker Reference Implementation', 'wp-ndla-h5p-caretaker' ); ?></title>
+	<title><?php esc_html_e( 'H5P Caretaker Reference Implementation', 'ndla-h5p-caretaker' ); ?></title>
     <?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet ?>
 	<link rel="stylesheet" href="<?php echo esc_url( $file_css ); ?>" />
     <?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript ?>
@@ -264,17 +264,17 @@ function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = f
 
 	<body class="h5p-caretaker">
 	<header class="header">
-		<h1 class="title main-color"><?php echo esc_html( __( 'H5P Caretaker', 'wp-ndla-h5p-caretaker' ) ); ?></h1>
+		<h1 class="title main-color"><?php echo esc_html( __( 'H5P Caretaker', 'ndla-h5p-caretaker' ) ); ?></h1>
 		<?php render_select_language( $locale ); ?>
 	</header>
 
 	<main class="page">
 		<div class="block background-dark">
 		<div class="centered-row block-visible">
-			<p class="main-color"><?php echo esc_html( __( 'Take care of your H5P', 'wp-ndla-h5p-caretaker' ) ); ?></p>
-			<h2 class="title"><?php echo esc_html( __( 'Check your H5P file for improvements', 'wp-ndla-h5p-caretaker' ) ); ?></h2>
+			<p class="main-color"><?php echo esc_html( __( 'Take care of your H5P', 'ndla-h5p-caretaker' ) ); ?></p>
+			<h2 class="title"><?php echo esc_html( __( 'Check your H5P file for improvements', 'ndla-h5p-caretaker' ) ); ?></h2>
 			<p>
-			<?php echo esc_html( __( 'Uncover accessibility issues, missing information and best practices that can help you improve your H5P content.', 'wp-ndla-h5p-caretaker' ) ); ?>
+			<?php echo esc_html( __( 'Uncover accessibility issues, missing information and best practices that can help you improve your H5P content.', 'ndla-h5p-caretaker' ) ); ?>
 			</p>
 			<?php
 			if ( ! empty( Options::get_intro() ) ) {
@@ -338,33 +338,33 @@ function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = f
 					{
 						endpoint: '<?php echo esc_url( home_url( '/' . Options::get_url() . '-upload' ) ); ?>',
 						l10n: {
-							orDragTheFileHere: '<?php echo esc_html( __( 'or drag the file here', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							removeFile: '<?php echo esc_html( __( 'Remove file', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							selectYourLanguage: '<?php echo esc_html( __( 'Select your language', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							uploadProgress: '<?php echo esc_html( __( 'Upload progress', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							uploadYourH5Pfile: '<?php echo esc_html( __( 'Upload your H5P file', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							yourFileIsBeingChecked: '<?php echo esc_html( __( 'Your file is being checked', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							yourFileWasCheckedSuccessfully: '<?php echo esc_html( __( 'Your file check was completed', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							totalMessages: '<?php echo esc_html( __( 'Total messages', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							issues: '<?php echo esc_html( __( 'issues', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							results: '<?php echo esc_html( __( 'results', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							filterBy: '<?php echo esc_html( __( 'Filter by', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							groupBy: '<?php echo esc_html( __( 'Group by', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							download: '<?php echo esc_html( __( 'Download', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							showDetails: '<?php echo esc_html( __( 'Show details', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							hideDetails: '<?php echo esc_html( __( 'Hide details', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							expandAllMessages: '<?php echo esc_html( __( 'Expand all messages', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							collapseAllMessages: '<?php echo esc_html( __( 'Collapse all messages', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							allFilteredOut: '<?php echo esc_html( __( 'All messages have been filtered out by content.', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							reportTitleTemplate: '<?php echo esc_html( __( 'H5P Caretaker report for @title', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							contentFilter: '<?php echo esc_html( __( 'Content type filter', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							showAll: '<?php echo esc_html( __( 'Show all', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							showSelected: '<?php echo esc_html( __( 'Various selected contents', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							showNone: '<?php echo esc_html( __( 'Show none', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							filterByContent: '<?php echo esc_html( __( 'Filter by content:', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							reset: '<?php echo esc_html( __( 'Reset', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							unknownError: '<?php echo esc_html( __( 'Something went wrong, but I dunno what, sorry!', 'wp-ndla-h5p-caretaker' ) ); ?>',
-							checkServerLog: '<?php echo esc_html( __( 'Please check the server log.', 'wp-ndla-h5p-caretaker' ) ); ?>',
+							orDragTheFileHere: '<?php echo esc_html( __( 'or drag the file here', 'ndla-h5p-caretaker' ) ); ?>',
+							removeFile: '<?php echo esc_html( __( 'Remove file', 'ndla-h5p-caretaker' ) ); ?>',
+							selectYourLanguage: '<?php echo esc_html( __( 'Select your language', 'ndla-h5p-caretaker' ) ); ?>',
+							uploadProgress: '<?php echo esc_html( __( 'Upload progress', 'ndla-h5p-caretaker' ) ); ?>',
+							uploadYourH5Pfile: '<?php echo esc_html( __( 'Upload your H5P file', 'ndla-h5p-caretaker' ) ); ?>',
+							yourFileIsBeingChecked: '<?php echo esc_html( __( 'Your file is being checked', 'ndla-h5p-caretaker' ) ); ?>',
+							yourFileWasCheckedSuccessfully: '<?php echo esc_html( __( 'Your file check was completed', 'ndla-h5p-caretaker' ) ); ?>',
+							totalMessages: '<?php echo esc_html( __( 'Total messages', 'ndla-h5p-caretaker' ) ); ?>',
+							issues: '<?php echo esc_html( __( 'issues', 'ndla-h5p-caretaker' ) ); ?>',
+							results: '<?php echo esc_html( __( 'results', 'ndla-h5p-caretaker' ) ); ?>',
+							filterBy: '<?php echo esc_html( __( 'Filter by', 'ndla-h5p-caretaker' ) ); ?>',
+							groupBy: '<?php echo esc_html( __( 'Group by', 'ndla-h5p-caretaker' ) ); ?>',
+							download: '<?php echo esc_html( __( 'Download', 'ndla-h5p-caretaker' ) ); ?>',
+							showDetails: '<?php echo esc_html( __( 'Show details', 'ndla-h5p-caretaker' ) ); ?>',
+							hideDetails: '<?php echo esc_html( __( 'Hide details', 'ndla-h5p-caretaker' ) ); ?>',
+							expandAllMessages: '<?php echo esc_html( __( 'Expand all messages', 'ndla-h5p-caretaker' ) ); ?>',
+							collapseAllMessages: '<?php echo esc_html( __( 'Collapse all messages', 'ndla-h5p-caretaker' ) ); ?>',
+							allFilteredOut: '<?php echo esc_html( __( 'All messages have been filtered out by content.', 'ndla-h5p-caretaker' ) ); ?>',
+							reportTitleTemplate: '<?php echo esc_html( __( 'H5P Caretaker report for @title', 'ndla-h5p-caretaker' ) ); ?>',
+							contentFilter: '<?php echo esc_html( __( 'Content type filter', 'ndla-h5p-caretaker' ) ); ?>',
+							showAll: '<?php echo esc_html( __( 'Show all', 'ndla-h5p-caretaker' ) ); ?>',
+							showSelected: '<?php echo esc_html( __( 'Various selected contents', 'ndla-h5p-caretaker' ) ); ?>',
+							showNone: '<?php echo esc_html( __( 'Show none', 'ndla-h5p-caretaker' ) ); ?>',
+							filterByContent: '<?php echo esc_html( __( 'Filter by content:', 'ndla-h5p-caretaker' ) ); ?>',
+							reset: '<?php echo esc_html( __( 'Reset', 'ndla-h5p-caretaker' ) ); ?>',
+							unknownError: '<?php echo esc_html( __( 'Something went wrong, but I dunno what, sorry!', 'ndla-h5p-caretaker' ) ); ?>',
+							checkServerLog: '<?php echo esc_html( __( 'Please check the server log.', 'ndla-h5p-caretaker' ) ); ?>',
 						},
 					},
 					{
