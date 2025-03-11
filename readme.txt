@@ -22,7 +22,7 @@ Install the _NDLA's H5P Caretaker_ plugin via the WordPress Plugin directory (no
 === Upload ZIP file ===
 1. Go to https://github.com/NDLANO/wp-ndla-h5p-caretaker/releases.
 2. Pick the latest release (or the one that you want to use) and download the
-   `wp-ndla-h5p-caretaker-<plugin-version>.zip` file.
+   `ndla-h5p-caretaker-<plugin-version>.zip` file.
 3. Log in to your WordPress site as an admin and go to _Plugins > Add New Plugin_.
 4. Click on the _Upload Plugin_ button.
 5. Upload the ZIP file with the plugin code.
