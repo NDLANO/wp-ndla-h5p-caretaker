@@ -114,6 +114,8 @@ class Options {
 	 * Register and add settings.
 	 */
 	public function page_init() {
+		// The `sanitize` function properly sanitizes all input.
+		// phpcs:ignore PluginCheck.CodeAnalysis.SettingSanitization.register_settingDynamic
 		register_setting(
 			'ndlah5pcaretaker_option_group',
 			'ndlah5pcaretaker_option',
