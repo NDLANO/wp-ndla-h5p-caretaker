@@ -23,7 +23,11 @@
     }
 
     const formData = new FormData();
+    if (window.H5PCaretakerIntegration.sessionKeyName) {
+      formData.set(window.H5PCaretakerIntegration.sessionKeyName, window.H5PCaretakerIntegration.sessionKeyValue);
+    }
     formData.set('id', exportRemoveId);
+    formData.set('action', 'remove');
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', window.H5PCaretakerIntegration.ajax.cleanUp, true);
@@ -35,6 +39,8 @@
     window.h5pcaretaker = new window.H5PCaretaker(
       {
         endpoint: window.H5PCaretakerIntegration.ajax.upload,
+        sessionKeyName: window.H5PCaretakerIntegration.sessionKeyName,
+        sessionKeyValue: window.H5PCaretakerIntegration.sessionKeyValue,
         l10n: {
           orDragTheFileHere: window.H5PCaretakerIntegration.l10n.orDragTheFileHere,
           removeFile: window.H5PCaretakerIntegration.l10n.removeFile,

@@ -36,8 +36,13 @@ function fetch_analysis() {
 		done( 405, __( 'Method Not Allowed', 'ndla-h5p-caretaker' ) );
 	}
 
-	// We're not in a WordPress context, so we can't use the nonce verification.
-  // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	if (
+		! isset( $_POST['h5pCaretakerNonce'] ) ||
+		! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['h5pCaretakerNonce'] ) ), 'h5p-caretaker-upload' )
+	) {
+		done( 403, __( 'Invalid nonce verification.', 'ndla-h5p-caretaker' ) );
+	}
+
 	if ( ! isset( $_FILES['file'] ) ) {
 		done(
 			422,
@@ -49,8 +54,6 @@ function fetch_analysis() {
 		);
 	}
 
-	// We're not in a WordPress context, so we can't use the nonce verification.
-  // phpcs:ignore WordPress.Security.NonceVerification.Missing
 	$file = array_map( 'sanitize_text_field', $_FILES['file'] );
 
 	if ( strval( UPLOAD_ERR_OK ) !== $file['error'] ) {
@@ -88,8 +91,6 @@ function fetch_analysis() {
 		'cachePath'   => $cache_dir,
 	);
 
-	// We're not in a WordPress context, so we can't use the nonce verification.
-  // phpcs:ignore WordPress.Security.NonceVerification.Missing
 	$locale = isset( $_POST['locale'] ) ? sanitize_text_field( wp_unslash( $_POST['locale'] ) ) : null;
 	if ( isset( $locale ) ) {
 		$config['locale'] = $locale;

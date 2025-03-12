@@ -22,6 +22,18 @@ if ( ! defined( 'ABSPATH' ) ) {
  * everything like we found it.
  */
 function clean_up_export_file() {
+	if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+		wp_die();
+	}
+
+	// Using 'h5p-caretaker-upload' nonce here, since this is not supposed to be used separately.
+	if (
+		! isset( $_POST['h5pCaretakerNonce'] ) ||
+		! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['h5pCaretakerNonce'] ) ), 'h5p-caretaker-upload' )
+	) {
+		wp_die( esc_html( __( 'Invalid nonce verification.', 'ndla-h5p-caretaker' ) ) );
+	}
+
 	// Capability is registered in ndla-h5p-caretaker.php.
 	// phpcs:ignore WordPress.WP.Capabilities.Unknown
 	if ( ! current_user_can( 'use-h5p-caretaker' ) ) {
@@ -29,7 +41,7 @@ function clean_up_export_file() {
 		wp_die( esc_html( __( 'You do not have sufficient permissions to access this page.', 'ndla-h5p-caretaker' ) ) );
 	}
 
-	if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+	if ( ! isset( $_POST['action'] ) || 'remove' !== $_POST['action'] ) {
 		wp_die();
 	}
 

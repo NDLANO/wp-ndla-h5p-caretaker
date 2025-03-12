@@ -252,7 +252,6 @@ function get_file_by_pattern( $dir, $pattern ) {
 
 /**
  * Render the HTML for the page.
- * TODO: Think about a templating engine. Mustache? Simple, but we do not need much here - and moodle uses it, too.
  *
  * @param array $params The parameters to render the HTML with.
  */
@@ -261,8 +260,55 @@ function render_html( $params ) {
 
 	// We're fetching from the local file system, not from a remote server!
 	// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-	$template   = file_get_contents( __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'h5pcaretaker.mustache' );
-	$renderdata = array();
+	$template = file_get_contents( __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'h5pcaretaker.mustache' );
+
+	$render_data = array(
+		'locale'                             => esc_attr( str_replace( '_', '-', $params['locale'] ) ),
+		'title'                              => esc_html( __( 'H5P Caretaker Reference Implementation', 'ndla-h5p-caretaker' ) ),
+		'h5pcaretakerhandlers'               => esc_url( $params['h5p_caretaker_handlers'] ),
+		'filecss'                            => esc_url( $params['file_css'] ),
+		'filejs'                             => esc_url( $params['file_js'] ),
+		'sessionkeyname'                     => 'h5pCaretakerNonce',
+		'sessionkeyvalue'                    => wp_create_nonce( 'h5p-caretaker-upload' ),
+		'preloadedurl'                       => esc_url( $params['preloadedurl'] ),
+		'preloadedid'                        => esc_attr( $params['preloadedid'] ),
+		'h5pcaretaker'                       => esc_html( __( 'H5P Caretaker', 'ndla-h5p-caretaker' ) ),
+		// The get_select_language_locales function escapes all the values.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		'locales'                            => get_select_language_locales( $params['locale'] ),
+		'takecareofyourh5p'                  => esc_html( __( 'Take care of your H5P', 'ndla-h5p-caretaker' ) ),
+		'checkyourh5pfileforimprovements'    => esc_html( __( 'Check your H5P file for improvements', 'ndla-h5p-caretaker' ) ),
+		'uncoveraccessibilityissues'         => esc_html( __( 'Uncover accessibility issues, missing information and best practices that can help you improve your H5P content.', 'ndla-h5p-caretaker' ) ),
+		'ajaxcleanup'                        => esc_url( home_url( '/' . Options::get_url() . '-clean-up' ) ),
+		'ajaxupload'                         => esc_url( home_url( '/' . Options::get_url() . '-upload' ) ),
+		'l10nordragthefilehere'              => esc_html( __( 'or drag the file here', 'ndla-h5p-caretaker' ) ),
+		'l10nremovefile'                     => esc_html( __( 'Remove file', 'ndla-h5p-caretaker' ) ),
+		'l10nselectyourlanguage'             => esc_html( __( 'Select your language', 'ndla-h5p-caretaker' ) ),
+		'l10nuploadprogress'                 => esc_html( __( 'Upload progress', 'ndla-h5p-caretaker' ) ),
+		'l10nuploadyourh5pfile'              => esc_html( __( 'Upload your H5P file', 'ndla-h5p-caretaker' ) ),
+		'l10nyourfileisbeingchecked'         => esc_html( __( 'Your file is being checked', 'ndla-h5p-caretaker' ) ),
+		'l10nyourfilewascheckedsuccessfully' => esc_html( __( 'Your file check was completed', 'ndla-h5p-caretaker' ) ),
+		'l10ntotalmessages'                  => esc_html( __( 'Total messages', 'ndla-h5p-caretaker' ) ),
+		'l10nissues'                         => esc_html( __( 'issues', 'ndla-h5p-caretaker' ) ),
+		'l10nresults'                        => esc_html( __( 'results', 'ndla-h5p-caretaker' ) ),
+		'l10nfilterby'                       => esc_html( __( 'Filter by', 'ndla-h5p-caretaker' ) ),
+		'l10ngroupby'                        => esc_html( __( 'Group by', 'ndla-h5p-caretaker' ) ),
+		'l10ndownload'                       => esc_html( __( 'Download', 'ndla-h5p-caretaker' ) ),
+		'l10nshowdetails'                    => esc_html( __( 'Show details', 'ndla-h5p-caretaker' ) ),
+		'l10nhidedetails'                    => esc_html( __( 'Hide details', 'ndla-h5p-caretaker' ) ),
+		'l10nexpandallmessages'              => esc_html( __( 'Expand all messages', 'ndla-h5p-caretaker' ) ),
+		'l10ncollapseallmessages'            => esc_html( __( 'Collapse all messages', 'ndla-h5p-caretaker' ) ),
+		'l10nallfilteredout'                 => esc_html( __( 'All messages have been filtered out by content.', 'ndla-h5p-caretaker' ) ),
+		'l10nreporttitletemplate'            => esc_html( __( 'H5P Caretaker report for @title', 'ndla-h5p-caretaker' ) ),
+		'l10ncontentfilter'                  => esc_html( __( 'Content type filter', 'ndla-h5p-caretaker' ) ),
+		'l10nshowall'                        => esc_html( __( 'Show all', 'ndla-h5p-caretaker' ) ),
+		'l10nshowselected'                   => esc_html( __( 'Various selected contents', 'ndla-h5p-caretaker' ) ),
+		'l10nshownone'                       => esc_html( __( 'Show none', 'ndla-h5p-caretaker' ) ),
+		'l10nfilterbycontent'                => esc_html( __( 'Filter by content:', 'ndla-h5p-caretaker' ) ),
+		'l10nreset'                          => esc_html( __( 'Reset', 'ndla-h5p-caretaker' ) ),
+		'l10nunknownerror'                   => esc_html( __( 'Something went wrong, but I dunno what, sorry!', 'ndla-h5p-caretaker' ) ),
+		'l10ncheckserverlog'                 => esc_html( __( 'Please check the server log.', 'ndla-h5p-caretaker' ) ),
+	);
 
 	$mustache = new Mustache_Engine();
 
@@ -274,51 +320,9 @@ function render_html( $params ) {
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo $mustache->render(
 		$template,
-		array(
-			'locale'                             => esc_attr( str_replace( '_', '-', $params['locale'] ) ),
-			'title'                              => esc_html( __( 'H5P Caretaker Reference Implementation', 'ndla-h5p-caretaker' ) ),
-			'h5pcaretakerhandlers'               => esc_url( $params['h5p_caretaker_handlers'] ),
-			'filecss'                            => esc_url( $params['file_css'] ),
-			'filejs'                             => esc_url( $params['file_js'] ),
-			'preloadedurl'                       => esc_url( $params['preloadedurl'] ),
-			'preloadedid'                        => esc_attr( $params['preloadedid'] ),
-			'h5pcaretaker'                       => esc_html( __( 'H5P Caretaker', 'ndla-h5p-caretaker' ) ),
-			// The get_select_language_locales function escapes all the values.
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			'locales'                            => get_select_language_locales( $params['locale'] ),
-			'takecareofyourh5p'                  => esc_html( __( 'Take care of your H5P', 'ndla-h5p-caretaker' ) ),
-			'checkyourh5pfileforimprovements'    => esc_html( __( 'Check your H5P file for improvements', 'ndla-h5p-caretaker' ) ),
-			'uncoveraccessibilityissues'         => esc_html( __( 'Uncover accessibility issues, missing information and best practices that can help you improve your H5P content.', 'ndla-h5p-caretaker' ) ),
-			'ajaxcleanup'                        => esc_url( home_url( '/' . Options::get_url() . '-clean-up' ) ),
-			'ajaxupload'                         => esc_url( home_url( '/' . Options::get_url() . '-upload' ) ),
-			'l10nordragthefilehere'              => esc_html( __( 'or drag the file here', 'ndla-h5p-caretaker' ) ),
-			'l10nremovefile'                     => esc_html( __( 'Remove file', 'ndla-h5p-caretaker' ) ),
-			'l10nselectyourlanguage'             => esc_html( __( 'Select your language', 'ndla-h5p-caretaker' ) ),
-			'l10nuploadprogress'                 => esc_html( __( 'Upload progress', 'ndla-h5p-caretaker' ) ),
-			'l10nuploadyourh5pfile'              => esc_html( __( 'Upload your H5P file', 'ndla-h5p-caretaker' ) ),
-			'l10nyourfileisbeingchecked'         => esc_html( __( 'Your file is being checked', 'ndla-h5p-caretaker' ) ),
-			'l10nyourfilewascheckedsuccessfully' => esc_html( __( 'Your file check was completed', 'ndla-h5p-caretaker' ) ),
-			'l10ntotalmessages'                  => esc_html( __( 'Total messages', 'ndla-h5p-caretaker' ) ),
-			'l10nissues'                         => esc_html( __( 'issues', 'ndla-h5p-caretaker' ) ),
-			'l10nresults'                        => esc_html( __( 'results', 'ndla-h5p-caretaker' ) ),
-			'l10nfilterby'                       => esc_html( __( 'Filter by', 'ndla-h5p-caretaker' ) ),
-			'l10ngroupby'                        => esc_html( __( 'Group by', 'ndla-h5p-caretaker' ) ),
-			'l10ndownload'                       => esc_html( __( 'Download', 'ndla-h5p-caretaker' ) ),
-			'l10nshowdetails'                    => esc_html( __( 'Show details', 'ndla-h5p-caretaker' ) ),
-			'l10nhidedetails'                    => esc_html( __( 'Hide details', 'ndla-h5p-caretaker' ) ),
-			'l10nexpandallmessages'              => esc_html( __( 'Expand all messages', 'ndla-h5p-caretaker' ) ),
-			'l10ncollapseallmessages'            => esc_html( __( 'Collapse all messages', 'ndla-h5p-caretaker' ) ),
-			'l10nallfilteredout'                 => esc_html( __( 'All messages have been filtered out by content.', 'ndla-h5p-caretaker' ) ),
-			'l10nreporttitletemplate'            => esc_html( __( 'H5P Caretaker report for @title', 'ndla-h5p-caretaker' ) ),
-			'l10ncontentfilter'                  => esc_html( __( 'Content type filter', 'ndla-h5p-caretaker' ) ),
-			'l10nshowall'                        => esc_html( __( 'Show all', 'ndla-h5p-caretaker' ) ),
-			'l10nshowselected'                   => esc_html( __( 'Various selected contents', 'ndla-h5p-caretaker' ) ),
-			'l10nshownone'                       => esc_html( __( 'Show none', 'ndla-h5p-caretaker' ) ),
-			'l10nfilterbycontent'                => esc_html( __( 'Filter by content:', 'ndla-h5p-caretaker' ) ),
-			'l10nreset'                          => esc_html( __( 'Reset', 'ndla-h5p-caretaker' ) ),
-			'l10nunknownerror'                   => esc_html( __( 'Something went wrong, but I dunno what, sorry!', 'ndla-h5p-caretaker' ) ),
-			'l10ncheckserverlog'                 => esc_html( __( 'Please check the server log.', 'ndla-h5p-caretaker' ) ),
-		)
+		// Every single value in the render data has been escaped.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		$render_data
 	);
 
 	exit(); // Ensure no other content is loaded.
