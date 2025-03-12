@@ -81,11 +81,11 @@
     if (window.H5PCaretaker) {
       runH5PCaretaker();
     } else if (attempts <= 0) {
+      console.warn(`H5PCaretaker not found after ${maxattempts} attempts.`);
+    } else {
       setTimeout(() => {
         waitForH5PCaretaker(delay, maxattempts, attempts - 1);
       }, delay);
-    } else {
-      console.warn(`H5PCaretaker not found after ${maxattempts} attempts.`);
     }
   };
 
