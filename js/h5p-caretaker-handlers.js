@@ -26,7 +26,7 @@
     formData.set('id', exportRemoveId);
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', window.H5PCaretakerIntegration.ajax.cleanup, true);
+    xhr.open('POST', window.H5PCaretakerIntegration.ajax.cleanUp, true);
     xhr.send(formData);
   };
 
