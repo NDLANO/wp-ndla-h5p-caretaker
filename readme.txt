@@ -1,5 +1,5 @@
 === NDLA's H5P Caretaker ===
-Contributors: otacke
+Contributors: explorendla, otacke
 Tags: h5p, accessibility, licensing
 Requires at least: 4.0
 Tested up to: 6.7
