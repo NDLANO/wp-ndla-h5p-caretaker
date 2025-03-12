@@ -58,25 +58,7 @@ class Main {
 			$caretaker_url,   // Menu slug.
 		);
 
-		// Hook into admin_head to add a custom script for setting the target attribute.
-		add_action( 'admin_head', array( $this, 'add_target_blank_to_menu_entry' ) );
-	}
-
-		/**
-		 * Add a script to set the target attribute to _blank for the H5P Caretaker menu item.
-		 */
-	public function add_target_blank_to_menu_entry() {
-		?>
-			<script type="text/javascript">
-				document.addEventListener('DOMContentLoaded', function() {
-				<?php //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-				const menuItem = document.querySelector('a[href*="<?php echo Options::get_url(); ?>"]');
-				if (menuItem) {
-					menuItem.setAttribute('target', '_blank');
-				}
-			});
-			</script>
-		<?php
+		add_action( 'admin_enqueue_scripts', array( $this, 'override_tool_menu_item' ) );
 	}
 
 		/**
@@ -144,6 +126,25 @@ class Main {
 			'label' => esc_html( __( 'H5P Caretaker', 'ndla-h5p-caretaker' ) ),
 		);
 		wp_localize_script( 'inject_caretaker_button', 'H5PCaretakerButton', $data );
+	}
+
+	/**
+	 * Enqueue the custom script for the H5P Caretaker tool menu item.
+	 */
+	public function override_tool_menu_item() {
+		wp_register_script(
+			'override_tool_menu_item',
+			plugins_url( '/../js/override-tool-menu-item.js', __FILE__ ),
+			array(),
+			NDLAH5PCARETAKER_VERSION,
+			true
+		);
+		wp_enqueue_script( 'override_tool_menu_item' );
+
+		$data = array(
+			'url' => esc_attr( Options::get_url() ),
+		);
+		wp_localize_script( 'override_tool_menu_item', 'H5PCaretakerToolMenuItem', $data );
 	}
 
 	/**
