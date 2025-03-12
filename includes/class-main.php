@@ -40,7 +40,7 @@ class Main {
 		load_plugin_textdomain(
 			'ndla-h5p-caretaker',
 			false,
-			basename( dirname( __DIR__ ) ) . DIRECTORY_SEPARATOR . 'languages'
+			plugin_basename( __DIR__ ) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'languages'
 		);
 	}
 
