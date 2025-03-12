@@ -7,6 +7,10 @@
 
 namespace NDLAH5PCARETAKER;
 
+use Mustache_Engine;
+
+use Ndlano\H5PCaretaker\H5PCaretaker;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -32,6 +36,7 @@ function render_page_index() {
 
 	$export_needs_to_be_removed = false;
 	$path                       = null;
+
 	if ( ! empty( $h5p_id ) ) {
 		try {
 			$export_needs_to_be_removed = ensure_h5p_export( $h5p_id );
@@ -57,18 +62,22 @@ function render_page_index() {
 	$locale = LocaleUtils::request_translation(
 		$get_locale ?? locale_accept_from_http( $http_accept_language )
 	);
+
 	if ( get_query_var( 'custom_page' ) ) {
 		$base_dir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
 		$dist_dir = $base_dir . 'node_modules' . DIRECTORY_SEPARATOR . '@explorendla' . DIRECTORY_SEPARATOR . 'h5p-caretaker-client' . DIRECTORY_SEPARATOR . 'dist' . DIRECTORY_SEPARATOR . '@explorendla';
 		$dist_url = plugin_dir_url( __FILE__ ) . '../node_modules/@explorendla/h5p-caretaker-client/dist/@explorendla';
 
-		render_html(
-			$dist_url . '/' . get_file_by_pattern( $dist_dir, 'h5p-caretaker-client-*.js' ),
-			$dist_url . '/' . get_file_by_pattern( $dist_dir, 'h5p-caretaker-client-*.css' ),
-			$locale,
-			$path ?? '',
-			$export_needs_to_be_removed ? $h5p_id : false,
+		$render_data = array(
+			'h5p_caretaker_handlers' => plugin_dir_url( __FILE__ ) . '../js/h5p-caretaker-handlers.js',
+			'file_js'                => $dist_url . '/' . get_file_by_pattern( $dist_dir, 'h5p-caretaker-client-*.js' ),
+			'file_css'               => $dist_url . '/' . get_file_by_pattern( $dist_dir, 'h5p-caretaker-client-*.css' ),
+			'locale'                 => $locale,
+			'preloadedurl'           => $path ?? '',
+			'preloadedid'            => $export_needs_to_be_removed ? $h5p_id : false,
 		);
+
+		render_html( $render_data );
 	}
 }
 
@@ -238,171 +247,83 @@ function get_file_by_pattern( $dir, $pattern ) {
  * Render the HTML for the page.
  * TODO: Think about a templating engine. Mustache? Simple, but we do not need much here - and moodle uses it, too.
  *
- * @param string $file_js The filename of the JavaScript file.
- * @param string $file_css The filename of the CSS file.
- * @param string $locale The locale to use.
- * @param string $path The path to the H5P file if preset.
- * @param string $export_remove_id The ID of the H5P content to remove the export for.
+ * @param array $params The parameters to render the HTML with.
  */
-function render_html( $file_js, $file_css, $locale, $path, $export_remove_id = false ) {
+function render_html( $params ) {
 	header( 'Content-Type: text/html; charset=utf-8' );
-	?>
-	<!DOCTYPE html>
-	<html lang="<?php echo esc_attr( str_replace( '_', '-', $locale ) ); ?>">
-	<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><?php esc_html_e( 'H5P Caretaker Reference Implementation', 'ndla-h5p-caretaker' ); ?></title>
-    <?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet ?>
-	<link rel="stylesheet" href="<?php echo esc_url( $file_css ); ?>" />
-    <?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript ?>
-	<script type="module" src="<?php echo esc_url( $file_js ); ?>"></script>
-	<script>
-		window.H5P_CARETAKER_PATH = <?php echo wp_json_encode( $path ); ?>;
-	</script>
-	</head>
 
-	<body class="h5p-caretaker">
-	<header class="header">
-		<h1 class="title main-color"><?php echo esc_html( __( 'H5P Caretaker', 'ndla-h5p-caretaker' ) ); ?></h1>
-		<?php render_select_language( $locale ); ?>
-	</header>
+	// We're fetching from the local file system, not from a remote server!
+	// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	$template   = file_get_contents( __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'h5pcaretaker.mustache' );
+	$renderdata = array();
 
-	<main class="page">
-		<div class="block background-dark">
-		<div class="centered-row block-visible">
-			<p class="main-color"><?php echo esc_html( __( 'Take care of your H5P', 'ndla-h5p-caretaker' ) ); ?></p>
-			<h2 class="title"><?php echo esc_html( __( 'Check your H5P file for improvements', 'ndla-h5p-caretaker' ) ); ?></h2>
-			<p>
-			<?php echo esc_html( __( 'Uncover accessibility issues, missing information and best practices that can help you improve your H5P content.', 'ndla-h5p-caretaker' ) ); ?>
-			</p>
-			<?php
-			if ( ! empty( Options::get_intro() ) ) {
-				echo '<p>';
-				echo wp_kses_post( Options::get_intro() );
-				echo '<p>';
-			}
-			?>
+	$mustache = new Mustache_Engine();
 
-			<div class="dropzone">
-			<!-- Will be filled by dropzone.js -->
-			</div>
-
-		</div>
-		</div>
-
-		<div class="block background-dark">
-		<div class="centered-row">
-			<div class="filter-tree">
-			<!-- Will be filled by content-filter.js -->
-			</div>
-		</div>
-		</div>
-
-		<div class="block background-light">
-		<div class="output centered-row">
-			<!-- <div class="output">
-			<!-- Will be filled by main.js -->
-			<!-- </div> -->
-		</div>
-		</div>
-
-		<script>
-			// If there's a file to upload, do so after initialization.
-			const handleInitialized = () => {
-				const url = '<?php echo esc_url( $path ); ?>';
-				if (!url) {
-					return;
-				}
-				window.h5pcaretaker.uploadByURL(url);
-			};
-
-			// If export file needs to be removed, do so after upload has ended.
-			const handleUploadEnded = () => {
-				const exportRemoveId = '<?php echo esc_js( $export_remove_id ); ?>';
-
-				if (!exportRemoveId) {
-					return;
-				}
-
-				const formData = new FormData();
-				formData.set('id', exportRemoveId);
-
-				const xhr = new XMLHttpRequest();
-				xhr.open('POST', '<?php echo esc_url( home_url( '/' . Options::get_url() . '-clean-up' ) ); ?>', true);
-				xhr.send(formData);
-			};
-
-			document.addEventListener('DOMContentLoaded', () => {
-				window.h5pcaretaker = new window.H5PCaretaker(
-					{
-						endpoint: '<?php echo esc_url( home_url( '/' . Options::get_url() . '-upload' ) ); ?>',
-						l10n: {
-							orDragTheFileHere: '<?php echo esc_html( __( 'or drag the file here', 'ndla-h5p-caretaker' ) ); ?>',
-							removeFile: '<?php echo esc_html( __( 'Remove file', 'ndla-h5p-caretaker' ) ); ?>',
-							selectYourLanguage: '<?php echo esc_html( __( 'Select your language', 'ndla-h5p-caretaker' ) ); ?>',
-							uploadProgress: '<?php echo esc_html( __( 'Upload progress', 'ndla-h5p-caretaker' ) ); ?>',
-							uploadYourH5Pfile: '<?php echo esc_html( __( 'Upload your H5P file', 'ndla-h5p-caretaker' ) ); ?>',
-							yourFileIsBeingChecked: '<?php echo esc_html( __( 'Your file is being checked', 'ndla-h5p-caretaker' ) ); ?>',
-							yourFileWasCheckedSuccessfully: '<?php echo esc_html( __( 'Your file check was completed', 'ndla-h5p-caretaker' ) ); ?>',
-							totalMessages: '<?php echo esc_html( __( 'Total messages', 'ndla-h5p-caretaker' ) ); ?>',
-							issues: '<?php echo esc_html( __( 'issues', 'ndla-h5p-caretaker' ) ); ?>',
-							results: '<?php echo esc_html( __( 'results', 'ndla-h5p-caretaker' ) ); ?>',
-							filterBy: '<?php echo esc_html( __( 'Filter by', 'ndla-h5p-caretaker' ) ); ?>',
-							groupBy: '<?php echo esc_html( __( 'Group by', 'ndla-h5p-caretaker' ) ); ?>',
-							download: '<?php echo esc_html( __( 'Download', 'ndla-h5p-caretaker' ) ); ?>',
-							showDetails: '<?php echo esc_html( __( 'Show details', 'ndla-h5p-caretaker' ) ); ?>',
-							hideDetails: '<?php echo esc_html( __( 'Hide details', 'ndla-h5p-caretaker' ) ); ?>',
-							expandAllMessages: '<?php echo esc_html( __( 'Expand all messages', 'ndla-h5p-caretaker' ) ); ?>',
-							collapseAllMessages: '<?php echo esc_html( __( 'Collapse all messages', 'ndla-h5p-caretaker' ) ); ?>',
-							allFilteredOut: '<?php echo esc_html( __( 'All messages have been filtered out by content.', 'ndla-h5p-caretaker' ) ); ?>',
-							reportTitleTemplate: '<?php echo esc_html( __( 'H5P Caretaker report for @title', 'ndla-h5p-caretaker' ) ); ?>',
-							contentFilter: '<?php echo esc_html( __( 'Content type filter', 'ndla-h5p-caretaker' ) ); ?>',
-							showAll: '<?php echo esc_html( __( 'Show all', 'ndla-h5p-caretaker' ) ); ?>',
-							showSelected: '<?php echo esc_html( __( 'Various selected contents', 'ndla-h5p-caretaker' ) ); ?>',
-							showNone: '<?php echo esc_html( __( 'Show none', 'ndla-h5p-caretaker' ) ); ?>',
-							filterByContent: '<?php echo esc_html( __( 'Filter by content:', 'ndla-h5p-caretaker' ) ); ?>',
-							reset: '<?php echo esc_html( __( 'Reset', 'ndla-h5p-caretaker' ) ); ?>',
-							unknownError: '<?php echo esc_html( __( 'Something went wrong, but I dunno what, sorry!', 'ndla-h5p-caretaker' ) ); ?>',
-							checkServerLog: '<?php echo esc_html( __( 'Please check the server log.', 'ndla-h5p-caretaker' ) ); ?>',
-						},
-					},
-					{
-						onInitialized: () => {
-							handleInitialized();
-						},
-						onUploadEnded: () => {
-							handleUploadEnded();
-						}
-					}
-				);
-			});
-		</script>
-	</main>
-
-	<?php
-	if ( ! empty( Options::get_outro() ) ) {
-		?>
-		<footer class="footer">
-		<?php echo wp_kses_post( Options::get_outro() ); ?>
-		</footer>
-		<?php
-	}
-	?>
-	</body>
-	</html>
-	<?php
+	/*
+	 * We have escaped every value passed to mustache and the template does not contain JavaScript except for setting
+	 * variables that have been escaped. We can't use wp_enqueue_script/wp_localize_script here, because we're not
+	 * in a WordPress context but merely rendering the template that is then used by the H5P Caretaker client.
+	 */
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo $mustache->render(
+		$template,
+		array(
+			'locale'                             => esc_attr( str_replace( '_', '-', $params['locale'] ) ),
+			'title'                              => esc_html( __( 'H5P Caretaker Reference Implementation', 'ndla-h5p-caretaker' ) ),
+			'h5pcaretakerhandlers'               => esc_url( $params['h5p_caretaker_handlers'] ),
+			'filecss'                            => esc_url( $params['file_css'] ),
+			'filejs'                             => esc_url( $params['file_js'] ),
+			'preloadedurl'                       => esc_url( $params['preloadedurl'] ),
+			'preloadedid'                        => esc_attr( $params['preloadedid'] ),
+			'h5pcaretaker'                       => esc_html( __( 'H5P Caretaker', 'ndla-h5p-caretaker' ) ),
+			// The get_select_language_locales function escapes all the values.
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			'locales'                            => get_select_language_locales( $params['locale'] ),
+			'takecareofyourh5p'                  => esc_html( __( 'Take care of your H5P', 'ndla-h5p-caretaker' ) ),
+			'checkyourh5pfileforimprovements'    => esc_html( __( 'Check your H5P file for improvements', 'ndla-h5p-caretaker' ) ),
+			'uncoveraccessibilityissues'         => esc_html( __( 'Uncover accessibility issues, missing information and best practices that can help you improve your H5P content.', 'ndla-h5p-caretaker' ) ),
+			'ajaxcleanup'                        => esc_url( home_url( '/' . Options::get_url() . '-clean-up' ) ),
+			'ajaxupload'                         => esc_url( home_url( '/' . Options::get_url() . '-upload' ) ),
+			'l10nordragthefilehere'              => esc_html( __( 'or drag the file here', 'ndla-h5p-caretaker' ) ),
+			'l10nremovefile'                     => esc_html( __( 'Remove file', 'ndla-h5p-caretaker' ) ),
+			'l10nselectyourlanguage'             => esc_html( __( 'Select your language', 'ndla-h5p-caretaker' ) ),
+			'l10nuploadprogress'                 => esc_html( __( 'Upload progress', 'ndla-h5p-caretaker' ) ),
+			'l10nuploadyourh5pfile'              => esc_html( __( 'Upload your H5P file', 'ndla-h5p-caretaker' ) ),
+			'l10nyourfileisbeingchecked'         => esc_html( __( 'Your file is being checked', 'ndla-h5p-caretaker' ) ),
+			'l10nyourfilewascheckedsuccessfully' => esc_html( __( 'Your file check was completed', 'ndla-h5p-caretaker' ) ),
+			'l10ntotalmessages'                  => esc_html( __( 'Total messages', 'ndla-h5p-caretaker' ) ),
+			'l10nissues'                         => esc_html( __( 'issues', 'ndla-h5p-caretaker' ) ),
+			'l10nresults'                        => esc_html( __( 'results', 'ndla-h5p-caretaker' ) ),
+			'l10nfilterby'                       => esc_html( __( 'Filter by', 'ndla-h5p-caretaker' ) ),
+			'l10ngroupby'                        => esc_html( __( 'Group by', 'ndla-h5p-caretaker' ) ),
+			'l10ndownload'                       => esc_html( __( 'Download', 'ndla-h5p-caretaker' ) ),
+			'l10nshowdetails'                    => esc_html( __( 'Show details', 'ndla-h5p-caretaker' ) ),
+			'l10nhidedetails'                    => esc_html( __( 'Hide details', 'ndla-h5p-caretaker' ) ),
+			'l10nexpandallmessages'              => esc_html( __( 'Expand all messages', 'ndla-h5p-caretaker' ) ),
+			'l10ncollapseallmessages'            => esc_html( __( 'Collapse all messages', 'ndla-h5p-caretaker' ) ),
+			'l10nallfilteredout'                 => esc_html( __( 'All messages have been filtered out by content.', 'ndla-h5p-caretaker' ) ),
+			'l10nreporttitletemplate'            => esc_html( __( 'H5P Caretaker report for @title', 'ndla-h5p-caretaker' ) ),
+			'l10ncontentfilter'                  => esc_html( __( 'Content type filter', 'ndla-h5p-caretaker' ) ),
+			'l10nshowall'                        => esc_html( __( 'Show all', 'ndla-h5p-caretaker' ) ),
+			'l10nshowselected'                   => esc_html( __( 'Various selected contents', 'ndla-h5p-caretaker' ) ),
+			'l10nshownone'                       => esc_html( __( 'Show none', 'ndla-h5p-caretaker' ) ),
+			'l10nfilterbycontent'                => esc_html( __( 'Filter by content:', 'ndla-h5p-caretaker' ) ),
+			'l10nreset'                          => esc_html( __( 'Reset', 'ndla-h5p-caretaker' ) ),
+			'l10nunknownerror'                   => esc_html( __( 'Something went wrong, but I dunno what, sorry!', 'ndla-h5p-caretaker' ) ),
+			'l10ncheckserverlog'                 => esc_html( __( 'Please check the server log.', 'ndla-h5p-caretaker' ) ),
+		)
+	);
 
 	exit(); // Ensure no other content is loaded.
 }
 
 /**
- * Render the language selection dropdown.
+ * Get the available locales for the select language dropdown.
+ * Note that this escapes all the values, so they can be safely used in the template.
  *
  * @param string $locale The current locale to set selected.
  */
-function render_select_language( $locale ) {
-	echo '<select class="select-language" name="language" id="select-language" data-locale-key="locale">';
+function get_select_language_locales( $locale ) {
 	$available_locales = LocaleUtils::get_available_locales();
 	$locales_lookup    = array_combine(
 		$available_locales,
@@ -410,11 +331,14 @@ function render_select_language( $locale ) {
 	);
 	asort( $locales_lookup );
 
-	foreach ( $locales_lookup as $available_locale => $native_locale_name ) {
-		$selected = ( $available_locale === $locale ) ? 'selected' : '';
-		echo '<option value="' . esc_attr( $available_locale ) . '" ' . esc_attr( $selected ) . '>'
-			. esc_html( $native_locale_name )
-			. '</option>';
-	}
-	echo '</select>';
+	return array_map(
+		function ( $available_locale ) use ( $locale, $locales_lookup ) {
+			return array(
+				'locale'   => esc_attr( $available_locale ),
+				'name'     => esc_html( $locales_lookup[ $available_locale ] ),
+				'selected' => $available_locale === $locale,
+			);
+		},
+		$available_locales
+	);
 }

@@ -15,9 +15,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Main plugin class.
  */
 class Main {
-		/**
-		 * Constructor.
-		 */
+	/**
+	 * The current H5P ID.
+	 *
+	 * @var string $h5p_id The H5P ID.
+	 */
+	private $h5p_id;
+
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		add_filter( 'query_vars', array( $this, 'register_query_vars' ) );
 		add_action( 'template_redirect', array( $this, 'handle_requests' ) );
@@ -87,14 +94,11 @@ class Main {
 
 		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ?? '';
 		$task = filter_input( INPUT_GET, 'task', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ?? '';
-		$id   = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ?? '';
+
+		$this->h5p_id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ?? '';
+
 		if ( 'h5p' === $page && 'show' === $task ) {
-			add_action(
-				'admin_enqueue_scripts',
-				function () use ( $id ) {
-					$this->inject_caretaker_button( $id );
-				}
-			);
+			add_action( 'admin_enqueue_scripts', array( $this, 'inject_caretaker_button' ) );
 		}
 	}
 
@@ -123,36 +127,23 @@ class Main {
 	}
 
 	/**
-	 * Inject the caretaker button into the H5P content editor.
-	 *
-	 * @param int $h5p_id The ID of the H5P content.
+	 * Enqueue the custom script for the H5P Caretaker button.
 	 */
-	public function inject_caretaker_button( $h5p_id ) {
-		if ( ! isset( $h5p_id ) ) {
-			return;
-		}
+	public function inject_caretaker_button() {
+		wp_register_script(
+			'inject_caretaker_button',
+			plugins_url( '/../js/inject-caretaker-button.js', __FILE__ ),
+			array(),
+			NDLAH5PCARETAKER_VERSION,
+			true
+		);
+		wp_enqueue_script( 'inject_caretaker_button' );
 
-		$caretaker_url = $this->build_url( array( 'id' => $h5p_id ) );
-
-		?>
-		<script type="text/javascript">
-			document.addEventListener('DOMContentLoaded', function() {
-				const lastButton = document.querySelector('.wrap > h2 > a:last-of-type');
-				if (!lastButton) {
-					return;
-				}
-
-				const caretakerButton = document.createElement('a');
-				caretakerButton.href = '<?php echo esc_url( $caretaker_url, null, 'not_display' ); ?>';
-				// The margin is not consistent for some reason, temporary workaround.
-				caretakerButton.style.marginLeft = '10px';
-				caretakerButton.target = '_blank';
-				caretakerButton.classList.add('add-new-h2');
-				caretakerButton.textContent = '<?php echo esc_html( __( 'H5P Caretaker', 'ndla-h5p-caretaker' ) ); ?>';
-				lastButton.parentNode.insertBefore(caretakerButton, lastButton.nextSibling);
-			});
-		</script>
-		<?php
+		$data = array(
+			'url'   => esc_url( $this->build_url( array( 'id' => $this->h5p_id ) ), null, 'not_display' ),
+			'label' => esc_html( __( 'H5P Caretaker', 'ndla-h5p-caretaker' ) ),
+		);
+		wp_localize_script( 'inject_caretaker_button', 'H5PCaretakerButton', $data );
 	}
 
 	/**
@@ -166,9 +157,9 @@ class Main {
 		return $vars;
 	}
 
-		/**
-		 * Render the content for each custom page based on the query variable.
-		 */
+	/**
+	 * Render the content for each custom page based on the query variable.
+	 */
 	public function handle_requests() {
 		$custom_page = get_query_var( 'custom_page' );
 		if ( Options::get_url() === $custom_page ) {

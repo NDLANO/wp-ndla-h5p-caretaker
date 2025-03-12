@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+	<html lang="{{locale}}">
+	<head>
+	  <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <title>{{title}}</title>
+    <script type="module" src="{{h5pcaretakerhandlers}}"></script>
+	  <link rel="stylesheet" href="{{filecss}}" />
+	  <script type="module" src="{{filejs}}"></script>
+	  <script>
+      window.H5P_CARETAKER_PATH = '{{preloadedurl}}';
+      window.H5PCaretakerIntegration = {
+        preloaded: {
+          url: '{{preloadedurl}}',
+          id: '{{preloadedid}}'
+        },
+        ajax: {
+          cleanUp: '{{ajaxcleanup}}',
+          upload: '{{ajaxupload}}'
+        },
+        l10n: {
+          orDragTheFileHere: '{{l10nordragthefileshere}}',
+          removeFile: '{{l10nremovefile}}',
+          selectyourLanguage: '{{l10nselectyourlanguage}}',
+          uploadProgress: '{{l10nuploadProgress}}',
+          uploadYourH5Pfile: '{{l10nuploadyourh5pfile}}',
+          yourFileIsBeingChecked: '{{l10nyourfileisbeingchecked}}',
+          yourFileWasCheckedSuccessfully: '{{l10nyourfilewascheckedsuccessfully}}',
+          totalMessages: '{{l10ntotalmessages}}',
+          issues: '{{l10nissues}}',
+          results: '{{l10nresults}}',
+          filterBy: '{{l10nfilterby}}',
+          groupBy: '{{l10ngroupby}}',
+          download: '{{l10ndownload}}',
+          showDetails: '{{l10nshowdetails}}',
+          hideDetails: '{{l10nhidedetails}}',
+          expandAllMessages: '{{l10nexpandallmessages}}',
+          collapseAllMessages: '{{l10ncollapseallmessages}}',
+          allFilteredOut: '{{l10nallfilteredout}}',
+          reportTitleTemplate: '{{l10nreporttitletemplate}}',
+          contentFilter: '{{l10ncontentfilter}}',
+          showAll: '{{l10nshowall}}',
+          showSelected: '{{l10nshowselected}}',
+          showNone: '{{l10nshownone}}',
+          filterByContent: '{{l10nfilterbycontent}}',
+          reset: '{{l10nreset}}',
+          unknownError: '{{l10nunknownerror}}',
+          checkServerLog: '{{l10ncheckserverlog}}',
+        }
+      };
+	  </script>
+	</head>
+
+	<body class="h5p-caretaker">
+	<header class="header">
+    <h1 class="title main-color">{{{h5pcaretaker}}}</h1>
+
+    <select class="select-language" name="language" id="select-language" data-locale-key="locale">
+      {{#locales}}
+        <option value="{{locale}}" {{#selected}}selected{{/selected}}>{{name}}</option>
+      {{/locales}}
+    </select>
+	</header>
+
+	<main class="page">
+		<div class="block background-dark">
+		<div class="centered-row block-visible">
+			<p class="main-color">{{takecareofyourh5p}}
+			<h2 class="title">{{checkyourh5pfileforimprovements}}</h2>
+			<p>{{uncoveraccessibilityissues}}</p>
+
+      {{#intro}}
+        <p>{{intro}}</p>
+      {{/intro}}
+
+			<div class="dropzone">
+			<!-- Will be filled by dropzone.js -->
+			</div>
+
+		</div>
+		</div>
+
+		<div class="block background-dark">
+		<div class="centered-row">
+			<div class="filter-tree">
+			<!-- Will be filled by content-filter.js -->
+			</div>
+		</div>
+		</div>
+
+		<div class="block background-light">
+		<div class="output centered-row">
+			<!-- <div class="output">
+			<!-- Will be filled by main.js -->
+			<!-- </div> -->
+		</div>
+		</div>
+	</main>
+
+  {{#outro}}
+		<footer class="footer">{{outro}}</footer>
+  {{/outro}}
+
+	</body>
+	</html>
