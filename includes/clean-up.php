@@ -22,7 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * everything like we found it.
  */
 function clean_up_export_file() {
-  // phpcs:ignore WordPress.WP.Capabilities.Unknown
+	// Capability is registered in ndla-h5p-caretaker.php.
+	// phpcs:ignore WordPress.WP.Capabilities.Unknown
 	if ( ! current_user_can( 'use-h5p-caretaker' ) ) {
 		// Redirect to the dashboard or display an error message.
 		wp_die( esc_html( __( 'You do not have sufficient permissions to access this page.', 'ndla-h5p-caretaker' ) ) );

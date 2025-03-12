@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Render the page index.
  */
 function render_page_index() {
+	// Capability is registered in ndla-h5p-caretaker.php.
   // phpcs:ignore WordPress.WP.Capabilities.Unknown
 	if ( Options::get_visibility() !== 'public' && ! current_user_can( 'use-h5p-caretaker' ) ) {
 		// Redirect to the dashboard or display an error message.
@@ -29,6 +30,7 @@ function render_page_index() {
 	$get_locale           = get_locale_from_query();
 
 	// Prevent snooping on H5P content.
+	// Capability is registered in ndla-h5p-caretaker.php.
   // phpcs:ignore WordPress.WP.Capabilities.Unknown
 	if ( current_user_can( 'use-h5p-caretaker' ) ) {
 		$h5p_id = get_id_from_query();
@@ -131,7 +133,7 @@ function create_h5p_export( $content ) {
 
 	$core = \H5P_Plugin::get_instance()->get_h5p_instance( 'core' );
 
-	// Validate and filter against main library semantics.
+	// Validate and filter against main library semantics. Nothing we can do about H5P Group's naming (h5pF).
 	// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 	$validator = new \H5PContentValidator( $core->h5pF, $core );
 	$validator->validateLibrary(
@@ -139,7 +141,7 @@ function create_h5p_export( $content ) {
 		(object) array( 'options' => array( $params->library ) )
 	);
 
-	// Handle addons.
+	// Handle addons. Nothing we can do about H5P Group's naming (h5pF).
 	// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 	$addons = $core->h5pF->loadAddons();
 	foreach ( $addons as $addon ) {
@@ -170,9 +172,11 @@ function create_h5p_export( $content ) {
 		return false;
 	}
 
+	// Nothing we can do about H5P Group's naming (h5pF).
   // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 	$core->h5pF->deleteLibraryUsage( $content['id'] );
-  // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	// Nothing we can do about H5P Group's naming (h5pF).
+	// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 	$core->h5pF->saveLibraryUsage( $content['id'], $content['dependencies'] );
 
 	if ( ! $content['slug'] ) {
@@ -182,13 +186,14 @@ function create_h5p_export( $content ) {
 		$core->fs->deleteExport( $content['id'] . '.h5p' );
 	}
 
+	// Nothing we can do about H5P Group's naming (h5pF).
 	// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 	$exporter            = new \H5PExport( $core->h5pF, $core );
 	$content['filtered'] = $params;
 
 	$exporter->createExportFile( $content );
 
-	// Cache.
+	// Cache. Nothing we can do about H5P Group's naming (h5pF).
   // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 	$core->h5pF->updateContentFields(
 		$content['id'],
@@ -216,6 +221,7 @@ function get_http_accept_language() {
  * @return string The locale from the query.
  */
 function get_locale_from_query() {
+	// We're not in a WordPress context, so we can't use the nonce verification.
   // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	return isset( $_GET['locale'] ) ? sanitize_text_field( wp_unslash( $_GET['locale'] ) ) : '';
 }
@@ -226,6 +232,7 @@ function get_locale_from_query() {
  * @return string The ID from the query.
  */
 function get_id_from_query() {
+	// We're not in a WordPress context, so we can't use the nonce verification.
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	return isset( $_GET['id'] ) ? sanitize_text_field( wp_unslash( $_GET['id'] ) ) : '';
 }

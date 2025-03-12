@@ -21,6 +21,7 @@ function fetch_analysis() {
 
 	ob_start();
 
+	// Capability is registered in ndla-h5p-caretaker.php.
   // phpcs:ignore WordPress.WP.Capabilities.Unknown
 	if ( Options::get_visibility() !== 'public' && ! current_user_can( 'use-h5p-caretaker' ) ) {
 		// Redirect to the dashboard or display an error message.
