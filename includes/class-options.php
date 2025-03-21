@@ -108,6 +108,21 @@ class Options {
 			</form>
 		</div>
 		<?php
+
+		wp_register_script(
+			'update_url_preview',
+			plugins_url( '/../js/update-url-preview.js', __FILE__ ),
+			array(),
+			NDLAH5PCARETAKER_VERSION,
+			true
+		);
+		wp_enqueue_script( 'update_url_preview' );
+
+		$data = array(
+			'prefix'      => esc_url( home_url( '/' ) ),
+			'placeholder' => esc_attr( self::DEFAULT_URL ),
+		);
+		wp_localize_script( 'update_url_preview', 'H5PCaretakerOptions', $data );
 	}
 
 	/**
@@ -224,34 +239,6 @@ class Options {
 				);
 			?>
 		</p>
-		<script>
-			// Update the output URL when the input changes.
-			(() => {
-				const input = document.getElementById('url');
-				if (!input) {
-					return;
-				}
-
-				const output = document.getElementById('output-url');
-				if (!output) {
-					return;
-				}
-
-				const prefix = '<?php echo esc_url( home_url( '/' ) ); ?>';
-				let previous = input.value;
-
-				input.addEventListener('change', () => {
-					const inputOrPlaceholder = input.value || '<?php echo esc_attr( self::DEFAULT_URL ); ?>';
-
-					output.textContent = output.textContent.replace(
-						`${prefix}${previous}`,
-						`${prefix}${inputOrPlaceholder}`
-					);
-
-					previous = inputOrPlaceholder;
-				});
-			})();
-		</script>
 		<?php
 	}
 
