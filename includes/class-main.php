@@ -95,6 +95,7 @@ class Main {
 			$user           = wp_get_current_user();
 			$user_locale    = get_user_meta( $user->ID, 'locale', true );
 			$gets['locale'] = $user_locale ? $user_locale : get_locale();
+			$gets['nonce']  = wp_create_nonce( 'h5p-caretaker-show' );
 		}
 
 		$query_string = array_map(

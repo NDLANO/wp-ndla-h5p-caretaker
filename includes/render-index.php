@@ -221,8 +221,15 @@ function get_http_accept_language() {
  * @return string The locale from the query.
  */
 function get_locale_from_query() {
-	// We're not in a WordPress context, so we can't use the nonce verification.
-  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( ! isset( $_GET['nonce'] ) ) {
+		// IMPORTANT NOTE: It's okay to not have it as the user may have entered the Caretaker URL directly.
+		$_GET['nonce'] = wp_create_nonce( 'h5p-caretaker-show' );
+	}
+
+	if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['nonce'] ) ), 'h5p-caretaker-show' ) ) {
+		wp_die( esc_html( __( 'Invalid nonce verification.', 'ndla-h5p-caretaker' ) ) );
+	}
+
 	return isset( $_GET['locale'] ) ? sanitize_text_field( wp_unslash( $_GET['locale'] ) ) : '';
 }
 
@@ -232,8 +239,15 @@ function get_locale_from_query() {
  * @return string The ID from the query.
  */
 function get_id_from_query() {
-	// We're not in a WordPress context, so we can't use the nonce verification.
-	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( ! isset( $_GET['nonce'] ) ) {
+		// IMPORTANT NOTE: It's okay to not have it as the user may have entered the Caretaker URL directly.
+		$_GET['nonce'] = wp_create_nonce( 'h5p-caretaker-show' );
+	}
+
+	if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['nonce'] ) ), 'h5p-caretaker-show' ) ) {
+		wp_die( esc_html( __( 'Invalid nonce verification.', 'ndla-h5p-caretaker' ) ) );
+	}
+
 	return isset( $_GET['id'] ) ? sanitize_text_field( wp_unslash( $_GET['id'] ) ) : '';
 }
 
