@@ -11,6 +11,9 @@
     "@explorendla/h5p-caretaker-client": "^1.0.21"
   },
   "scripts": {
-    "build": "mv node_modules modules"
+    "clean": "shx mv node_modules/@explorendla/h5p-caretaker-client ./js && shx rm -r node_modules"
+  },
+  "devDependencies": {
+    "shx": "^0.4.0"
   }
 }

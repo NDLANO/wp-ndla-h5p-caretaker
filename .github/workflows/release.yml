@@ -13,10 +13,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Node.js dependencies
-        run: npm install --omit=dev
+        run: npm install
 
-      - name: Start build process (rename node_modules for WP team)
-        run: npm run build
+      - name: Clean up for production
+        run: npm run clean
 
       - name: Install Composer dependencies
         run: composer install --no-dev --optimize-autoloader
