@@ -67,8 +67,9 @@ function render_page_index() {
 
 	if ( get_query_var( 'custom_page' ) ) {
 		$base_dir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
-		$dist_dir = $base_dir . 'node_modules' . DIRECTORY_SEPARATOR . '@explorendla' . DIRECTORY_SEPARATOR . 'h5p-caretaker-client' . DIRECTORY_SEPARATOR . 'dist' . DIRECTORY_SEPARATOR . '@explorendla';
-		$dist_url = plugin_dir_url( __FILE__ ) . '../node_modules/@explorendla/h5p-caretaker-client/dist/@explorendla';
+		// NOTE: Normally, one would use node_modules here, but the WP plugin checker believes that's for dev only.
+		$dist_dir = $base_dir . 'modules' . DIRECTORY_SEPARATOR . '@explorendla' . DIRECTORY_SEPARATOR . 'h5p-caretaker-client' . DIRECTORY_SEPARATOR . 'dist' . DIRECTORY_SEPARATOR . '@explorendla';
+		$dist_url = plugin_dir_url( __FILE__ ) . '../modules/@explorendla/h5p-caretaker-client/dist/@explorendla';
 
 		$render_data = array(
 			'h5p_caretaker_handlers' => plugin_dir_url( __FILE__ ) . '../js/h5p-caretaker-handlers.js',

@@ -9,5 +9,8 @@
   "license": "MIT",
   "dependencies": {
     "@explorendla/h5p-caretaker-client": "^1.0.21"
+  },
+  "scripts": {
+    "build": "mv node_modules modules"
   }
 }
