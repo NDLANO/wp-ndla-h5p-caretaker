@@ -1,0 +1,232 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wp-ndla-h5p-caretaker\n"
+"POT-Creation-Date: 2025-03-12 22:34+0100\n"
+"PO-Revision-Date: 2025-03-24 09:28+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_x;__;_ex;esc_html__;esc_html_e;esc_attr__;"
+"esc_attr_e;_n;_nx;_n_noop;_nx_noop;esc_url__;esc_url_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendor\n"
+"X-Poedit-SearchPathExcluded-1: node_modules\n"
+
+#: includes/class-main.php:126 includes/class-options.php:101
+#: includes/render-index.php:275
+msgid "H5P Caretaker"
+msgstr "H5P Caretaker"
+
+#: includes/class-options.php:127
+msgid "General"
+msgstr "Général"
+
+#: includes/class-options.php:134
+msgid "URL"
+msgstr "URL"
+
+#: includes/class-options.php:142
+msgid "Visibility"
+msgstr "Visibilité"
+
+#: includes/class-options.php:150
+msgid "Additional intro"
+msgstr "Introduction supplémentaire"
+
+#: includes/class-options.php:158
+msgid "Additional footer"
+msgstr "Pied de page supplémentaire"
+
+#: includes/class-options.php:221
+#, php-format
+msgid ""
+"Set the desired URL for the H5P Caretaker page. With the current value it "
+"will be available at %s."
+msgstr ""
+"Définir l’URL souhaitée pour la page H5P-Caretaker. Avec la valeur "
+"actuelle, elle sera accessible à l’adresse %s."
+
+#: includes/class-options.php:268
+msgid "Public"
+msgstr "Publique"
+
+#: includes/class-options.php:269
+msgid "Needs capability"
+msgstr "Nécessite des droits"
+
+#: includes/class-options.php:273
+msgid ""
+"Select whether the H5P Caretaker page should be publicly available or only "
+"to those logged in users that have the capability based on their user role."
+msgstr ""
+"Indiquez si la page H5P Caretaker doit être accessible au public ou "
+"uniquement aux utilisateurs connectés dont le rôle dispose de la capacité."
+
+#: includes/clean-up.php:30 includes/fetch-analysis.php:43
+msgid "Invalid nonce verification."
+msgstr "Vérification du nonce non valide."
+
+#: includes/clean-up.php:37 includes/fetch-analysis.php:28
+#: includes/render-index.php:26
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+"Vous ne disposez pas des autorisations suffisantes pour accéder à cette "
+"page."
+
+#: includes/fetch-analysis.php:36
+msgid "Method Not Allowed"
+msgstr "Méthode non autorisée"
+
+#: includes/fetch-analysis.php:51
+#, php-format
+msgid ""
+"It seems that no file was provided or it exceeds the file upload size limit "
+"of %s KB."
+msgstr ""
+"Il semble qu’aucun fichier n’ait été fourni ou qu’il dépasse la taille "
+"limite d’envoi de %s KB."
+
+#: includes/fetch-analysis.php:60
+msgid "Something went wrong with the file upload, but I dunno what."
+msgstr ""
+"Quelque chose s’est mal passé durant l’envoi du fichier, mais je ne sais "
+"pas quoi."
+
+#: includes/fetch-analysis.php:68
+#, php-format
+msgid "The file is larger than the allowed maximum file size of %s KB."
+msgstr "Le fichier est plus grand que la taille maximale autorisée de %s KB."
+
+#: includes/render-index.php:267
+msgid "H5P Caretaker Reference Implementation"
+msgstr "Implémentation de référence H5P Caretaker"
+
+#: includes/render-index.php:279
+msgid "Take care of your H5P"
+msgstr "Prenez soin de votre H5P"
+
+#: includes/render-index.php:280
+msgid "Check your H5P file for improvements"
+msgstr "Vérifiez si votre fichier H5P peut être amélioré"
+
+#: includes/render-index.php:281
+msgid ""
+"Uncover accessibility issues, missing information and best practices that "
+"can help you improve your H5P content."
+msgstr ""
+"Découvrez les problèmes d’accessibilité, les informations manquantes et les "
+"bonnes pratiques qui peuvent vous aider à améliorer votre contenu H5P."
+
+#: includes/render-index.php:284
+msgid "or drag the file here"
+msgstr "ou glissez le fichier ici"
+
+#: includes/render-index.php:285
+msgid "Remove file"
+msgstr "Supprimer le fichier"
+
+#: includes/render-index.php:286
+msgid "Select your language"
+msgstr "Choisir votre langue"
+
+#: includes/render-index.php:287
+msgid "Upload progress"
+msgstr "Avancement de l’envoi"
+
+#: includes/render-index.php:288
+msgid "Upload your H5P file"
+msgstr "Envoyez votre fichier H5P"
+
+#: includes/render-index.php:289
+msgid "Your file is being checked"
+msgstr "Votre fichier est en cours de vérification"
+
+#: includes/render-index.php:290
+msgid "Your file check was completed"
+msgstr "Votre fichier a été vérifié avec succès"
+
+#: includes/render-index.php:291
+msgid "Total messages"
+msgstr "Total des messages"
+
+#: includes/render-index.php:292
+msgid "issues"
+msgstr "problèmes"
+
+#: includes/render-index.php:293
+msgid "results"
+msgstr "résultats"
+
+#: includes/render-index.php:294
+msgid "Filter by"
+msgstr "Filtrer par"
+
+#: includes/render-index.php:295
+msgid "Group by"
+msgstr "Grouper par"
+
+#: includes/render-index.php:296
+msgid "Download"
+msgstr "Télécharger"
+
+#: includes/render-index.php:297
+msgid "Show details"
+msgstr "Voir les détails"
+
+#: includes/render-index.php:298
+msgid "Hide details"
+msgstr "Cacher les détails"
+
+#: includes/render-index.php:299
+msgid "Expand all messages"
+msgstr "Déplier tous les messages"
+
+#: includes/render-index.php:300
+msgid "Collapse all messages"
+msgstr "Replier tous les messages"
+
+#: includes/render-index.php:301
+msgid "All messages have been filtered out by content."
+msgstr "Tous les messages ont été filtrés selon leur contenu."
+
+#: includes/render-index.php:302
+msgid "H5P Caretaker report for @title"
+msgstr "Rapport H5P-Caretaker pour @title"
+
+#: includes/render-index.php:303
+msgid "Content type filter"
+msgstr "Filtre du type de contenu"
+
+#: includes/render-index.php:304
+msgid "Show all"
+msgstr "Tout afficher"
+
+#: includes/render-index.php:305
+msgid "Various selected contents"
+msgstr "Différents contenus sélectionnés"
+
+#: includes/render-index.php:306
+msgid "Show none"
+msgstr "Ne rien afficher"
+
+#: includes/render-index.php:307
+msgid "Filter by content:"
+msgstr "Filtrer sur le contenu :"
+
+#: includes/render-index.php:308
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: includes/render-index.php:309
+msgid "Something went wrong, but I dunno what, sorry!"
+msgstr "Quelque chose s’est mal passé, mais je ne sais pas quoi, désolé !"
+
+#: includes/render-index.php:310
+msgid "Please check the server log."
+msgstr "Veuillez consulter les journaux du serveur."
