@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-ndla-h5p-caretaker\n"
 "POT-Creation-Date: 2025-03-12 22:34+0100\n"
-"PO-Revision-Date: 2025-03-24 09:28+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2025-03-24 11:53+0100\n"
+"Last-Translator: H5P-Careraker\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_x;__;_ex;esc_html__;esc_html_e;esc_attr__;"
 "esc_attr_e;_n;_nx;_n_noop;_nx_noop;esc_url__;esc_url_e\n"
@@ -217,7 +217,7 @@ msgstr "Ne rien afficher"
 
 #: includes/render-index.php:307
 msgid "Filter by content:"
-msgstr "Filtrer sur le contenu :"
+msgstr "Filtrer sur le contenu:"
 
 #: includes/render-index.php:308
 msgid "Reset"
@@ -225,7 +225,7 @@ msgstr "Réinitialiser"
 
 #: includes/render-index.php:309
 msgid "Something went wrong, but I dunno what, sorry!"
-msgstr "Quelque chose s’est mal passé, mais je ne sais pas quoi, désolé !"
+msgstr "Quelque chose s’est mal passé, mais je ne sais pas quoi, désolé!"
 
 #: includes/render-index.php:310
 msgid "Please check the server log."
