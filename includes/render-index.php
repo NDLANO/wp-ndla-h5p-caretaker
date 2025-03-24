@@ -361,7 +361,7 @@ function get_select_language_locales( $locale ) {
 		function ( $available_locale ) use ( $locale, $locales_lookup ) {
 			return array(
 				'locale'   => esc_attr( $available_locale ),
-				'name'     => esc_html( $locales_lookup[ $available_locale ] ),
+				'name'     => esc_html( ucfirst( $locales_lookup[ $available_locale ] ) ),
 				'selected' => $available_locale === $locale,
 			);
 		},
