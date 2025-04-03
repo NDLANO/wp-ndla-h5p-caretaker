@@ -56,6 +56,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install Subversion
+        run: sudo apt-get update && sudo apt-get install -y subversion
+
       - name: Deploy on WordPress plugin repository
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
