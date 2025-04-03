@@ -62,8 +62,9 @@ jobs:
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: "ndla-h5p-caretaker"
         run: |
-          VERSION=${GITHUB_REF#refs/tags/}
+          set -e  # Exit immediately if any command fails
 
+          VERSION=${GITHUB_REF#refs/tags/}
           SVN_DIR="${{ runner.temp }}/svn"
           GIT_DIR="${{ github.workspace }}"
 
