@@ -24,16 +24,30 @@ jobs:
       - name: Update Composer dependencies (for git-based dependencies)
         run: composer update
 
+      - name: Set up exclusion list
+        run: |
+          # Define excluded files/directories
+          EXCLUSIONS=".github .git .gitignore docs composer.lock package-lock.json phpcs.xml"
+          echo "EXCLUSIONS=${EXCLUSIONS}" >> $GITHUB_ENV
+
       - name: Create ZIP file
         run: |
           ZIP_NAME="ndla-h5p-caretaker.zip"
           echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
-          zip -r "$ZIP_NAME" . \
-            -x ".github/*" ".gitignore" ".git/*" \
-            "docs/*" \
-            "composer.lock" \
-            "package-lock.json" \
-            "phpcs.xml"
+
+          # Format exclusions for zip command
+          ZIP_EXCLUSIONS=""
+          for item in $EXCLUSIONS; do
+            # Add /* to directories for recursive exclusion
+            if [[ -d "$item" ]]; then
+              ZIP_EXCLUSIONS+=" \"${item}/*\""
+            else
+              ZIP_EXCLUSIONS+=" \"${item}\""
+            fi
+          done
+
+          # Create zip with exclusions
+          eval "zip -r \"$ZIP_NAME\" . -x $ZIP_EXCLUSIONS"
 
       - name: Upload ZIP to Release
         uses: softprops/action-gh-release@v2
@@ -41,3 +55,53 @@ jobs:
           files: ${{ env.ZIP_NAME }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy on WordPress plugin repository
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: "ndla-h5p-caretaker"
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+
+          SVN_DIR="${{ runner.temp }}/svn"
+          GIT_DIR="${{ github.workspace }}"
+
+          echo "Starting WordPress.org deployment for version $VERSION..."
+
+          echo "Checking out SVN repository (sparse checkout)"
+          svn co --depth=empty "https://plugins.svn.wordpress.org/${SLUG}" "$SVN_DIR"
+          svn up --set-depth=infinity "$SVN_DIR/trunk"
+          svn up --set-depth=infinity "$SVN_DIR/tags"
+
+          echo "Cleaning up SVN trunk directory"
+          rm -rf "$SVN_DIR/trunk/*"
+
+          echo "Copying files to SVN trunk"
+
+          # Format exclusions for tar command
+          TAR_ARGS=""
+          for item in $EXCLUSIONS; do
+            TAR_ARGS+=" --exclude=$item"
+          done
+
+          # A little odd, but seems to be common practice to "sync" files with exclusions
+          eval "tar $TAR_ARGS -cf - -C \"$GIT_DIR\" . | tar -xf - -C \"$SVN_DIR/trunk/\""
+
+          if [ -d "$SVN_DIR/tags/$VERSION" ]; then
+            echo "Tag $VERSION already exists, removing it"
+            svn delete "$SVN_DIR/tags/$VERSION"
+            svn commit -m "Removing existing tag $VERSION" "$SVN_DIR/tags" --username "$SVN_USERNAME" --password "$SVN_PASSWORD"
+          fi
+
+          svn copy "$SVN_DIR/trunk" "$SVN_DIR/tags/$VERSION"
+
+          # Add new/modified files
+          svn status "$SVN_DIR" | grep -v '^!' | awk '{print $2}' | xargs -I% svn add % 2>/dev/null || true
+
+          # Remove deleted files
+          svn status "$SVN_DIR" | grep '^!' | awk '{print $2}' | xargs -I% svn rm % 2>/dev/null || true
+
+          svn commit -m "Release $VERSION" "$SVN_DIR" --username "$SVN_USERNAME" --password "$SVN_PASSWORD"
+
+          echo "Plugin deployed to WordPress.org!"
