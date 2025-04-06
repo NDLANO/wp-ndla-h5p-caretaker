@@ -8,7 +8,7 @@
   "author": "NDLA",
   "license": "MIT",
   "dependencies": {
-    "@explorendla/h5p-caretaker-client": "^1.0.21"
+    "@explorendla/h5p-caretaker-client": "^1.0.22"
   },
   "scripts": {
     "clean": "shx mv node_modules/@explorendla/h5p-caretaker-client ./js && shx rm -r node_modules"
