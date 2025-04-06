@@ -43,6 +43,9 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 
 == Changelog ==
 
+= 1.0.13 =
+* Fixed sticky filter for many subcontents.
+
 = 1.0.12 =
 * Fixed optional intro/footer texts not showing up.
 * Improved readmes.
@@ -51,6 +54,9 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 First version released on the WordPress plugin directory.
 
 == Upgrade Notice ==
+
+= 1.0.13 =
+Upgrade if you run into trouble with the filter and scrolling.
 
 = 1.0.12 =
 Upgrade if you require intro/footer texts.
