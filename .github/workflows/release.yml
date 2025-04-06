@@ -77,11 +77,9 @@ jobs:
 
           echo "Checking out SVN repository (sparse checkout)"
           svn co --depth=empty "https://plugins.svn.wordpress.org/${SLUG}" "$SVN_DIR"
-          svn up --set-depth=infinity "$SVN_DIR/trunk"
           svn up --set-depth=infinity "$SVN_DIR/tags"
 
-          echo "Cleaning up SVN trunk directory"
-          rm -rf "$SVN_DIR/trunk/*"
+          mkdir -p "$SVN_DIR/trunk"
 
           echo "Copying files to SVN trunk"
 
