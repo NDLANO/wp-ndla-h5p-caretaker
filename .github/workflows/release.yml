@@ -27,15 +27,15 @@ jobs:
       - name: Set up exclusion list
         run: |
           # Define excluded files/directories
-          EXCLUSIONS=".github .git .gitignore docs composer.lock package-lock.json phpcs.xml ndla-h5p-caretaker.zip"
-          echo "EXCLUSIONS=$EXCLUSIONS" >> $GITHUB_ENV
+          EXCLUSIONS=".github .git .gitignore docs composer.lock package-lock.json phpcs.xml"
+          echo "EXCLUSIONS=${EXCLUSIONS}" >> $GITHUB_ENV
 
       - name: Create ZIP file
         run: |
           ZIP_NAME="ndla-h5p-caretaker.zip"
+          ZIP_PATH="${RUNNER_TEMP}/${ZIP_NAME}"
           echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
-
-          EXCLUSIONS="${{ env.EXCLUSIONS }}"
+          echo "ZIP_PATH=${ZIP_PATH}" >> $GITHUB_ENV
 
           # Format exclusions for zip command
           ZIP_EXCLUSIONS=""
@@ -49,12 +49,12 @@ jobs:
           done
 
           # Create zip with exclusions
-          eval "zip -r \"$ZIP_NAME\" . -x $ZIP_EXCLUSIONS"
+          eval "zip -r \"$ZIP_PATH\" . -x $ZIP_EXCLUSIONS"
 
       - name: Upload ZIP to Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ env.ZIP_NAME }}
+          files: ${{ env.ZIP_PATH }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -66,7 +66,6 @@ jobs:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: "ndla-h5p-caretaker"
-          EXCLUSIONS: ${{ env.EXCLUSIONS }}
         run: |
           set -e  # Exit immediately if any command fails
 
@@ -76,7 +75,7 @@ jobs:
 
           echo "Starting WordPress.org deployment for version $VERSION..."
 
-          echo "Checking out SVN repository"
+          echo "Checking out SVN repository (sparse checkout)"
           svn co --depth=empty "https://plugins.svn.wordpress.org/${SLUG}" "$SVN_DIR"
           svn up --set-depth=infinity "$SVN_DIR/trunk"
           svn up --set-depth=infinity "$SVN_DIR/tags"
