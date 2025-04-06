@@ -28,12 +28,14 @@ jobs:
         run: |
           # Define excluded files/directories
           EXCLUSIONS=".github .git .gitignore docs composer.lock package-lock.json phpcs.xml ndla-h5p-caretaker.zip"
-          echo "EXCLUSIONS=${EXCLUSIONS}" >> $GITHUB_ENV
+          echo "EXCLUSIONS=$EXCLUSIONS" >> $GITHUB_ENV
 
       - name: Create ZIP file
         run: |
           ZIP_NAME="ndla-h5p-caretaker.zip"
           echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
+
+          EXCLUSIONS="${{ env.EXCLUSIONS }}"
 
           # Format exclusions for zip command
           ZIP_EXCLUSIONS=""
@@ -64,6 +66,7 @@ jobs:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: "ndla-h5p-caretaker"
+          EXCLUSIONS: ${{ env.EXCLUSIONS }}
         run: |
           set -e  # Exit immediately if any command fails
 
@@ -73,7 +76,7 @@ jobs:
 
           echo "Starting WordPress.org deployment for version $VERSION..."
 
-          echo "Checking out SVN repository (sparse checkout)"
+          echo "Checking out SVN repository"
           svn co --depth=empty "https://plugins.svn.wordpress.org/${SLUG}" "$SVN_DIR"
           svn up --set-depth=infinity "$SVN_DIR/trunk"
           svn up --set-depth=infinity "$SVN_DIR/tags"
