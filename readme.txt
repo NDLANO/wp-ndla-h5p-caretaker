@@ -4,7 +4,7 @@ Tags: h5p, accessibility, licensing
 Requires at least: 4.0
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 1.0.16
+Stable tag: 1.0.17
 License: MIT
 License URI: https://github.com/NDLANO/wp-ndla-h5p-caretaker/blob/master/LICENSE
 
@@ -43,6 +43,9 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 
 == Changelog ==
 
+= 1.0.17 =
+* Simplify archive generation.
+
 = 1.0.16 =
 * Properly removed manual install zip from archive for good :-)
 
@@ -63,6 +66,9 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 First version released on the WordPress plugin directory.
 
 == Upgrade Notice ==
+
+= 1.0.17 =
+Upgrade if you have time.
 
 = 1.0.16 =
 Upgrade if you have time.
