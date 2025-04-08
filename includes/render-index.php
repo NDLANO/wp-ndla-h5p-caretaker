@@ -278,8 +278,8 @@ function render_html( $params ) {
 	$template = file_get_contents( __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'h5pcaretaker.mustache' );
 
 	$render_data = array(
-		'intro'                              => esc_html( Options::get_intro() ),
-		'outro'                              => esc_html( Options::get_outro() ),
+		'intro'                              => Options::get_intro(),
+		'outro'                              => Options::get_outro(),
 		'locale'                             => esc_attr( str_replace( '_', '-', $params['locale'] ) ),
 		'title'                              => esc_html( __( 'H5P Caretaker Reference Implementation', 'ndla-h5p-caretaker' ) ),
 		'h5pcaretakerhandlers'               => esc_url( $params['h5p_caretaker_handlers'] ),
