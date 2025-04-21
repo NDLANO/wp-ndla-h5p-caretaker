@@ -325,6 +325,11 @@ function render_html( $params ) {
 		'l10nreset'                          => esc_html( __( 'Reset', 'ndla-h5p-caretaker' ) ),
 		'l10nunknownerror'                   => esc_html( __( 'Something went wrong, but I dunno what, sorry!', 'ndla-h5p-caretaker' ) ),
 		'l10ncheckserverlog'                 => esc_html( __( 'Please check the server log.', 'ndla-h5p-caretaker' ) ),
+		'l10nexpandList'                     => esc_html( __( 'Expand list', 'ndla-h5p-caretaker' ) ),
+		'l10ncollapseList'                   => esc_html( __( 'Collapse list', 'ndla-h5p-caretaker' ) ),
+		'l10nchangeSortingGrouping'          => esc_html( __( 'Change sorting/grouping', 'ndla-h5p-caretaker' ) ),
+		'l10npreviousMessage'                => esc_html( __( 'Previous message', 'ndla-h5p-caretaker' ) ),
+		'l10nnextMessage'                    => esc_html( __( 'Next message', 'ndla-h5p-caretaker' ) ),
 	);
 
 	$mustache = new Mustache_Engine();
