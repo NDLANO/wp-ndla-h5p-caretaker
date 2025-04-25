@@ -4,7 +4,7 @@ Tags: h5p, accessibility, licensing
 Requires at least: 4.0
 Tested up to: 6.8
 Requires PHP: 8.0
-Stable tag: 1.0.18
+Stable tag: 1.0.19
 License: MIT
 License URI: https://github.com/NDLANO/wp-ndla-h5p-caretaker/blob/master/LICENSE
 

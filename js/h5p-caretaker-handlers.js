@@ -57,8 +57,6 @@
           download: window.H5PCaretakerIntegration.l10n.download,
           showDetails: window.H5PCaretakerIntegration.l10n.showDetails,
           hideDetails: window.H5PCaretakerIntegration.l10n.hideDetails,
-          expandAllMessages: window.H5PCaretakerIntegration.l10n.expandAllMessages,
-          collapseAllMessages: window.H5PCaretakerIntegration.l10n.collapseAllMessages,
           allFilteredOut: window.H5PCaretakerIntegration.l10n.allFilteredOut,
           reportTitleTemplate: window.H5PCaretakerIntegration.l10n.reportTitleTemplate,
           contentFilter: window.H5PCaretakerIntegration.l10n.contentFilter,
