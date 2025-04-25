@@ -313,8 +313,6 @@ function render_html( $params ) {
 		'l10ndownload'                       => esc_html( __( 'Download', 'ndla-h5p-caretaker' ) ),
 		'l10nshowdetails'                    => esc_html( __( 'Show details', 'ndla-h5p-caretaker' ) ),
 		'l10nhidedetails'                    => esc_html( __( 'Hide details', 'ndla-h5p-caretaker' ) ),
-		'l10nexpandallmessages'              => esc_html( __( 'Expand all messages', 'ndla-h5p-caretaker' ) ),
-		'l10ncollapseallmessages'            => esc_html( __( 'Collapse all messages', 'ndla-h5p-caretaker' ) ),
 		'l10nallfilteredout'                 => esc_html( __( 'All messages have been filtered out by content.', 'ndla-h5p-caretaker' ) ),
 		'l10nreporttitletemplate'            => esc_html( __( 'H5P Caretaker report for @title', 'ndla-h5p-caretaker' ) ),
 		'l10ncontentfilter'                  => esc_html( __( 'Content type filter', 'ndla-h5p-caretaker' ) ),
@@ -325,6 +323,11 @@ function render_html( $params ) {
 		'l10nreset'                          => esc_html( __( 'Reset', 'ndla-h5p-caretaker' ) ),
 		'l10nunknownerror'                   => esc_html( __( 'Something went wrong, but I dunno what, sorry!', 'ndla-h5p-caretaker' ) ),
 		'l10ncheckserverlog'                 => esc_html( __( 'Please check the server log.', 'ndla-h5p-caretaker' ) ),
+		'l10nexpandList'                     => esc_html( __( 'Expand list', 'ndla-h5p-caretaker' ) ),
+		'l10ncollapseList'                   => esc_html( __( 'Collapse list', 'ndla-h5p-caretaker' ) ),
+		'l10nchangeSortingGrouping'          => esc_html( __( 'Change sorting/grouping', 'ndla-h5p-caretaker' ) ),
+		'l10npreviousMessage'                => esc_html( __( 'Previous message', 'ndla-h5p-caretaker' ) ),
+		'l10nnextMessage'                    => esc_html( __( 'Next message', 'ndla-h5p-caretaker' ) ),
 	);
 
 	$mustache = new Mustache_Engine();
