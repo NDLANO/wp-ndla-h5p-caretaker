@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wp-ndla-h5p-caretaker\n"
-"POT-Creation-Date: 2025-04-21 13:40+0200\n"
-"PO-Revision-Date: 2025-04-21 13:41+0200\n"
+"POT-Creation-Date: 2025-04-25 17:07+0200\n"
+"PO-Revision-Date: 2025-04-25 17:07+0200\n"
 "Last-Translator: H5P-Careraker\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -184,69 +184,67 @@ msgid "Hide details"
 msgstr "Cacher les détails"
 
 #: includes/render-index.php:316
-msgid "Expand all messages"
-msgstr "Déplier tous les messages"
-
-#: includes/render-index.php:317
-msgid "Collapse all messages"
-msgstr "Replier tous les messages"
-
-#: includes/render-index.php:318
 msgid "All messages have been filtered out by content."
 msgstr "Tous les messages ont été filtrés selon leur contenu."
 
-#: includes/render-index.php:319
+#: includes/render-index.php:317
 msgid "H5P Caretaker report for @title"
 msgstr "Rapport H5P-Caretaker pour @title"
 
-#: includes/render-index.php:320
+#: includes/render-index.php:318
 msgid "Content type filter"
 msgstr "Filtre du type de contenu"
 
-#: includes/render-index.php:321
+#: includes/render-index.php:319
 msgid "Show all"
 msgstr "Tout afficher"
 
-#: includes/render-index.php:322
+#: includes/render-index.php:320
 msgid "Various selected contents"
 msgstr "Différents contenus sélectionnés"
 
-#: includes/render-index.php:323
+#: includes/render-index.php:321
 msgid "Show none"
 msgstr "Ne rien afficher"
 
-#: includes/render-index.php:324
+#: includes/render-index.php:322
 msgid "Filter by content:"
 msgstr "Filtrer sur le contenu:"
 
-#: includes/render-index.php:325
+#: includes/render-index.php:323
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: includes/render-index.php:326
+#: includes/render-index.php:324
 msgid "Something went wrong, but I dunno what, sorry!"
 msgstr "Quelque chose s’est mal passé, mais je ne sais pas quoi, désolé!"
 
-#: includes/render-index.php:327
+#: includes/render-index.php:325
 msgid "Please check the server log."
 msgstr "Veuillez consulter les journaux du serveur."
 
-#: includes/render-index.php:328
+#: includes/render-index.php:326
 msgid "Expand list"
 msgstr "Développer la liste"
 
-#: includes/render-index.php:329
+#: includes/render-index.php:327
 msgid "Collapse list"
 msgstr "Réduire la liste"
 
-#: includes/render-index.php:330
+#: includes/render-index.php:328
 msgid "Change sorting/grouping"
 msgstr "Modifier le tri/regroupement"
 
-#: includes/render-index.php:331
+#: includes/render-index.php:329
 msgid "Previous message"
 msgstr "Message précédent"
 
-#: includes/render-index.php:332
+#: includes/render-index.php:330
 msgid "Next message"
 msgstr "Message suivant"
+
+#~ msgid "Expand all messages"
+#~ msgstr "Déplier tous les messages"
+
+#~ msgid "Collapse all messages"
+#~ msgstr "Replier tous les messages"

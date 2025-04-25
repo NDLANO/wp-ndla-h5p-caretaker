@@ -313,8 +313,6 @@ function render_html( $params ) {
 		'l10ndownload'                       => esc_html( __( 'Download', 'ndla-h5p-caretaker' ) ),
 		'l10nshowdetails'                    => esc_html( __( 'Show details', 'ndla-h5p-caretaker' ) ),
 		'l10nhidedetails'                    => esc_html( __( 'Hide details', 'ndla-h5p-caretaker' ) ),
-		'l10nexpandallmessages'              => esc_html( __( 'Expand all messages', 'ndla-h5p-caretaker' ) ),
-		'l10ncollapseallmessages'            => esc_html( __( 'Collapse all messages', 'ndla-h5p-caretaker' ) ),
 		'l10nallfilteredout'                 => esc_html( __( 'All messages have been filtered out by content.', 'ndla-h5p-caretaker' ) ),
 		'l10nreporttitletemplate'            => esc_html( __( 'H5P Caretaker report for @title', 'ndla-h5p-caretaker' ) ),
 		'l10ncontentfilter'                  => esc_html( __( 'Content type filter', 'ndla-h5p-caretaker' ) ),
