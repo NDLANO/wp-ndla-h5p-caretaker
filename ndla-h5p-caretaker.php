@@ -46,6 +46,8 @@ function ndla_h5p_caretaker() {
 	register_deactivation_hook( __FILE__, 'NDLAH5PCARETAKER\on_deactivation' );
 	register_uninstall_hook( __FILE__, 'NDLAH5PCARETAKER\on_uninstall' );
 
+	add_action( 'plugins_loaded', 'NDLAH5PCARETAKER\update' );
+
 	return new Main();
 }
 
@@ -75,6 +77,64 @@ function on_uninstall() {
 
 	remove_capabilities();
 	remove_directories();
+}
+
+/**
+ * Update plugin.
+ */
+function update() {
+	if ( NDLAH5PCARETAKER_VERSION === get_option( 'ndlah5pcaretaker_version' ) ) {
+		return;
+	}
+
+	clean_up_js_dir();
+
+	update_option( 'ndlah5pcaretaker_version', NDLAH5PCARETAKER_VERSION );
+}
+
+/**
+ * Clean up JS directory.
+ */
+function clean_up_js_dir() {
+	$js_dir = plugin_dir_path( __FILE__ ) . implode(
+		DIRECTORY_SEPARATOR,
+		array( 'js', 'h5p-caretaker-client', 'dist', '@explorendla', '' )
+	);
+
+	foreach ( array( 'h5p-caretaker-client-*.js', 'h5p-caretaker-client-*.css' ) as $pattern ) {
+		clean_up_by_pattern( $js_dir, $pattern );
+	}
+}
+
+/**
+ * Clean up files by pattern.
+ * Assumes a pattern placeholder * that represents a semantic version.
+ *
+ * @param string $dir Directory to clean up.
+ * @param string $pattern Pattern to match files.
+ */
+function clean_up_by_pattern( $dir, $pattern ) {
+	$files = glob( $dir . $pattern );
+	if ( ! $files ) {
+		return;
+	}
+
+	$latest_file    = '';
+	$latest_version = 0;
+
+	foreach ( $files as $file ) {
+		$version = preg_replace( '/[^0-9]/', '', basename( $file ) );
+		if ( $version > $latest_version ) {
+			$latest_version = $version;
+			$latest_file    = $file;
+		}
+	}
+
+	foreach ( $files as $file ) {
+		if ( $file !== $latest_file ) {
+			wp_delete_file( $file );
+		}
+	}
 }
 
 /**
