@@ -262,7 +262,23 @@ function get_id_from_query() {
  */
 function get_file_by_pattern( $dir, $pattern ) {
 	$files = glob( $dir . DIRECTORY_SEPARATOR . $pattern );
-	return basename( $files[0] ?? '' );
+
+	if ( empty( $files ) ) {
+		return '';
+	}
+
+	$versioned_files = array();
+	foreach ( $files as $file ) {
+		$filename = basename( $file );
+		if ( preg_match( '/(\d+\.\d+\.\d+)/', $filename, $matches ) ) {
+				$version                      = $matches[1];
+				$versioned_files[ $filename ] = $version;
+		}
+	}
+
+	arsort( $versioned_files, SORT_NATURAL );
+
+	return ! empty( $versioned_files ) ? key( $versioned_files ) : basename( $files[0] ?? '' );
 }
 
 /**
