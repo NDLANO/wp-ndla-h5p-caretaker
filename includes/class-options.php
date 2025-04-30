@@ -175,6 +175,14 @@ class Options {
 			'ndlah5pcaretaker-admin',
 			'general_settings'
 		);
+
+		add_settings_field(
+			'no_branding',
+			__( 'Turn off branding', 'ndla-h5p-caretaker' ),
+			array( $this, 'no_branding_callback' ),
+			'ndlah5pcaretaker-admin',
+			'general_settings'
+		);
 	}
 
 	/**
@@ -204,6 +212,10 @@ class Options {
 		$new_input['outro'] = ! empty( $input['outro'] ) ?
 			wp_kses_post( $input['outro'] ) :
 			'';
+
+		$new_input['no_branding'] = ! empty( $input['no_branding'] ) ?
+			absint( $input['no_branding'] ) :
+			0;
 
 		return $new_input;
 	}
@@ -296,6 +308,28 @@ class Options {
 	}
 
 	/**
+	 * Show the option for removing branding
+	 */
+	public function no_branding_callback() {
+		?>
+		<label for="no_branding">
+		<input
+			type="checkbox"
+			name="ndlah5pcaretaker_option[no_branding]"
+			id="no_branding"
+			value="1"
+			<?php
+				echo isset( self::$options['no_branding'] ) ?
+					checked( '1', self::$options['no_branding'], false ) :
+					''
+			?>
+		/>
+		<?php echo esc_html__( 'Turn NDLA branding off.', 'ndla-h5p-caretaker' ); ?>
+		</label>
+		<?php
+	}
+
+	/**
 	 * Get caretaker page URL.
 	 *
 	 * @return string Caretaker page URL.
@@ -337,6 +371,17 @@ class Options {
 		return ( isset( self::$options['outro'] ) ) ?
 			self::$options['outro'] :
 			'';
+	}
+
+	/**
+	 * Get caretaker no branding setting.
+	 *
+	 * @return int Caretaker no branding setting.
+	 */
+	public static function get_no_branding() {
+		return ( isset( self::$options['no_branding'] ) ) ?
+			self::$options['no_branding'] :
+			0;
 	}
 
 	/**

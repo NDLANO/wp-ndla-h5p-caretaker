@@ -296,6 +296,7 @@ function render_html( $params ) {
 	$render_data = array(
 		'intro'                              => Options::get_intro(),
 		'outro'                              => Options::get_outro(),
+		'noBranding'                         => Options::get_no_branding(),
 		'locale'                             => esc_attr( str_replace( '_', '-', $params['locale'] ) ),
 		'title'                              => esc_html( __( 'H5P Caretaker Reference Implementation', 'ndla-h5p-caretaker' ) ),
 		'h5pcaretakerhandlers'               => esc_url( $params['h5p_caretaker_handlers'] ),

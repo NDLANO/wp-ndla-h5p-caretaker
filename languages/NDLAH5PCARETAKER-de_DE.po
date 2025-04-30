@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wp-ndla-h5p-caretaker\n"
-"POT-Creation-Date: 2025-04-25 17:07+0200\n"
-"PO-Revision-Date: 2025-04-25 17:07+0200\n"
+"POT-Creation-Date: 2025-04-30 23:14+0200\n"
+"PO-Revision-Date: 2025-04-30 23:16+0200\n"
 "Last-Translator: H5P-Careraker\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -17,9 +17,10 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: vendor\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
+"X-Poedit-SearchPathExcluded-2: js\n"
 
 #: includes/class-main.php:127 includes/class-options.php:101
-#: includes/render-index.php:292
+#: includes/render-index.php:309
 msgid "H5P Caretaker"
 msgstr "H5P Caretaker"
 
@@ -43,7 +44,11 @@ msgstr "Zusätzliche Einleitung"
 msgid "Additional footer"
 msgstr "Zusätzliche Fußzeile"
 
-#: includes/class-options.php:236
+#: includes/class-options.php:181
+msgid "Turn off branding"
+msgstr "Branding deaktivieren"
+
+#: includes/class-options.php:248
 #, php-format
 msgid ""
 "Set the desired URL for the H5P Caretaker page. With the current value it "
@@ -52,15 +57,15 @@ msgstr ""
 "Lege den gewünschten URL für die H5P-Caretaker-Seite ein. Mit dem aktuellen "
 "Wert wird er unter %s erreichbar sein."
 
-#: includes/class-options.php:255
+#: includes/class-options.php:267
 msgid "Public"
 msgstr "Öffentlich"
 
-#: includes/class-options.php:256
+#: includes/class-options.php:268
 msgid "Needs capability"
 msgstr "Benötigt Rechte"
 
-#: includes/class-options.php:260
+#: includes/class-options.php:272
 msgid ""
 "Select whether the H5P Caretaker page should be publicly available or only "
 "to those logged in users that have the capability based on their user role."
@@ -68,6 +73,10 @@ msgstr ""
 "Wähle, ob die H5P-Caretaker-Seite öffentlich zugänglich sein sollte oder nur "
 "für angemeldete Nutzerinnen und Nutzer, die dieses Recht in ihrer Rolle "
 "haben."
+
+#: includes/class-options.php:327
+msgid "Turn NDLA branding off."
+msgstr "Deaktiviere das NDLA-Branding."
 
 #: includes/clean-up.php:34 includes/fetch-analysis.php:43
 #: includes/render-index.php:231 includes/render-index.php:249
@@ -101,19 +110,19 @@ msgstr "Etwas ist schief gelaufen, aber ich weiß nicht was."
 msgid "The file is larger than the allowed maximum file size of %s KB."
 msgstr "Die Datei ist größer als die maximal erlaubte Dateigröße von %s KB."
 
-#: includes/render-index.php:284
+#: includes/render-index.php:301
 msgid "H5P Caretaker Reference Implementation"
 msgstr "H5P-Caretaker-Referenzimplementierung"
 
-#: includes/render-index.php:296
+#: includes/render-index.php:313
 msgid "Take care of your H5P"
 msgstr "Kümmere dich um H5P"
 
-#: includes/render-index.php:297
+#: includes/render-index.php:314
 msgid "Check your H5P file for improvements"
 msgstr "Prüfe deine H5P-Datei auf Verbesserungspotential"
 
-#: includes/render-index.php:298
+#: includes/render-index.php:315
 msgid ""
 "Uncover accessibility issues, missing information and best practices that "
 "can help you improve your H5P content."
@@ -121,124 +130,124 @@ msgstr ""
 "Entdecke Probleme mit der Barrierefreiheit, fehlende Informationen und "
 "bewährte Praktiken, die dir helfen können, deine H5P-Inhalte zu verbessern."
 
-#: includes/render-index.php:301
+#: includes/render-index.php:318
 msgid "or drag the file here"
 msgstr "oder ziehe die Datei hierher"
 
-#: includes/render-index.php:302
+#: includes/render-index.php:319
 msgid "Remove file"
 msgstr "Entferne Datei"
 
-#: includes/render-index.php:303
+#: includes/render-index.php:320
 msgid "Select your language"
 msgstr "Wähle deine Sprache"
 
-#: includes/render-index.php:304
+#: includes/render-index.php:321
 msgid "Upload progress"
 msgstr "Upload-Fortschritt"
 
-#: includes/render-index.php:305
+#: includes/render-index.php:322
 msgid "Upload your H5P file"
 msgstr "Lade deine H5P-Datei hoch"
 
-#: includes/render-index.php:306
+#: includes/render-index.php:323
 msgid "Your file is being checked"
 msgstr "Deine Datei wird geprüft"
 
-#: includes/render-index.php:307
+#: includes/render-index.php:324
 msgid "Your file check was completed"
 msgstr "Deine Datei wurde erfolgreich geprüft"
 
-#: includes/render-index.php:308
+#: includes/render-index.php:325
 msgid "Total messages"
 msgstr "Meldungen insgesamt"
 
-#: includes/render-index.php:309
+#: includes/render-index.php:326
 msgid "issues"
 msgstr "Auffälligkeiten"
 
-#: includes/render-index.php:310
+#: includes/render-index.php:327
 msgid "results"
 msgstr "Ergebnisse"
 
-#: includes/render-index.php:311
+#: includes/render-index.php:328
 msgid "Filter by"
 msgstr "Filtern nach"
 
-#: includes/render-index.php:312
+#: includes/render-index.php:329
 msgid "Group by"
 msgstr "Gruppieren nach"
 
-#: includes/render-index.php:313
+#: includes/render-index.php:330
 msgid "Download"
 msgstr "Herunterladen"
 
-#: includes/render-index.php:314
+#: includes/render-index.php:331
 msgid "Show details"
 msgstr "Zeige Details"
 
-#: includes/render-index.php:315
+#: includes/render-index.php:332
 msgid "Hide details"
 msgstr "Verstecke Details"
 
-#: includes/render-index.php:316
+#: includes/render-index.php:333
 msgid "All messages have been filtered out by content."
 msgstr "Alle Meldungen wurden nach Inhalt herausgefiltert."
 
-#: includes/render-index.php:317
+#: includes/render-index.php:334
 msgid "H5P Caretaker report for @title"
 msgstr "H5P-Caretaker-Report für @title"
 
-#: includes/render-index.php:318
+#: includes/render-index.php:335
 msgid "Content type filter"
 msgstr "Inhaltstypfilter"
 
-#: includes/render-index.php:319
+#: includes/render-index.php:336
 msgid "Show all"
 msgstr "Zeige alle"
 
-#: includes/render-index.php:320
+#: includes/render-index.php:337
 msgid "Various selected contents"
 msgstr "Verschiedene ausgewählte Inhalte"
 
-#: includes/render-index.php:321
+#: includes/render-index.php:338
 msgid "Show none"
 msgstr "Zeige keine"
 
-#: includes/render-index.php:322
+#: includes/render-index.php:339
 msgid "Filter by content:"
 msgstr "Filtere nach Inhalt:"
 
-#: includes/render-index.php:323
+#: includes/render-index.php:340
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: includes/render-index.php:324
+#: includes/render-index.php:341
 msgid "Something went wrong, but I dunno what, sorry!"
 msgstr ""
 "Etwas ist schief gelaufen, aber ich weiß nicht was, bitte entschuldige!"
 
-#: includes/render-index.php:325
+#: includes/render-index.php:342
 msgid "Please check the server log."
 msgstr "Bitte prüfe die Server-Logs."
 
-#: includes/render-index.php:326
+#: includes/render-index.php:343
 msgid "Expand list"
 msgstr "Liste ausklappen"
 
-#: includes/render-index.php:327
+#: includes/render-index.php:344
 msgid "Collapse list"
 msgstr "Liste einklappen"
 
-#: includes/render-index.php:328
+#: includes/render-index.php:345
 msgid "Change sorting/grouping"
 msgstr "Ändere Sortierung/Gruppierung"
 
-#: includes/render-index.php:329
+#: includes/render-index.php:346
 msgid "Previous message"
 msgstr "Vorherige Meldung"
 
-#: includes/render-index.php:330
+#: includes/render-index.php:347
 msgid "Next message"
 msgstr "Nächste Meldung"
 
