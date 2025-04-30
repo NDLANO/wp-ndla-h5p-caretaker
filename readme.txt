@@ -4,7 +4,7 @@ Tags: h5p, accessibility, licensing
 Requires at least: 4.0
 Tested up to: 6.8
 Requires PHP: 8.0
-Stable tag: 1.0.21
+Stable tag: 1.0.22
 License: MIT
 License URI: https://github.com/NDLANO/wp-ndla-h5p-caretaker/blob/master/LICENSE
 
@@ -42,6 +42,9 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 2. You can change some options to your particular needs.
 
 == Changelog ==
+
+= 1.0.22 =
+* Added optional NDLA branding.
 
 = 1.0.21 =
 * Fixed download report.
@@ -85,6 +88,10 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 First version released on the WordPress plugin directory.
 
 == Upgrade Notice ==
+
+= 1.0.22 =
+No important reason to upgrade. But if you do, note that branding will be activated - but you can deactivate it in the
+settings.
 
 = 1.0.21 =
 Upgrade to fix issue with report download.
