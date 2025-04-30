@@ -4,7 +4,7 @@
  * Description: A plugin to allow checking H5P content for issues.
  * Text Domain: ndla-h5p-caretaker
  * Domain Path: /languages
- * Version: 1.0.20
+ * Version: 1.0.21
  * Author: NDLA, Oliver Tacke
  * License: MIT
  *
@@ -33,7 +33,7 @@ if ( ! function_exists( 'WP_Filesystem' ) ) {
 WP_Filesystem();
 
 if ( ! defined( 'NDLAH5PCARETAKER_VERSION' ) ) {
-	define( 'NDLAH5PCARETAKER_VERSION', '1.0.20' );
+	define( 'NDLAH5PCARETAKER_VERSION', '1.0.21' );
 }
 
 /**

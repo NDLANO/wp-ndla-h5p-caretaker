@@ -4,7 +4,7 @@ Tags: h5p, accessibility, licensing
 Requires at least: 4.0
 Tested up to: 6.8
 Requires PHP: 8.0
-Stable tag: 1.0.20
+Stable tag: 1.0.21
 License: MIT
 License URI: https://github.com/NDLANO/wp-ndla-h5p-caretaker/blob/master/LICENSE
 
@@ -43,9 +43,13 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 
 == Changelog ==
 
+= 1.0.21 =
+* Fixed download report.
+* Removed Filter option.
+
 = 1.0.20 =
 * Fixed old client version being used.
-* Added code to remove obsolete client files
+* Added code to remove obsolete client files.
 
 = 1.0.19 =
 * Got rid of long lists by introducing grouping by message type and using a carousel instead.
@@ -81,6 +85,9 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 First version released on the WordPress plugin directory.
 
 == Upgrade Notice ==
+
+= 1.0.21 =
+Upgrade to fix issue with report download.
 
 = 1.0.20 =
 Upgrade to use latest client.
