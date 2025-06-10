@@ -58,7 +58,6 @@
           showDetails: window.H5PCaretakerIntegration.l10n.showDetails,
           hideDetails: window.H5PCaretakerIntegration.l10n.hideDetails,
           allFilteredOut: window.H5PCaretakerIntegration.l10n.allFilteredOut,
-          reportTitleTemplate: window.H5PCaretakerIntegration.l10n.reportTitleTemplate,
           contentFilter: window.H5PCaretakerIntegration.l10n.contentFilter,
           showAll: window.H5PCaretakerIntegration.l10n.showAll,
           showSelected: window.H5PCaretakerIntegration.l10n.showSelected,
