@@ -331,7 +331,6 @@ function render_html( $params ) {
 		'l10nshowdetails'                    => esc_html( __( 'Show details', 'ndla-h5p-caretaker' ) ),
 		'l10nhidedetails'                    => esc_html( __( 'Hide details', 'ndla-h5p-caretaker' ) ),
 		'l10nallfilteredout'                 => esc_html( __( 'All messages have been filtered out by content.', 'ndla-h5p-caretaker' ) ),
-		'l10nreporttitletemplate'            => esc_html( __( 'H5P Caretaker report for @title', 'ndla-h5p-caretaker' ) ),
 		'l10ncontentfilter'                  => esc_html( __( 'Content type filter', 'ndla-h5p-caretaker' ) ),
 		'l10nshowall'                        => esc_html( __( 'Show all', 'ndla-h5p-caretaker' ) ),
 		'l10nshowselected'                   => esc_html( __( 'Various selected contents', 'ndla-h5p-caretaker' ) ),

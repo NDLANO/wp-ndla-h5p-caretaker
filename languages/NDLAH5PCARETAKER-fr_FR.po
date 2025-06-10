@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wp-ndla-h5p-caretaker\n"
-"POT-Creation-Date: 2025-04-30 23:15+0200\n"
-"PO-Revision-Date: 2025-04-30 23:16+0200\n"
+"POT-Creation-Date: 2025-06-10 16:28+0200\n"
+"PO-Revision-Date: 2025-06-10 16:28+0200\n"
 "Last-Translator: H5P-Careraker\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -79,20 +79,21 @@ msgstr "Désactiver la marque NDLA."
 
 #: includes/clean-up.php:34 includes/fetch-analysis.php:43
 #: includes/render-index.php:231 includes/render-index.php:249
+#: includes/upload.php:43
 msgid "Invalid nonce verification."
 msgstr "Vérification du nonce non valide."
 
 #: includes/clean-up.php:41 includes/fetch-analysis.php:28
-#: includes/render-index.php:26
+#: includes/render-index.php:26 includes/upload.php:28
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 "Vous ne disposez pas des autorisations suffisantes pour accéder à cette page."
 
-#: includes/fetch-analysis.php:36
+#: includes/fetch-analysis.php:36 includes/upload.php:36
 msgid "Method Not Allowed"
 msgstr "Méthode non autorisée"
 
-#: includes/fetch-analysis.php:51
+#: includes/fetch-analysis.php:51 includes/upload.php:51
 #, php-format
 msgid ""
 "It seems that no file was provided or it exceeds the file upload size limit "
@@ -101,13 +102,13 @@ msgstr ""
 "Il semble qu’aucun fichier n’ait été fourni ou qu’il dépasse la taille "
 "limite d’envoi de %s KB."
 
-#: includes/fetch-analysis.php:60
+#: includes/fetch-analysis.php:60 includes/upload.php:60
 msgid "Something went wrong with the file upload, but I dunno what."
 msgstr ""
 "Quelque chose s’est mal passé durant l’envoi du fichier, mais je ne sais pas "
 "quoi."
 
-#: includes/fetch-analysis.php:68
+#: includes/fetch-analysis.php:68 includes/upload.php:68
 #, php-format
 msgid "The file is larger than the allowed maximum file size of %s KB."
 msgstr "Le fichier est plus grand que la taille maximale autorisée de %s KB."
@@ -197,60 +198,59 @@ msgid "All messages have been filtered out by content."
 msgstr "Tous les messages ont été filtrés selon leur contenu."
 
 #: includes/render-index.php:334
-msgid "H5P Caretaker report for @title"
-msgstr "Rapport H5P-Caretaker pour @title"
-
-#: includes/render-index.php:335
 msgid "Content type filter"
 msgstr "Filtre du type de contenu"
 
-#: includes/render-index.php:336
+#: includes/render-index.php:335
 msgid "Show all"
 msgstr "Tout afficher"
 
-#: includes/render-index.php:337
+#: includes/render-index.php:336
 msgid "Various selected contents"
 msgstr "Différents contenus sélectionnés"
 
-#: includes/render-index.php:338
+#: includes/render-index.php:337
 msgid "Show none"
 msgstr "Ne rien afficher"
 
-#: includes/render-index.php:339
+#: includes/render-index.php:338
 msgid "Filter by content:"
 msgstr "Filtrer sur le contenu:"
 
-#: includes/render-index.php:340
+#: includes/render-index.php:339
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: includes/render-index.php:341
+#: includes/render-index.php:340
 msgid "Something went wrong, but I dunno what, sorry!"
 msgstr "Quelque chose s’est mal passé, mais je ne sais pas quoi, désolé!"
 
-#: includes/render-index.php:342
+#: includes/render-index.php:341
 msgid "Please check the server log."
 msgstr "Veuillez consulter les journaux du serveur."
 
-#: includes/render-index.php:343
+#: includes/render-index.php:342
 msgid "Expand list"
 msgstr "Développer la liste"
 
-#: includes/render-index.php:344
+#: includes/render-index.php:343
 msgid "Collapse list"
 msgstr "Réduire la liste"
 
-#: includes/render-index.php:345
+#: includes/render-index.php:344
 msgid "Change sorting/grouping"
 msgstr "Modifier le tri/regroupement"
 
-#: includes/render-index.php:346
+#: includes/render-index.php:345
 msgid "Previous message"
 msgstr "Message précédent"
 
-#: includes/render-index.php:347
+#: includes/render-index.php:346
 msgid "Next message"
 msgstr "Message suivant"
+
+#~ msgid "H5P Caretaker report for @title"
+#~ msgstr "Rapport H5P-Caretaker pour @title"
 
 #~ msgid "Expand all messages"
 #~ msgstr "Déplier tous les messages"
