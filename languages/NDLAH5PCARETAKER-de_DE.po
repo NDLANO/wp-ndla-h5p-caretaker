@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wp-ndla-h5p-caretaker\n"
-"POT-Creation-Date: 2025-06-10 16:28+0200\n"
-"PO-Revision-Date: 2025-06-10 16:28+0200\n"
+"POT-Creation-Date: 2025-06-20 18:34+0200\n"
+"PO-Revision-Date: 2025-06-20 18:35+0200\n"
 "Last-Translator: H5P-Careraker\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -184,67 +184,71 @@ msgid "Download"
 msgstr "Herunterladen"
 
 #: includes/render-index.php:331
+msgid "Download edited H5P"
+msgstr "Geändertes H5P herunterladen"
+
+#: includes/render-index.php:332
 msgid "Show details"
 msgstr "Zeige Details"
 
-#: includes/render-index.php:332
+#: includes/render-index.php:333
 msgid "Hide details"
 msgstr "Verstecke Details"
 
-#: includes/render-index.php:333
+#: includes/render-index.php:334
 msgid "All messages have been filtered out by content."
 msgstr "Alle Meldungen wurden nach Inhalt herausgefiltert."
 
-#: includes/render-index.php:334
+#: includes/render-index.php:335
 msgid "Content type filter"
 msgstr "Inhaltstypfilter"
 
-#: includes/render-index.php:335
+#: includes/render-index.php:336
 msgid "Show all"
 msgstr "Zeige alle"
 
-#: includes/render-index.php:336
+#: includes/render-index.php:337
 msgid "Various selected contents"
 msgstr "Verschiedene ausgewählte Inhalte"
 
-#: includes/render-index.php:337
+#: includes/render-index.php:338
 msgid "Show none"
 msgstr "Zeige keine"
 
-#: includes/render-index.php:338
+#: includes/render-index.php:339
 msgid "Filter by content:"
 msgstr "Filtere nach Inhalt:"
 
-#: includes/render-index.php:339
+#: includes/render-index.php:340
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: includes/render-index.php:340
+#: includes/render-index.php:341
 msgid "Something went wrong, but I dunno what, sorry!"
 msgstr ""
 "Etwas ist schief gelaufen, aber ich weiß nicht was, bitte entschuldige!"
 
-#: includes/render-index.php:341
+#: includes/render-index.php:342
 msgid "Please check the server log."
 msgstr "Bitte prüfe die Server-Logs."
 
-#: includes/render-index.php:342
+#: includes/render-index.php:343
 msgid "Expand list"
 msgstr "Liste ausklappen"
 
-#: includes/render-index.php:343
+#: includes/render-index.php:344
 msgid "Collapse list"
 msgstr "Liste einklappen"
 
-#: includes/render-index.php:344
+#: includes/render-index.php:345
 msgid "Change sorting/grouping"
 msgstr "Ändere Sortierung/Gruppierung"
 
-#: includes/render-index.php:345
+#: includes/render-index.php:346
 msgid "Previous message"
 msgstr "Vorherige Meldung"
 
-#: includes/render-index.php:346
+#: includes/render-index.php:347
 msgid "Next message"
 msgstr "Nächste Meldung"
 
