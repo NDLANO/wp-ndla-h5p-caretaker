@@ -29,4 +29,4 @@ Please note that the uploaded H5P file will be removed immediately after analyzi
 Please also note that the plugin will fetch the [H5P accessibility reports](https://studio.libretexts.org/help/h5p-accessibility-guide) and displaythose inside the report if appropriate. No personal information is shared in that process.
 
 ## License
-The H5P Caretaker plugin for Moodle is is licensed under the [MIT License](https://github.com/NDLANO/wp-ndla-h5p-caretaker/blob/master/LICENSE).
+The H5P Caretaker plugin for WordPress is is licensed under the [MIT License](https://github.com/NDLANO/wp-ndla-h5p-caretaker/blob/master/LICENSE).
