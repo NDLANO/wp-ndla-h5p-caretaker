@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wp-ndla-h5p-caretaker\n"
-"POT-Creation-Date: 2025-04-30 23:14+0200\n"
-"PO-Revision-Date: 2025-04-30 23:16+0200\n"
+"POT-Creation-Date: 2025-06-20 18:34+0200\n"
+"PO-Revision-Date: 2025-06-20 18:35+0200\n"
 "Last-Translator: H5P-Careraker\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -80,19 +80,20 @@ msgstr "Deaktiviere das NDLA-Branding."
 
 #: includes/clean-up.php:34 includes/fetch-analysis.php:43
 #: includes/render-index.php:231 includes/render-index.php:249
+#: includes/upload.php:43
 msgid "Invalid nonce verification."
 msgstr "Ungültige Nonce-Verifikation."
 
 #: includes/clean-up.php:41 includes/fetch-analysis.php:28
-#: includes/render-index.php:26
+#: includes/render-index.php:26 includes/upload.php:28
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Du bist nicht berechtigt, diese Seite zu sehen."
 
-#: includes/fetch-analysis.php:36
+#: includes/fetch-analysis.php:36 includes/upload.php:36
 msgid "Method Not Allowed"
 msgstr "Methode nicht erlaubt"
 
-#: includes/fetch-analysis.php:51
+#: includes/fetch-analysis.php:51 includes/upload.php:51
 #, php-format
 msgid ""
 "It seems that no file was provided or it exceeds the file upload size limit "
@@ -101,11 +102,11 @@ msgstr ""
 "Es sieht so aus, als sei keine Datei angegeben worden oder die Dateigröße "
 "überschreitet die Grenze von %s KB."
 
-#: includes/fetch-analysis.php:60
+#: includes/fetch-analysis.php:60 includes/upload.php:60
 msgid "Something went wrong with the file upload, but I dunno what."
 msgstr "Etwas ist schief gelaufen, aber ich weiß nicht was."
 
-#: includes/fetch-analysis.php:68
+#: includes/fetch-analysis.php:68 includes/upload.php:68
 #, php-format
 msgid "The file is larger than the allowed maximum file size of %s KB."
 msgstr "Die Datei ist größer als die maximal erlaubte Dateigröße von %s KB."
@@ -183,20 +184,20 @@ msgid "Download"
 msgstr "Herunterladen"
 
 #: includes/render-index.php:331
+msgid "Download edited H5P"
+msgstr "Geändertes H5P herunterladen"
+
+#: includes/render-index.php:332
 msgid "Show details"
 msgstr "Zeige Details"
 
-#: includes/render-index.php:332
+#: includes/render-index.php:333
 msgid "Hide details"
 msgstr "Verstecke Details"
 
-#: includes/render-index.php:333
+#: includes/render-index.php:334
 msgid "All messages have been filtered out by content."
 msgstr "Alle Meldungen wurden nach Inhalt herausgefiltert."
-
-#: includes/render-index.php:334
-msgid "H5P Caretaker report for @title"
-msgstr "H5P-Caretaker-Report für @title"
 
 #: includes/render-index.php:335
 msgid "Content type filter"
@@ -250,6 +251,9 @@ msgstr "Vorherige Meldung"
 #: includes/render-index.php:347
 msgid "Next message"
 msgstr "Nächste Meldung"
+
+#~ msgid "H5P Caretaker report for @title"
+#~ msgstr "H5P-Caretaker-Report für @title"
 
 #~ msgid "Expand all messages"
 #~ msgstr "Alle Meldungen ausklappen"

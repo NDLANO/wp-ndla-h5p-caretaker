@@ -167,7 +167,7 @@ class Main {
 		if ( Options::get_url() === $custom_page ) {
 			render_page_index();
 		} elseif ( Options::get_url() . '-upload' === $custom_page ) {
-			fetch_analysis();
+			upload();
 		} elseif ( Options::get_url() . '-clean-up' === $custom_page ) {
 			clean_up_export_file();
 		}
