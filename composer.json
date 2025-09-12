@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=8",
-        "ndlano/h5p-caretaker": "^1.0.4",
+        "ndlano/h5p-caretaker": "^1.1.0",
         "mustache/mustache": "^2.14"
     }
 }

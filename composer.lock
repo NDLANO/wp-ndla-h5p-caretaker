@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38d8541d2ab9ecdb9ad8894206db1357",
+    "content-hash": "3403900f3adecd743db78074ac725d3e",
     "packages": [
         {
             "name": "mustache/mustache",
@@ -58,16 +58,16 @@
         },
         {
             "name": "ndlano/h5p-caretaker",
-            "version": "1.0.9",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/NDLANO/h5p-caretaker.git",
-                "reference": "a0baf5da436546950aa5d90edcd40123306c3567"
+                "reference": "875019fc9fd17868068edbc1bfaf50d83a88df84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NDLANO/h5p-caretaker/zipball/a0baf5da436546950aa5d90edcd40123306c3567",
-                "reference": "a0baf5da436546950aa5d90edcd40123306c3567",
+                "url": "https://api.github.com/repos/NDLANO/h5p-caretaker/zipball/875019fc9fd17868068edbc1bfaf50d83a88df84",
+                "reference": "875019fc9fd17868068edbc1bfaf50d83a88df84",
                 "shasum": ""
             },
             "require": {
@@ -100,9 +100,9 @@
             "description": "Library that is supposed to help people take care of H5P content types",
             "support": {
                 "issues": "https://github.com/NDLANO/h5p-caretaker/issues",
-                "source": "https://github.com/NDLANO/h5p-caretaker/tree/1.0.9"
+                "source": "https://github.com/NDLANO/h5p-caretaker/tree/1.1.0"
             },
-            "time": "2025-04-21T11:23:58+00:00"
+            "time": "2025-09-12T14:46:41+00:00"
         }
     ],
     "packages-dev": [],
