@@ -43,6 +43,10 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 
 == Changelog ==
 
+= 1.1.1 =
+* Added support for 1.1 version of Caretaker client.
+* Added support for 1.1 version of Caretaker server.
+
 = 1.0.22 =
 * Added optional NDLA branding.
 
@@ -88,6 +92,9 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 First version released on the WordPress plugin directory.
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Update if you want to edit some of the fields directly in the Caretaker interface.
 
 = 1.0.22 =
 No important reason to upgrade. But if you do, note that branding will be activated - but you can deactivate it in the
