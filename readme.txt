@@ -4,7 +4,7 @@ Tags: h5p, accessibility, licensing
 Requires at least: 4.0
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: MIT
 License URI: https://github.com/NDLANO/wp-ndla-h5p-caretaker/blob/master/LICENSE
 
@@ -42,6 +42,9 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 2. You can change some options to your particular needs.
 
 == Changelog ==
+
+= 1.1.2 =
+Improved deployment script.
 
 = 1.1.1 =
 * Added support for 1.1 version of Caretaker client.
@@ -92,6 +95,9 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 First version released on the WordPress plugin directory.
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+Upgrade to save some storage.
 
 = 1.1.1 =
 Update if you want to edit some of the fields directly in the Caretaker interface.
