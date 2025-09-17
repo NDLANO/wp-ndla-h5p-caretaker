@@ -81,7 +81,7 @@ jobs:
           svn up --set-depth=infinity "$SVN_DIR/tags"
 
           echo "Cleaning up SVN trunk directory"
-          rm -rf "$SVN_DIR/trunk/*"
+          svn rm "$SVN_DIR/trunk"/* 2>/dev/null || true
 
           echo "Copying files to SVN trunk"
 
@@ -93,6 +93,9 @@ jobs:
 
           # A little odd, but seems to be common practice to "sync" files with exclusions
           eval "tar $TAR_ARGS -cf - -C \"$GIT_DIR\" . | tar -xf - -C \"$SVN_DIR/trunk/\""
+
+          echo "Adding new files to SVN"
+          svn add "$SVN_DIR/trunk"/* --force
 
           if [ -d "$SVN_DIR/tags/$VERSION" ]; then
             echo "Tag $VERSION already exists, removing it"
