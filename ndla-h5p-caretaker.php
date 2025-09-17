@@ -120,11 +120,11 @@ function clean_up_by_pattern( $dir, $pattern ) {
 	}
 
 	$latest_file    = '';
-	$latest_version = 0;
+	$latest_version = null;
 
 	foreach ( $files as $file ) {
-		$version = preg_replace( '/[^0-9]/', '', basename( $file ) );
-		if ( $version > $latest_version ) {
+		$version = extract_version_from_filename( basename( $file ) );
+		if ( $version && ( $latest_version === null || version_compare( $version, $latest_version, '>' ) ) ) {
 			$latest_version = $version;
 			$latest_file    = $file;
 		}
@@ -135,6 +135,20 @@ function clean_up_by_pattern( $dir, $pattern ) {
 			wp_delete_file( $file );
 		}
 	}
+}
+
+/**
+ * Extract semantic version from filename.
+ *
+ * @param string $filename Filename to extract version from.
+ * @return string|null Version string or null if not found.
+ */
+function extract_version_from_filename( $filename ) {
+    // Match semantic version pattern (x.y.z) in filename
+    if ( preg_match( '/(\d+\.\d+\.\d+)/', $filename, $matches ) ) {
+        return $matches[1];
+    }
+    return null;
 }
 
 /**
