@@ -54,7 +54,7 @@ function fetch_analysis() {
 		);
 	}
 
-	$file = array_map( 'sanitize_text_field', $_FILES['file'] );
+	$file = array_map( 'sanitize_text_field', wp_unslash( $_FILES['file'] ) );
 
 	if ( strval( UPLOAD_ERR_OK ) !== $file['error'] ) {
 		done( 500, __( 'Something went wrong with the file upload, but I dunno what.', 'ndla-h5p-caretaker' ) );

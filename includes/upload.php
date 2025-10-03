@@ -54,7 +54,7 @@ function upload() {
 		);
 	}
 
-	$file = array_map( 'sanitize_text_field', $_FILES['file'] );
+	$file = array_map( 'sanitize_text_field', wp_unslash( $_FILES['file'] ) );
 
 	if ( strval( UPLOAD_ERR_OK ) !== $file['error'] ) {
 		done( 500, __( 'Something went wrong with the file upload, but I dunno what.', 'ndla-h5p-caretaker' ) );
@@ -101,18 +101,20 @@ function upload() {
 	$changes = isset( $_POST['changes'] ) ? sanitize_text_field( wp_unslash( $_POST['changes'] ) ) : null;
 
 	if ( $changes ) {
-		$changesJson = json_decode( $changes, false );
+		$changes_json = json_decode( $changes, false );
 
-		$file = $h5p_caretaker->write(array(
-			'file' => $file['tmp_name'],
-			'changes' => $changesJson
-		));
+		$file = $h5p_caretaker->write(
+			array(
+				'file'    => $file['tmp_name'],
+				'changes' => $changes_json,
+			)
+		);
 
-		if (!isset($file) || isset($file['error'])) {
-      done(422, $file['error']);
-    }
+		if ( ! isset( $file ) || isset( $file['error'] ) ) {
+			done( 422, $file['error'] );
+		}
 
-		done(200, $file['result']);
+		done( 200, $file['result'] );
 	} else {
 		$analysis = $h5p_caretaker->analyze( array( 'file' => $file['tmp_name'] ) );
 

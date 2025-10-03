@@ -67,11 +67,11 @@ class Options {
 		update_option(
 			self::$option_slug,
 			array(
-				'url'        => self::DEFAULT_URL,
-				'visibility' => self::DEFAULT_VISIBILITY,
-				'intro'      => '',
+				'url'                => self::DEFAULT_URL,
+				'visibility'         => self::DEFAULT_VISIBILITY,
+				'intro'              => '',
 				'intro_translations' => array(),
-				'outro'      => '',
+				'outro'              => '',
 			)
 		);
 	}
@@ -213,12 +213,12 @@ class Options {
 
 		$new_input = array();
 
-		$new_input['url'] = $this->sanitize_url( $input['url'] ?? '' );
-		$new_input['visibility'] = $this->sanitize_visibility( $input['visibility'] ?? '' );
-		$new_input['intro'] = $this->sanitize_intro( $input['intro'] ?? '' );
+		$new_input['url']                = $this->sanitize_url( $input['url'] ?? '' );
+		$new_input['visibility']         = $this->sanitize_visibility( $input['visibility'] ?? '' );
+		$new_input['intro']              = $this->sanitize_intro( $input['intro'] ?? '' );
 		$new_input['intro_translations'] = $this->sanitize_intro_translations( $input['intro_translations'] ?? array() );
-		$new_input['outro'] = $this->sanitize_outro( $input['outro'] ?? '' );
-		$new_input['no_branding'] = $this->sanitize_no_branding( $input['no_branding'] ?? '' );
+		$new_input['outro']              = $this->sanitize_outro( $input['outro'] ?? '' );
+		$new_input['no_branding']        = $this->sanitize_no_branding( $input['no_branding'] ?? '' );
 
 		return $new_input;
 	}
@@ -229,9 +229,9 @@ class Options {
 	 * @return array Available language codes.
 	 */
 	private static function get_available_languages() {
-			if ( null === self::$available_languages ) {
-					self::$available_languages = LocaleUtils::get_available_locales();
-			}
+		if ( null === self::$available_languages ) {
+				self::$available_languages = LocaleUtils::get_available_locales();
+		}
 			return self::$available_languages;
 	}
 
@@ -275,7 +275,7 @@ class Options {
 	 */
 	private function sanitize_intro_translations( $intro_translations ) {
 		$sanitized_translations = array();
-		$available_languages = self::get_available_languages();
+		$available_languages    = self::get_available_languages();
 
 		if ( ! empty( $intro_translations ) && is_array( $intro_translations ) ) {
 			foreach ( $intro_translations as $bcp47 => $translation_text ) {
@@ -379,99 +379,97 @@ class Options {
 		);
 	}
 
-  /**
-   * Get intro translations option callback - dynamic fields with add/remove.
-   */
+	/**
+	 * Get intro translations option callback - dynamic fields with add/remove.
+	 */
 	public function intro_translations_callback() {
 			$intro_translations = self::get_intro_translations();
 
 			echo '<div id="intro-translations-container">';
 
-    	$available_languages = self::get_available_languages();
-			foreach ($available_languages as $index => $bcp47) {
-				$language_name = LocaleUtils::get_default_language_name( $bcp47 );
-				$language_name = isset( $language_name ) ? $language_name : $bcp47;
+		$available_languages = self::get_available_languages();
+		foreach ( $available_languages as $index => $bcp47 ) {
+			$language_name = LocaleUtils::get_default_language_name( $bcp47 );
+			$language_name = isset( $language_name ) ? $language_name : $bcp47;
 
-				$translation_text = isset( $intro_translations[ $bcp47 ] ) ? $intro_translations[ $bcp47 ] : '';
-				$this->render_translation_field( $bcp47, $language_name, $translation_text);
-			}
+			$translation_text = isset( $intro_translations[ $bcp47 ] ) ? $intro_translations[ $bcp47 ] : '';
+			$this->render_translation_field( $bcp47, $language_name, $translation_text );
+		}
 
 			echo '</div>';
 
-			// Add JavaScript for show/hide functionality
+			// Add JavaScript for show/hide functionality.
 			$this->add_translation_javascript();
 	}
 
 	/**
 	 * Render a single translation field.
 	 *
-	 * @param int    $bcp47   Field index.
-	 * @param string $content Field content.
+	 * @param int    $bcp47   BCP 47 language code.
+	 * @param string $language_name Language name.
+	 * @param string $translation_text Translation text.
 	 */
 	private function render_translation_field( $bcp47, $language_name, $translation_text = '' ) {
-		$field_id = 'intro_translations_' . $bcp47;
-    $field_name = 'ndlah5pcaretaker_option[intro_translations][' . $bcp47 . ']';
+		$field_id   = 'intro_translations_' . $bcp47;
+		$field_name = 'ndlah5pcaretaker_option[intro_translations][' . $bcp47 . ']';
 
 		$classes = 'translation-field';
-		if ($translation_text === '') {
+		if ( '' === $translation_text ) {
 			$classes .= ' hidden-translation';
 		}
 
-    echo '<div class="' . esc_attr( $classes ) . '">';
-    echo '<div class="translation-field-header">';
-    echo '<div class="translation-language-name">' . esc_html( $language_name ) . '</div>';
+		echo '<div class="' . esc_attr( $classes ) . '">';
+		echo '<div class="translation-field-header">';
+		echo '<div class="translation-language-name">' . esc_html( $language_name ) . '</div>';
 
-		if ($translation_text !== '') {
-    	echo '<button type="button" class="toggle-visibility">' . esc_html__( 'Hide', 'ndla-h5p-caretaker' ) . '</button>';
-		}
-		else {
+		if ( '' === $translation_text ) {
+			echo '<button type="button" class="toggle-visibility">' . esc_html__( 'Hide', 'ndla-h5p-caretaker' ) . '</button>';
+		} else {
 			echo '<button type="button" class="toggle-visibility">' . esc_html__( 'Show', 'ndla-h5p-caretaker' ) . '</button>';
 		}
 
-    echo '</div>';
+		echo '</div>';
 
-    wp_editor(
-        $translation_text,
-        $field_id,
-        array(
-            'textarea_name' => $field_name,
-            'editor_height' => self::DEFAULT_INTRO_HEIGHT_PX,
-            'media_buttons' => false,
-            'teeny'         => true,
-        )
-    );
+		wp_editor(
+			$translation_text,
+			$field_id,
+			array(
+				'textarea_name' => $field_name,
+				'editor_height' => self::DEFAULT_INTRO_HEIGHT_PX,
+				'media_buttons' => false,
+				'teeny'         => true,
+			)
+		);
 
-    echo '</div>';
-}
+		echo '</div>';
+	}
 
 	/**
 	 * Load JavaScript for dynamic translation fields.
-	 *
-	 * @param int $initial_count Initial number of visible translations.
 	 */
 	private function add_translation_javascript() {
 			wp_enqueue_style(
-					'ndla-translation-fields',
-					plugins_url( '/css/options-handle-translation-fields.css', dirname( __FILE__ ) ),
-					array(),
-					NDLAH5PCARETAKER_VERSION
+				'ndla-translation-fields',
+				plugins_url( '/css/options-handle-translation-fields.css', dirname( __FILE__ ) ),
+				array(),
+				NDLAH5PCARETAKER_VERSION
 			);
 
 			wp_register_script(
-					'ndla-translation-fields',
-					plugins_url( '/js/options-handle-translation-fields.js', dirname( __FILE__ ) ),
-					array( 'jquery' ),
-					NDLAH5PCARETAKER_VERSION,
-					true
+				'ndla-translation-fields',
+				plugins_url( '/js/options-handle-translation-fields.js', dirname( __FILE__ ) ),
+				array( 'jquery' ),
+				NDLAH5PCARETAKER_VERSION,
+				true
 			);
 
 			wp_localize_script(
-					'ndla-translation-fields',
-					'ndlaTranslationFields',
-					array(
-						'Show' => __( 'Show', 'ndla-h5p-caretaker' ),
-						'Hide' => __( 'Hide', 'ndla-h5p-caretaker' ),
-					)
+				'ndla-translation-fields',
+				'ndlaTranslationFields',
+				array(
+					'Show' => __( 'Show', 'ndla-h5p-caretaker' ),
+					'Hide' => __( 'Hide', 'ndla-h5p-caretaker' ),
+				)
 			);
 
 			wp_enqueue_script( 'ndla-translation-fields' );
@@ -554,9 +552,9 @@ class Options {
 	 * @return string Caretaker page intro.
 	 */
 	public static function get_intro_translations() {
-			if ( isset( self::$options['intro_translations'] ) && is_array( self::$options['intro_translations'] ) ) {
-					return self::$options['intro_translations'];
-			}
+		if ( isset( self::$options['intro_translations'] ) && is_array( self::$options['intro_translations'] ) ) {
+				return self::$options['intro_translations'];
+		}
 
 			return array();
 	}

@@ -124,7 +124,7 @@ function clean_up_by_pattern( $dir, $pattern ) {
 
 	foreach ( $files as $file ) {
 		$version = extract_version_from_filename( basename( $file ) );
-		if ( $version && ( $latest_version === null || version_compare( $version, $latest_version, '>' ) ) ) {
+		if ( $version && ( null === $latest_version || version_compare( $version, $latest_version, '>' ) ) ) {
 			$latest_version = $version;
 			$latest_file    = $file;
 		}
@@ -144,11 +144,11 @@ function clean_up_by_pattern( $dir, $pattern ) {
  * @return string|null Version string or null if not found.
  */
 function extract_version_from_filename( $filename ) {
-    // Match semantic version pattern (x.y.z) in filename
-    if ( preg_match( '/(\d+\.\d+\.\d+)/', $filename, $matches ) ) {
-        return $matches[1];
-    }
-    return null;
+	// Match semantic version pattern (x.y.z) in filename.
+	if ( preg_match( '/(\d+\.\d+\.\d+)/', $filename, $matches ) ) {
+		return $matches[1];
+	}
+	return null;
 }
 
 /**

@@ -294,7 +294,7 @@ function render_html( $params ) {
 	$template = file_get_contents( __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'h5pcaretaker.mustache' );
 
 	$intro_translations = Options::get_intro_translations();
-	$intro = $intro_translations[$params['locale']] ?? Options::get_intro();
+	$intro              = $intro_translations[ $params['locale'] ] ?? Options::get_intro();
 
 	$render_data = array(
 		'intro'                              => $intro,
