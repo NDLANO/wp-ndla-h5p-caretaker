@@ -206,37 +206,87 @@ class Options {
 
 		$new_input = array();
 
-		$new_input['url'] = empty( $input['url'] ) ?
-			self::DEFAULT_URL :
-			sanitize_text_field( $input['url'] );
+		$new_input['url'] = $this->sanitize_url( $input['url'] ?? '' );
+		$new_input['visibility'] = $this->sanitize_visibility( $input['visibility'] ?? '' );
+		$new_input['intro'] = $this->sanitize_intro( $input['intro'] ?? '' );
+		$new_input['intro_translations'] = $this->sanitize_intro_translations( $input['intro_translations'] ?? array() );
+		$new_input['outro'] = $this->sanitize_outro( $input['outro'] ?? '' );
+		$new_input['no_branding'] = $this->sanitize_no_branding( $input['no_branding'] ?? '' );
 
-		$new_input['visibility'] = ( ! in_array( $input['visibility'] ?? '', array( 'public', 'capability' ), true ) ) ?
+		return $new_input;
+	}
+
+	/**
+	 * Sanitize URL field.
+	 *
+	 * @param string $url URL input.
+	 * @return string Sanitized URL.
+	 */
+	private function sanitize_url( $url ) {
+		return empty( $url ) ? self::DEFAULT_URL : sanitize_text_field( $url );
+	}
+
+	/**
+	 * Sanitize visibility field.
+	 *
+	 * @param string $visibility Visibility input.
+	 * @return string Sanitized visibility.
+	 */
+	private function sanitize_visibility( $visibility ) {
+		return ( ! in_array( $visibility, array( 'public', 'capability' ), true ) ) ?
 			'capability' :
-			$input['visibility'];
+			$visibility;
+	}
 
-		$new_input['intro'] = ! empty( $input['intro'] ) ?
-			wp_kses_post( $input['intro'] ) :
-			'';
+	/**
+	 * Sanitize intro field.
+	 *
+	 * @param string $intro Intro input.
+	 * @return string Sanitized intro.
+	 */
+	private function sanitize_intro( $intro ) {
+		return ! empty( $intro ) ? wp_kses_post( $intro ) : '';
+	}
 
-		$new_input['intro_translations'] = array();
+	/**
+	 * Sanitize intro translations field.
+	 *
+	 * @param array $intro_translations Intro translations input.
+	 * @return array Sanitized intro translations.
+	 */
+	private function sanitize_intro_translations( $intro_translations ) {
+		$sanitized_translations = array();
 		$available_languages = LocaleUtils::get_available_locales();
-		if ( ! empty( $input['intro_translations'] ) && is_array( $input['intro_translations'] ) ) {
-			foreach ( $input['intro_translations'] as $bcp47 => $translation_text ) {
+
+		if ( ! empty( $intro_translations ) && is_array( $intro_translations ) ) {
+			foreach ( $intro_translations as $bcp47 => $translation_text ) {
 				if ( in_array( $bcp47, $available_languages, true ) && ! empty( $translation_text ) ) {
-					$new_input['intro_translations'][ $bcp47 ] = wp_kses_post( $translation_text );
+					$sanitized_translations[ $bcp47 ] = wp_kses_post( $translation_text );
 				}
 			}
 		}
 
-		$new_input['outro'] = ! empty( $input['outro'] ) ?
-			wp_kses_post( $input['outro'] ) :
-			'';
+		return $sanitized_translations;
+	}
 
-		$new_input['no_branding'] = ! empty( $input['no_branding'] ) ?
-			absint( $input['no_branding'] ) :
-			0;
+	/**
+	 * Sanitize outro field.
+	 *
+	 * @param string $outro Outro input.
+	 * @return string Sanitized outro.
+	 */
+	private function sanitize_outro( $outro ) {
+		return ! empty( $outro ) ? wp_kses_post( $outro ) : '';
+	}
 
-		return $new_input;
+	/**
+	 * Sanitize no branding field.
+	 *
+	 * @param mixed $no_branding No branding input.
+	 * @return int Sanitized no branding.
+	 */
+	private function sanitize_no_branding( $no_branding ) {
+		return ! empty( $no_branding ) ? absint( $no_branding ) : 0;
 	}
 
 	/**
