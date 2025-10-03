@@ -34,6 +34,13 @@ class Options {
 	private static $options;
 
 	/**
+	 * Cached available languages.
+	 *
+	 * @var array|null
+	 */
+	private static $available_languages = null;
+
+	/**
 	 * Start up
 	 *
 	 * @since 0.1.0
@@ -217,6 +224,18 @@ class Options {
 	}
 
 	/**
+	 * Get available languages with caching.
+	 *
+	 * @return array Available language codes.
+	 */
+	private static function get_available_languages() {
+			if ( null === self::$available_languages ) {
+					self::$available_languages = LocaleUtils::get_available_locales();
+			}
+			return self::$available_languages;
+	}
+
+	/**
 	 * Sanitize URL field.
 	 *
 	 * @param string $url URL input.
@@ -256,7 +275,7 @@ class Options {
 	 */
 	private function sanitize_intro_translations( $intro_translations ) {
 		$sanitized_translations = array();
-		$available_languages = LocaleUtils::get_available_locales();
+		$available_languages = self::get_available_languages();
 
 		if ( ! empty( $intro_translations ) && is_array( $intro_translations ) ) {
 			foreach ( $intro_translations as $bcp47 => $translation_text ) {
@@ -368,7 +387,7 @@ class Options {
 
 			echo '<div id="intro-translations-container">';
 
-    	$available_languages = LocaleUtils::get_available_locales();
+    	$available_languages = self::get_available_languages();
 			foreach ($available_languages as $index => $bcp47) {
 				$language_name = LocaleUtils::get_default_language_name( $bcp47 );
 				$language_name = isset( $language_name ) ? $language_name : $bcp47;
