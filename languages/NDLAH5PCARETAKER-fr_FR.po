@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wp-ndla-h5p-caretaker\n"
-"POT-Creation-Date: 2025-06-20 18:35+0200\n"
-"PO-Revision-Date: 2025-06-20 18:35+0200\n"
-"Last-Translator: H5P-Careraker\n"
+"POT-Creation-Date: 2025-10-03 13:12+0200\n"
+"PO-Revision-Date: 2025-10-03 13:12+0200\n"
+"Last-Translator: Sustainum-H5P-Content-Type-Hub-Manager\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -19,36 +19,324 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 "X-Poedit-SearchPathExcluded-2: js\n"
 
-#: includes/class-main.php:127 includes/class-options.php:101
-#: includes/render-index.php:309
+#: includes/class-localeutils.php:45
+msgid "Afrikaans"
+msgstr "Afrikaans"
+
+#: includes/class-localeutils.php:46
+msgid "Arabic"
+msgstr "Arabe"
+
+#: includes/class-localeutils.php:47
+msgid "Belarusian"
+msgstr "Biélorusse"
+
+#: includes/class-localeutils.php:48
+msgid "Bulgarian"
+msgstr "Bulgare"
+
+#: includes/class-localeutils.php:49
+msgid "Bengali"
+msgstr "Bengali"
+
+#: includes/class-localeutils.php:50
+msgid "Bosnian"
+msgstr "Bosniaque"
+
+#: includes/class-localeutils.php:51
+msgid "Catalan"
+msgstr "Catalane"
+
+#: includes/class-localeutils.php:52
+msgid "Czech"
+msgstr "Tchèque"
+
+#: includes/class-localeutils.php:53
+msgid "Welsh"
+msgstr "Gallois"
+
+#: includes/class-localeutils.php:54
+msgid "Danish"
+msgstr "Danois"
+
+#: includes/class-localeutils.php:55
+msgid "German"
+msgstr "Allemand"
+
+#: includes/class-localeutils.php:56
+msgid "Greek"
+msgstr "Grec"
+
+#: includes/class-localeutils.php:57
+msgid "English"
+msgstr "Anglais"
+
+#: includes/class-localeutils.php:58
+msgid "Esperanto"
+msgstr "Espéranto"
+
+#: includes/class-localeutils.php:59
+msgid "Spanish"
+msgstr "Espagnol"
+
+#: includes/class-localeutils.php:60
+msgid "Estonian"
+msgstr "Estonien"
+
+#: includes/class-localeutils.php:61
+msgid "Basque"
+msgstr "Basque"
+
+#: includes/class-localeutils.php:62
+msgid "Persian"
+msgstr "Persan"
+
+#: includes/class-localeutils.php:63
+msgid "Finnish"
+msgstr "Finnois"
+
+#: includes/class-localeutils.php:64
+msgid "Filipino"
+msgstr "Filipino"
+
+#: includes/class-localeutils.php:65
+msgid "Faroese"
+msgstr "Féroïen"
+
+#: includes/class-localeutils.php:66
+msgid "French"
+msgstr "Français"
+
+#: includes/class-localeutils.php:67
+msgid "Irish"
+msgstr "Irlandais"
+
+#: includes/class-localeutils.php:68
+msgid "Galician"
+msgstr "Galicien"
+
+#: includes/class-localeutils.php:69
+msgid "Gujarati"
+msgstr "Gujarati"
+
+#: includes/class-localeutils.php:70
+msgid "Hebrew"
+msgstr "Hébreu"
+
+#: includes/class-localeutils.php:71
+msgid "Hindi"
+msgstr "Hindi"
+
+#: includes/class-localeutils.php:72
+msgid "Croatian"
+msgstr "Croate"
+
+#: includes/class-localeutils.php:73
+msgid "Hungarian"
+msgstr "Hongrois"
+
+#: includes/class-localeutils.php:74
+msgid "Armenian"
+msgstr "Arménien"
+
+#: includes/class-localeutils.php:75
+msgid "Indonesian"
+msgstr "Indonésien"
+
+#: includes/class-localeutils.php:76
+msgid "Icelandic"
+msgstr "Islandais"
+
+#: includes/class-localeutils.php:77
+msgid "Italian"
+msgstr "Italien"
+
+#: includes/class-localeutils.php:78
+msgid "Japanese"
+msgstr "Japonais"
+
+#: includes/class-localeutils.php:79
+msgid "Georgian"
+msgstr "Géorgien"
+
+#: includes/class-localeutils.php:80
+msgid "Kazakh"
+msgstr "Kazakh"
+
+#: includes/class-localeutils.php:81
+msgid "Khmer"
+msgstr "Khmer"
+
+#: includes/class-localeutils.php:82
+msgid "Kannada"
+msgstr "Kannada"
+
+#: includes/class-localeutils.php:83
+msgid "Korean"
+msgstr "Coréen"
+
+#: includes/class-localeutils.php:84
+msgid "Lithuanian"
+msgstr "Lituanien"
+
+#: includes/class-localeutils.php:85
+msgid "Latvian"
+msgstr "Letton"
+
+#: includes/class-localeutils.php:86
+msgid "Macedonian"
+msgstr "Macédonien"
+
+#: includes/class-localeutils.php:87
+msgid "Malayalam"
+msgstr "Malayalam"
+
+#: includes/class-localeutils.php:88
+msgid "Mongolian"
+msgstr "Mongol"
+
+#: includes/class-localeutils.php:89
+msgid "Marathi"
+msgstr "Marathi"
+
+#: includes/class-localeutils.php:90
+msgid "Malay"
+msgstr "Malais"
+
+#: includes/class-localeutils.php:91
+msgid "Maltese"
+msgstr "Maltais"
+
+#: includes/class-localeutils.php:92
+msgid "Norwegian Bokmål"
+msgstr "Norvégien Bokmål"
+
+#: includes/class-localeutils.php:93
+msgid "Nepali"
+msgstr "Népalais"
+
+#: includes/class-localeutils.php:94
+msgid "Dutch"
+msgstr "Néerlandais"
+
+#: includes/class-localeutils.php:95
+msgid "Norwegian Nynorsk"
+msgstr "Norvégien Nynorsk"
+
+#: includes/class-localeutils.php:96
+msgid "Punjabi"
+msgstr "Pendjabi"
+
+#: includes/class-localeutils.php:97
+msgid "Polish"
+msgstr "Polonais"
+
+#: includes/class-localeutils.php:98
+msgid "Portuguese"
+msgstr "Portugais"
+
+#: includes/class-localeutils.php:99
+msgid "Romanian"
+msgstr "Roumain"
+
+#: includes/class-localeutils.php:100
+msgid "Russian"
+msgstr "Russe"
+
+#: includes/class-localeutils.php:101
+msgid "Slovak"
+msgstr "Slovaque"
+
+#: includes/class-localeutils.php:102
+msgid "Slovenian"
+msgstr "Slovène"
+
+#: includes/class-localeutils.php:103
+msgid "Albanian"
+msgstr "Albanais"
+
+#: includes/class-localeutils.php:104
+msgid "Serbian"
+msgstr "Serbe"
+
+#: includes/class-localeutils.php:105
+msgid "Swedish"
+msgstr "Suédois"
+
+#: includes/class-localeutils.php:106
+msgid "Swahili"
+msgstr "Swahili"
+
+#: includes/class-localeutils.php:107
+msgid "Tamil"
+msgstr "Tamoul"
+
+#: includes/class-localeutils.php:108
+msgid "Telugu"
+msgstr "Télougou"
+
+#: includes/class-localeutils.php:109
+msgid "Thai"
+msgstr "Thaï"
+
+#: includes/class-localeutils.php:110
+msgid "Turkish"
+msgstr "Turc"
+
+#: includes/class-localeutils.php:111
+msgid "Ukrainian"
+msgstr "Ukrainien"
+
+#: includes/class-localeutils.php:112
+msgid "Urdu"
+msgstr "Ourdou"
+
+#: includes/class-localeutils.php:113
+msgid "Uzbek"
+msgstr "Ouzbek"
+
+#: includes/class-localeutils.php:114
+msgid "Vietnamese"
+msgstr "Vietnamienne"
+
+#: includes/class-localeutils.php:115
+msgid "Chinese"
+msgstr "Chinoise"
+
+#: includes/class-main.php:127 includes/class-options.php:102
+#: includes/render-index.php:312
 msgid "H5P Caretaker"
 msgstr "H5P Caretaker"
 
-#: includes/class-options.php:142
+#: includes/class-options.php:143
 msgid "General"
 msgstr "Général"
 
-#: includes/class-options.php:149
+#: includes/class-options.php:150
 msgid "URL"
 msgstr "URL"
 
-#: includes/class-options.php:157
+#: includes/class-options.php:158
 msgid "Visibility"
 msgstr "Visibilité"
 
-#: includes/class-options.php:165
+#: includes/class-options.php:166
 msgid "Additional intro"
 msgstr "Introduction supplémentaire"
 
-#: includes/class-options.php:173
+#: includes/class-options.php:174
+msgid "Optional intro translations"
+msgstr "Traductions facultatives de l'introduction supplémentaire"
+
+#: includes/class-options.php:182
 msgid "Additional footer"
 msgstr "Pied de page supplémentaire"
 
-#: includes/class-options.php:181
+#: includes/class-options.php:190
 msgid "Turn off branding"
 msgstr "Désactiver la marque"
 
-#: includes/class-options.php:248
+#: includes/class-options.php:267
 #, php-format
 msgid ""
 "Set the desired URL for the H5P Caretaker page. With the current value it "
@@ -57,15 +345,15 @@ msgstr ""
 "Définir l’URL souhaitée pour la page H5P-Caretaker. Avec la valeur actuelle, "
 "elle sera accessible à l’adresse %s."
 
-#: includes/class-options.php:267
+#: includes/class-options.php:286
 msgid "Public"
 msgstr "Publique"
 
-#: includes/class-options.php:268
+#: includes/class-options.php:287
 msgid "Needs capability"
 msgstr "Nécessite des droits"
 
-#: includes/class-options.php:272
+#: includes/class-options.php:291
 msgid ""
 "Select whether the H5P Caretaker page should be publicly available or only "
 "to those logged in users that have the capability based on their user role."
@@ -73,7 +361,15 @@ msgstr ""
 "Indiquez si la page H5P Caretaker doit être accessible au public ou "
 "uniquement aux utilisateurs connectés dont le rôle dispose de la capacité."
 
-#: includes/class-options.php:327
+#: includes/class-options.php:356 includes/class-options.php:404
+msgid "Hide"
+msgstr "Cacher"
+
+#: includes/class-options.php:359 includes/class-options.php:403
+msgid "Show"
+msgstr "Montrer"
+
+#: includes/class-options.php:444
 msgid "Turn NDLA branding off."
 msgstr "Désactiver la marque NDLA."
 
@@ -113,19 +409,19 @@ msgstr ""
 msgid "The file is larger than the allowed maximum file size of %s KB."
 msgstr "Le fichier est plus grand que la taille maximale autorisée de %s KB."
 
-#: includes/render-index.php:301
+#: includes/render-index.php:304
 msgid "H5P Caretaker Reference Implementation"
 msgstr "Implémentation de référence H5P Caretaker"
 
-#: includes/render-index.php:313
+#: includes/render-index.php:316
 msgid "Take care of your H5P"
 msgstr "Prenez soin de votre H5P"
 
-#: includes/render-index.php:314
+#: includes/render-index.php:317
 msgid "Check your H5P file for improvements"
 msgstr "Vérifiez si votre fichier H5P peut être amélioré"
 
-#: includes/render-index.php:315
+#: includes/render-index.php:318
 msgid ""
 "Uncover accessibility issues, missing information and best practices that "
 "can help you improve your H5P content."
@@ -133,123 +429,123 @@ msgstr ""
 "Découvrez les problèmes d’accessibilité, les informations manquantes et les "
 "bonnes pratiques qui peuvent vous aider à améliorer votre contenu H5P."
 
-#: includes/render-index.php:318
+#: includes/render-index.php:321
 msgid "or drag the file here"
 msgstr "ou glissez le fichier ici"
 
-#: includes/render-index.php:319
+#: includes/render-index.php:322
 msgid "Remove file"
 msgstr "Supprimer le fichier"
 
-#: includes/render-index.php:320
+#: includes/render-index.php:323
 msgid "Select your language"
 msgstr "Choisir votre langue"
 
-#: includes/render-index.php:321
+#: includes/render-index.php:324
 msgid "Upload progress"
 msgstr "Avancement de l’envoi"
 
-#: includes/render-index.php:322
+#: includes/render-index.php:325
 msgid "Upload your H5P file"
 msgstr "Envoyez votre fichier H5P"
 
-#: includes/render-index.php:323
+#: includes/render-index.php:326
 msgid "Your file is being checked"
 msgstr "Votre fichier est en cours de vérification"
 
-#: includes/render-index.php:324
+#: includes/render-index.php:327
 msgid "Your file check was completed"
 msgstr "Votre fichier a été vérifié avec succès"
 
-#: includes/render-index.php:325
+#: includes/render-index.php:328
 msgid "Total messages"
 msgstr "Total des messages"
 
-#: includes/render-index.php:326
+#: includes/render-index.php:329
 msgid "issues"
 msgstr "problèmes"
 
-#: includes/render-index.php:327
+#: includes/render-index.php:330
 msgid "results"
 msgstr "résultats"
 
-#: includes/render-index.php:328
+#: includes/render-index.php:331
 msgid "Filter by"
 msgstr "Filtrer par"
 
-#: includes/render-index.php:329
+#: includes/render-index.php:332
 msgid "Group by"
 msgstr "Grouper par"
 
-#: includes/render-index.php:330
+#: includes/render-index.php:333
 msgid "Download"
 msgstr "Télécharger"
 
-#: includes/render-index.php:331
+#: includes/render-index.php:334
 msgid "Download edited H5P"
 msgstr "Download edited H5P"
 
-#: includes/render-index.php:332
+#: includes/render-index.php:335
 msgid "Show details"
 msgstr "Voir les détails"
 
-#: includes/render-index.php:333
+#: includes/render-index.php:336
 msgid "Hide details"
 msgstr "Cacher les détails"
 
-#: includes/render-index.php:334
+#: includes/render-index.php:337
 msgid "All messages have been filtered out by content."
 msgstr "Tous les messages ont été filtrés selon leur contenu."
 
-#: includes/render-index.php:335
+#: includes/render-index.php:338
 msgid "Content type filter"
 msgstr "Filtre du type de contenu"
 
-#: includes/render-index.php:336
+#: includes/render-index.php:339
 msgid "Show all"
 msgstr "Tout afficher"
 
-#: includes/render-index.php:337
+#: includes/render-index.php:340
 msgid "Various selected contents"
 msgstr "Différents contenus sélectionnés"
 
-#: includes/render-index.php:338
+#: includes/render-index.php:341
 msgid "Show none"
 msgstr "Ne rien afficher"
 
-#: includes/render-index.php:339
+#: includes/render-index.php:342
 msgid "Filter by content:"
 msgstr "Filtrer sur le contenu:"
 
-#: includes/render-index.php:340
+#: includes/render-index.php:343
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: includes/render-index.php:341
+#: includes/render-index.php:344
 msgid "Something went wrong, but I dunno what, sorry!"
 msgstr "Quelque chose s’est mal passé, mais je ne sais pas quoi, désolé!"
 
-#: includes/render-index.php:342
+#: includes/render-index.php:345
 msgid "Please check the server log."
 msgstr "Veuillez consulter les journaux du serveur."
 
-#: includes/render-index.php:343
+#: includes/render-index.php:346
 msgid "Expand list"
 msgstr "Développer la liste"
 
-#: includes/render-index.php:344
+#: includes/render-index.php:347
 msgid "Collapse list"
 msgstr "Réduire la liste"
 
-#: includes/render-index.php:345
+#: includes/render-index.php:348
 msgid "Change sorting/grouping"
 msgstr "Modifier le tri/regroupement"
 
-#: includes/render-index.php:346
+#: includes/render-index.php:349
 msgid "Previous message"
 msgstr "Message précédent"
 
-#: includes/render-index.php:347
+#: includes/render-index.php:350
 msgid "Next message"
 msgstr "Message suivant"
 

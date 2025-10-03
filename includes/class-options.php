@@ -63,6 +63,7 @@ class Options {
 				'url'        => self::DEFAULT_URL,
 				'visibility' => self::DEFAULT_VISIBILITY,
 				'intro'      => '',
+				'intro_translations' => array(),
 				'outro'      => '',
 			)
 		);
@@ -169,6 +170,14 @@ class Options {
 		);
 
 		add_settings_field(
+			'intro_translations',
+			__( 'Optional intro translations', 'ndla-h5p-caretaker' ),
+			array( $this, 'intro_translations_callback' ),
+			'ndlah5pcaretaker-admin',
+			'general_settings'
+		);
+
+		add_settings_field(
 			'outro',
 			__( 'Additional footer', 'ndla-h5p-caretaker' ),
 			array( $this, 'outro_callback' ),
@@ -208,6 +217,16 @@ class Options {
 		$new_input['intro'] = ! empty( $input['intro'] ) ?
 			wp_kses_post( $input['intro'] ) :
 			'';
+
+		$new_input['intro_translations'] = array();
+		$available_languages = LocaleUtils::get_available_locales();
+		if ( ! empty( $input['intro_translations'] ) && is_array( $input['intro_translations'] ) ) {
+			foreach ( $input['intro_translations'] as $bcp47 => $translation_text ) {
+				if ( in_array( $bcp47, $available_languages, true ) && ! empty( $translation_text ) ) {
+					$new_input['intro_translations'][ $bcp47 ] = wp_kses_post( $translation_text );
+				}
+			}
+		}
 
 		$new_input['outro'] = ! empty( $input['outro'] ) ?
 			wp_kses_post( $input['outro'] ) :
@@ -291,6 +310,104 @@ class Options {
 		);
 	}
 
+  /**
+   * Get intro translations option callback - dynamic fields with add/remove.
+   */
+	public function intro_translations_callback() {
+			$intro_translations = self::get_intro_translations();
+
+			echo '<div id="intro-translations-container">';
+
+    	$available_languages = LocaleUtils::get_available_locales();
+			foreach ($available_languages as $index => $bcp47) {
+				$language_name = LocaleUtils::get_default_language_name( $bcp47 );
+				$language_name = isset( $language_name ) ? $language_name : $bcp47;
+
+				$translation_text = isset( $intro_translations[ $bcp47 ] ) ? $intro_translations[ $bcp47 ] : '';
+				$this->render_translation_field( $bcp47, $language_name, $translation_text);
+			}
+
+			echo '</div>';
+
+			// Add JavaScript for show/hide functionality
+			$this->add_translation_javascript();
+	}
+
+	/**
+	 * Render a single translation field.
+	 *
+	 * @param int    $bcp47   Field index.
+	 * @param string $content Field content.
+	 */
+	private function render_translation_field( $bcp47, $language_name, $translation_text = '' ) {
+		$field_id = 'intro_translations_' . $bcp47;
+    $field_name = 'ndlah5pcaretaker_option[intro_translations][' . $bcp47 . ']';
+
+		$classes = 'translation-field';
+		if ($translation_text === '') {
+			$classes .= ' hidden-translation';
+		}
+
+    echo '<div class="' . esc_attr( $classes ) . '">';
+    echo '<div class="translation-field-header">';
+    echo '<div class="translation-language-name">' . esc_html( $language_name ) . '</div>';
+
+		if ($translation_text !== '') {
+    	echo '<button type="button" class="toggle-visibility">' . esc_html__( 'Hide', 'ndla-h5p-caretaker' ) . '</button>';
+		}
+		else {
+			echo '<button type="button" class="toggle-visibility">' . esc_html__( 'Show', 'ndla-h5p-caretaker' ) . '</button>';
+		}
+
+    echo '</div>';
+
+    wp_editor(
+        $translation_text,
+        $field_id,
+        array(
+            'textarea_name' => $field_name,
+            'editor_height' => self::DEFAULT_INTRO_HEIGHT_PX,
+            'media_buttons' => false,
+            'teeny'         => true,
+        )
+    );
+
+    echo '</div>';
+}
+
+	/**
+	 * Load JavaScript for dynamic translation fields.
+	 *
+	 * @param int $initial_count Initial number of visible translations.
+	 */
+	private function add_translation_javascript() {
+			wp_enqueue_style(
+					'ndla-translation-fields',
+					plugins_url( '/css/options-handle-translation-fields.css', dirname( __FILE__ ) ),
+					array(),
+					NDLAH5PCARETAKER_VERSION
+			);
+
+			wp_register_script(
+					'ndla-translation-fields',
+					plugins_url( '/js/options-handle-translation-fields.js', dirname( __FILE__ ) ),
+					array( 'jquery' ),
+					NDLAH5PCARETAKER_VERSION,
+					true
+			);
+
+			wp_localize_script(
+					'ndla-translation-fields',
+					'ndlaTranslationFields',
+					array(
+						'Show' => __( 'Show', 'ndla-h5p-caretaker' ),
+						'Hide' => __( 'Hide', 'ndla-h5p-caretaker' ),
+					)
+			);
+
+			wp_enqueue_script( 'ndla-translation-fields' );
+	}
+
 	/**
 	 * Get outro option.
 	 */
@@ -360,6 +477,19 @@ class Options {
 		return ( isset( self::$options['intro'] ) ) ?
 			self::$options['intro'] :
 			'';
+	}
+
+	/**
+	 * Get caretaker page intro.
+	 *
+	 * @return string Caretaker page intro.
+	 */
+	public static function get_intro_translations() {
+			if ( isset( self::$options['intro_translations'] ) && is_array( self::$options['intro_translations'] ) ) {
+					return self::$options['intro_translations'];
+			}
+
+			return array();
 	}
 
 	/**

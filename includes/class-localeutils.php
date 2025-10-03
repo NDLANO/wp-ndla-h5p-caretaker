@@ -29,6 +29,96 @@ class LocaleUtils {
 	private static $default_locale = 'en_US';
 
 	/**
+	 * Get the default language name for a given BCP 47 language code.
+	 *
+	 * @param string $bcp47 The BCP 47 language code.
+	 *
+	 * @return string|null The default language name or null if not found.
+	 */
+	public static function get_default_language_name( $bcp47 ) {
+		$locale = self::get_complete_locale( $bcp47 );
+		if ( ! isset( $locale ) ) {
+			return null;
+		}
+
+		$language_names = array(
+			'af_ZA' => __( 'Afrikaans', 'ndla-h5p-caretaker' ),
+			'ar_AE' => __( 'Arabic', 'ndla-h5p-caretaker' ),
+			'be_BY' => __( 'Belarusian', 'ndla-h5p-caretaker' ),
+			'bg_BG' => __( 'Bulgarian', 'ndla-h5p-caretaker' ),
+			'bn_BD' => __( 'Bengali', 'ndla-h5p-caretaker' ),
+			'bs_BA' => __( 'Bosnian', 'ndla-h5p-caretaker' ),
+			'ca_ES' => __( 'Catalan', 'ndla-h5p-caretaker' ),
+			'cs_CZ' => __( 'Czech', 'ndla-h5p-caretaker' ),
+			'cy_GB' => __( 'Welsh', 'ndla-h5p-caretaker' ),
+			'da_DK' => __( 'Danish', 'ndla-h5p-caretaker' ),
+			'de_DE' => __( 'German', 'ndla-h5p-caretaker' ),
+			'el_GR' => __( 'Greek', 'ndla-h5p-caretaker' ),
+			'en_US' => __( 'English', 'ndla-h5p-caretaker' ),
+			'eo'    => __( 'Esperanto', 'ndla-h5p-caretaker' ),
+			'es_ES' => __( 'Spanish', 'ndla-h5p-caretaker' ),
+			'et_EE' => __( 'Estonian', 'ndla-h5p-caretaker' ),
+			'eu_ES' => __( 'Basque', 'ndla-h5p-caretaker' ),
+			'fa_IR' => __( 'Persian', 'ndla-h5p-caretaker' ),
+			'fi_FI' => __( 'Finnish', 'ndla-h5p-caretaker' ),
+			'fil_PH'=> __( 'Filipino', 'ndla-h5p-caretaker' ),
+			'fo_FO'=> __( 'Faroese', 'ndla-h5p-caretaker' ),
+			'fr_FR'=> __( 'French', 'ndla-h5p-caretaker' ),
+			'ga_IE'=> __( 'Irish', 'ndla-h5p-caretaker' ),
+			'gl_ES'=> __( 'Galician', 'ndla-h5p-caretaker' ),
+			'gu_IN'=> __( 'Gujarati', 'ndla-h5p-caretaker' ),
+			'he_IL'=> __( 'Hebrew', 'ndla-h5p-caretaker' ),
+			'hi_IN'=> __( 'Hindi', 'ndla-h5p-caretaker' ),
+			'hr_HR'=> __( 'Croatian', 'ndla-h5p-caretaker' ),
+			'hum_HU'=> __( 'Hungarian', 'ndla-h5p-caretaker' ),
+			'hy_AM'=> __( 'Armenian', 'ndla-h5p-caretaker' ),
+			'id_ID'=> __( 'Indonesian', 'ndla-h5p-caretaker' ),
+			'is_IS'=> __( 'Icelandic', 'ndla-h5p-caretaker' ),
+			'it_IT'=> __( 'Italian', 'ndla-h5p-caretaker' ),
+			'ja_JP'=> __( 'Japanese', 'ndla-h5p-caretaker' ),
+			'ka_GE'=> __( 'Georgian', 'ndla-h5p-caretaker' ),
+			'kk_KZ'=> __( 'Kazakh', 'ndla-h5p-caretaker' ),
+			'km_KH'=> __( 'Khmer', 'ndla-h5p-caretaker' ),
+			'kn_IN'=> __( 'Kannada', 'ndla-h5p-caretaker' ),
+			'ko_KR'=> __( 'Korean', 'ndla-h5p-caretaker' ),
+			'lt_LT'=> __( 'Lithuanian', 'ndla-h5p-caretaker' ),
+			'lv_LV'=> __( 'Latvian', 'ndla-h5p-caretaker' ),
+			'mk_MK'=> __( 'Macedonian', 'ndla-h5p-caretaker' ),
+			'ml_IN'=> __( 'Malayalam', 'ndla-h5p-caretaker' ),
+			'mn_MN'=> __( 'Mongolian', 'ndla-h5p-caretaker' ),
+			'mr_IN'=> __( 'Marathi', 'ndla-h5p-caretaker' ),
+			'ms_MY'=> __( 'Malay', 'ndla-h5p-caretaker' ),
+			'mt_MT'=> __( 'Maltese', 'ndla-h5p-caretaker' ),
+			'nb_NO'=> __( 'Norwegian Bokmål', 'ndla-h5p-caretaker' ),
+			'ne_NP'=> __( 'Nepali', 'ndla-h5p-caretaker' ),
+			'nl_NL'=> __( 'Dutch', 'ndla-h5p-caretaker' ),
+			'nn_NO'=> __( 'Norwegian Nynorsk', 'ndla-h5p-caretaker' ),
+			'pa_IN'=> __( 'Punjabi', 'ndla-h5p-caretaker' ),
+			'pl_PL'=> __( 'Polish', 'ndla-h5p-caretaker' ),
+			'pt_PT'=> __( 'Portuguese', 'ndla-h5p-caretaker' ),
+			'ro_RO'=> __( 'Romanian', 'ndla-h5p-caretaker' ),
+			'ru_RU'=> __( 'Russian', 'ndla-h5p-caretaker' ),
+			'sk_SK'=> __( 'Slovak', 'ndla-h5p-caretaker' ),
+			'sl_SI'=> __( 'Slovenian', 'ndla-h5p-caretaker' ),
+			'sq_AL'=> __( 'Albanian', 'ndla-h5p-caretaker' ),
+			'sr_RS'=> __( 'Serbian', 'ndla-h5p-caretaker' ),
+			'sv_SE'=> __( 'Swedish', 'ndla-h5p-caretaker' ),
+			'sw_KE'=> __( 'Swahili', 'ndla-h5p-caretaker' ),
+			'ta_IN'=> __( 'Tamil', 'ndla-h5p-caretaker' ),
+			'te_IN'=> __( 'Telugu', 'ndla-h5p-caretaker' ),
+			'th_TH'=> __( 'Thai', 'ndla-h5p-caretaker' ),
+			'tr_TR'=> __( 'Turkish', 'ndla-h5p-caretaker' ),
+			'uk_UA'=> __( 'Ukrainian', 'ndla-h5p-caretaker' ),
+			'ur_PK'=> __( 'Urdu', 'ndla-h5p-caretaker' ),
+			'uz_UZ'=> __( 'Uzbek', 'ndla-h5p-caretaker' ),
+			'vi_VN'=> __( 'Vietnamese', 'ndla-h5p-caretaker' ),
+			'zh_CN'=> __( 'Chinese', 'ndla-h5p-caretaker' ),
+			// Add more mappings if needed.
+		);
+		return $language_names[ $locale ] ?? null;
+	}
+
+	/**
 	 * Get the complete (default) locale for a given language.
 	 *
 	 * @param string $language The language code.

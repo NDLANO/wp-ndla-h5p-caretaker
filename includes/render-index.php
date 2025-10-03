@@ -293,8 +293,11 @@ function render_html( $params ) {
 	// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 	$template = file_get_contents( __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'h5pcaretaker.mustache' );
 
+	$intro_translations = Options::get_intro_translations();
+	$intro = $intro_translations[$params['locale']] ?? Options::get_intro();
+
 	$render_data = array(
-		'intro'                              => Options::get_intro(),
+		'intro'                              => $intro,
 		'outro'                              => Options::get_outro(),
 		'noBranding'                         => Options::get_no_branding(),
 		'locale'                             => esc_attr( str_replace( '_', '-', $params['locale'] ) ),
