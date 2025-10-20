@@ -4,7 +4,7 @@ Tags: h5p, accessibility, licensing
 Requires at least: 4.0
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 License: MIT
 License URI: https://github.com/NDLANO/wp-ndla-h5p-caretaker/blob/master/LICENSE
 
@@ -42,6 +42,10 @@ Please also note that the plugin will fetch the [H5P accessibility reports](http
 2. You can change some options to your particular needs.
 
 == Changelog ==
+
+= 1.1.5 =
+- Update server and client dependency
+- Add support for instructions after a file was checked
 
 = 1.1.4 =
 In the settings, added optional fields for translations of the introductory text.
@@ -101,6 +105,9 @@ Improved deployment script.
 First version released on the WordPress plugin directory.
 
 == Upgrade Notice ==
+
+= 1.1.5 =
+Upgrade for more convenience.
 
 = 1.1.4 =
 Upgrade if you want to be able to set translations for the introduction field.
