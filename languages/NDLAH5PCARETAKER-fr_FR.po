@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wp-ndla-h5p-caretaker\n"
-"POT-Creation-Date: 2025-10-03 13:12+0200\n"
-"PO-Revision-Date: 2025-10-03 13:12+0200\n"
+"POT-Creation-Date: 2025-10-20 12:34+0200\n"
+"PO-Revision-Date: 2025-10-20 12:35+0200\n"
 "Last-Translator: Sustainum-H5P-Content-Type-Hub-Manager\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -303,40 +303,40 @@ msgstr "Vietnamienne"
 msgid "Chinese"
 msgstr "Chinoise"
 
-#: includes/class-main.php:127 includes/class-options.php:102
+#: includes/class-main.php:127 includes/class-options.php:109
 #: includes/render-index.php:312
 msgid "H5P Caretaker"
 msgstr "H5P Caretaker"
 
-#: includes/class-options.php:143
+#: includes/class-options.php:150
 msgid "General"
 msgstr "Général"
 
-#: includes/class-options.php:150
+#: includes/class-options.php:157
 msgid "URL"
 msgstr "URL"
 
-#: includes/class-options.php:158
+#: includes/class-options.php:165
 msgid "Visibility"
 msgstr "Visibilité"
 
-#: includes/class-options.php:166
+#: includes/class-options.php:173
 msgid "Additional intro"
 msgstr "Introduction supplémentaire"
 
-#: includes/class-options.php:174
+#: includes/class-options.php:181
 msgid "Optional intro translations"
 msgstr "Traductions facultatives de l'introduction supplémentaire"
 
-#: includes/class-options.php:182
+#: includes/class-options.php:189
 msgid "Additional footer"
 msgstr "Pied de page supplémentaire"
 
-#: includes/class-options.php:190
+#: includes/class-options.php:197
 msgid "Turn off branding"
 msgstr "Désactiver la marque"
 
-#: includes/class-options.php:267
+#: includes/class-options.php:336
 #, php-format
 msgid ""
 "Set the desired URL for the H5P Caretaker page. With the current value it "
@@ -345,15 +345,15 @@ msgstr ""
 "Définir l’URL souhaitée pour la page H5P-Caretaker. Avec la valeur actuelle, "
 "elle sera accessible à l’adresse %s."
 
-#: includes/class-options.php:286
+#: includes/class-options.php:355
 msgid "Public"
 msgstr "Publique"
 
-#: includes/class-options.php:287
+#: includes/class-options.php:356
 msgid "Needs capability"
 msgstr "Nécessite des droits"
 
-#: includes/class-options.php:291
+#: includes/class-options.php:360
 msgid ""
 "Select whether the H5P Caretaker page should be publicly available or only "
 "to those logged in users that have the capability based on their user role."
@@ -361,15 +361,15 @@ msgstr ""
 "Indiquez si la page H5P Caretaker doit être accessible au public ou "
 "uniquement aux utilisateurs connectés dont le rôle dispose de la capacité."
 
-#: includes/class-options.php:356 includes/class-options.php:404
+#: includes/class-options.php:426 includes/class-options.php:471
 msgid "Hide"
 msgstr "Cacher"
 
-#: includes/class-options.php:359 includes/class-options.php:403
+#: includes/class-options.php:428 includes/class-options.php:470
 msgid "Show"
 msgstr "Montrer"
 
-#: includes/class-options.php:444
+#: includes/class-options.php:511
 msgid "Turn NDLA branding off."
 msgstr "Désactiver la marque NDLA."
 
@@ -458,94 +458,102 @@ msgid "Your file check was completed"
 msgstr "Votre fichier a été vérifié avec succès"
 
 #: includes/render-index.php:328
+msgid ""
+"Now do all the changes that you deem necessary and download the edited "
+"version of your file."
+msgstr ""
+"Effectuez maintenant toutes les modifications que vous jugez nécessaires et "
+"téléchargez la version modifiée de votre fichier."
+
+#: includes/render-index.php:329
 msgid "Total messages"
 msgstr "Total des messages"
 
-#: includes/render-index.php:329
+#: includes/render-index.php:330
 msgid "issues"
 msgstr "problèmes"
 
-#: includes/render-index.php:330
+#: includes/render-index.php:331
 msgid "results"
 msgstr "résultats"
 
-#: includes/render-index.php:331
+#: includes/render-index.php:332
 msgid "Filter by"
 msgstr "Filtrer par"
 
-#: includes/render-index.php:332
+#: includes/render-index.php:333
 msgid "Group by"
 msgstr "Grouper par"
 
-#: includes/render-index.php:333
+#: includes/render-index.php:334
 msgid "Download"
 msgstr "Télécharger"
 
-#: includes/render-index.php:334
+#: includes/render-index.php:335
 msgid "Download edited H5P"
 msgstr "Download edited H5P"
 
-#: includes/render-index.php:335
+#: includes/render-index.php:336
 msgid "Show details"
 msgstr "Voir les détails"
 
-#: includes/render-index.php:336
+#: includes/render-index.php:337
 msgid "Hide details"
 msgstr "Cacher les détails"
 
-#: includes/render-index.php:337
+#: includes/render-index.php:338
 msgid "All messages have been filtered out by content."
 msgstr "Tous les messages ont été filtrés selon leur contenu."
 
-#: includes/render-index.php:338
+#: includes/render-index.php:339
 msgid "Content type filter"
 msgstr "Filtre du type de contenu"
 
-#: includes/render-index.php:339
+#: includes/render-index.php:340
 msgid "Show all"
 msgstr "Tout afficher"
 
-#: includes/render-index.php:340
+#: includes/render-index.php:341
 msgid "Various selected contents"
 msgstr "Différents contenus sélectionnés"
 
-#: includes/render-index.php:341
+#: includes/render-index.php:342
 msgid "Show none"
 msgstr "Ne rien afficher"
 
-#: includes/render-index.php:342
+#: includes/render-index.php:343
 msgid "Filter by content:"
 msgstr "Filtrer sur le contenu:"
 
-#: includes/render-index.php:343
+#: includes/render-index.php:344
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: includes/render-index.php:344
+#: includes/render-index.php:345
 msgid "Something went wrong, but I dunno what, sorry!"
 msgstr "Quelque chose s’est mal passé, mais je ne sais pas quoi, désolé!"
 
-#: includes/render-index.php:345
+#: includes/render-index.php:346
 msgid "Please check the server log."
 msgstr "Veuillez consulter les journaux du serveur."
 
-#: includes/render-index.php:346
+#: includes/render-index.php:347
 msgid "Expand list"
 msgstr "Développer la liste"
 
-#: includes/render-index.php:347
+#: includes/render-index.php:348
 msgid "Collapse list"
 msgstr "Réduire la liste"
 
-#: includes/render-index.php:348
+#: includes/render-index.php:349
 msgid "Change sorting/grouping"
 msgstr "Modifier le tri/regroupement"
 
-#: includes/render-index.php:349
+#: includes/render-index.php:350
 msgid "Previous message"
 msgstr "Message précédent"
 
-#: includes/render-index.php:350
+#: includes/render-index.php:351
 msgid "Next message"
 msgstr "Message suivant"
 

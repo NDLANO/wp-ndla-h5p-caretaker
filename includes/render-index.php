@@ -325,6 +325,7 @@ function render_html( $params ) {
 		'l10nuploadyourh5pfile'              => esc_html( __( 'Upload your H5P file', 'ndla-h5p-caretaker' ) ),
 		'l10nyourfileisbeingchecked'         => esc_html( __( 'Your file is being checked', 'ndla-h5p-caretaker' ) ),
 		'l10nyourfilewascheckedsuccessfully' => esc_html( __( 'Your file check was completed', 'ndla-h5p-caretaker' ) ),
+		'l10ninstructions'                   => esc_html( __( 'Now do all the changes that you deem necessary and download the edited version of your file.', 'ndla-h5p-caretaker' ) ),
 		'l10ntotalmessages'                  => esc_html( __( 'Total messages', 'ndla-h5p-caretaker' ) ),
 		'l10nissues'                         => esc_html( __( 'issues', 'ndla-h5p-caretaker' ) ),
 		'l10nresults'                        => esc_html( __( 'results', 'ndla-h5p-caretaker' ) ),
