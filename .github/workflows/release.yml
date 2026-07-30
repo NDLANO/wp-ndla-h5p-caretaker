@@ -15,6 +15,9 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
+      - name: Install potential fixes
+        run: npm audit fix
+
       - name: Clean up for production
         run: npm run clean
 
