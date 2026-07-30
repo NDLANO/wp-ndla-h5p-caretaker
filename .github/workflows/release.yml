@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install Node.js dependencies
         run: npm install
@@ -52,7 +52,7 @@ jobs:
           eval "zip -r \"$ZIP_PATH\" . -x $ZIP_EXCLUSIONS"
 
       - name: Upload ZIP to Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: ${{ env.ZIP_PATH }}
         env:
